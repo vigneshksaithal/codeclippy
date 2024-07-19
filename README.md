@@ -1,2 +1,2 @@
 # CodeClippy
-A Higlight.ing app for capturing code like Pieces app.
+A Higlight.ing app for capturing code snippets like Pieces app.
