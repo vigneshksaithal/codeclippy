@@ -1,10 +1,10 @@
 <main class="container">
 	<nav>
 		<ul>
-			<li><strong>Code Clippy</strong></li>
+			<li><h4>Code Clippy</h4></li>
 		</ul>
 		<ul>
-			<li><button>New</button></li>
+			<!-- <li><button>New</button></li> -->
 		</ul>
 	</nav>
 	<slot />
