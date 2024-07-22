@@ -1,8 +1,6 @@
 # CodeClippy
 
-[![CodeClippy](https://github.com/ctw02248/codeclippy/actions/workflows/deploy.yml/badge.svg)](https://github.com/ctw02248/codeclippy/actions/workflows/deploy.yml)
-
-CodeClippy is a web app that helps you capture and highlight code snippets. It uses the [Highlight.js](https://highlightjs.org/) library to syntax highlight the snippets.
+CodeClippy is a Highlight.ing app that helps you capture code snippets like Pieces.app without the complexity.
 
 ## Installation
 
