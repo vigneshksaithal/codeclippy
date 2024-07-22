@@ -26,11 +26,6 @@
 	let isModalOpen = false
 
 	onMount(async () => {
-		const date = new Date()
-		console.log('ISO TIME', date)
-		setTimeout(() => {
-			console.log('ISO AFTE', new Date(date).toISOString())
-		}, 2000)
 		/**
 		 * Wait till the Highlight app is hydrated
 		 */
