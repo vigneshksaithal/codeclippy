@@ -11,9 +11,6 @@ importers:
       '@highlight-ai/app-runtime':
         specifier: ^0.0.39
         version: 0.0.39
-      highlight.js:
-        specifier: ^11.10.0
-        version: 11.10.0
     devDependencies:
       '@sveltejs/adapter-cloudflare':
         specifier: ^4.6.1
@@ -746,10 +743,6 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
-
-  highlight.js@11.10.0:
-    resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==}
-    engines: {node: '>=12.0.0'}
 
   import-meta-resolve@4.1.0:
     resolution: {integrity: sha512-I6fiaX09Xivtk+THaMfAwnA3MVA5Big1WHF1Dfx9hFuvNIWpXnorlkzhcQf6ehrqQiiZECRt1poOAkPmer3ruw==}
@@ -1713,8 +1706,6 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
-
-  highlight.js@11.10.0: {}
 
   import-meta-resolve@4.1.0: {}
 

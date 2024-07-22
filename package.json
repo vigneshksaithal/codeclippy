@@ -21,7 +21,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@highlight-ai/app-runtime": "^0.0.39",
-		"highlight.js": "^11.10.0"
+		"@highlight-ai/app-runtime": "^0.0.39"
 	}
 }
