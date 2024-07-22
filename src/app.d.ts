@@ -8,6 +8,17 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	type codeSnippet = {
+		created_at: string;
+		updated_at: string;
+		title: string;
+		description: string;
+		code: string;
+		language: string;
+		tags: string[];
+	};
 }
 
-export {};
+export { }
+
