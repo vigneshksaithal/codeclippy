@@ -1,7 +1,7 @@
 <main class="container">
 	<nav>
 		<ul>
-			<li><h4>Code Clippy</h4></li>
+			<li><h4>CodeClippy</h4></li>
 		</ul>
 		<ul>
 			<!-- <li><button>New</button></li> -->
