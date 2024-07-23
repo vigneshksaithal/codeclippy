@@ -103,6 +103,45 @@
 	}
 </script>
 
+{#if codeSnippets.length === 0}
+	<article class="card">
+		<header>
+			<h1>CodeClippy</h1>
+			<p>
+				CodeClippy is a Highlight.ing app that helps you capture code snippets
+				like Pieces.app without the complexity.
+			</p>
+		</header>
+		<h4>How to use CodeClippy?</h4>
+		<ol>
+			<li>Select a code snippet.</li>
+			<li>Copy to the clipboard.</li>
+			<li>Invoke the Highlight app by hovering over it.</li>
+			<li>Type relevant description for it or use the AI generated text.</li>
+			<li>
+				Thats all your code will be saved in the CodeClippy app. You can access
+				it anytime by just visiting CodeClippy on Highlight app.
+			</li>
+		</ol>
+		<!-- svelte-ignore a11y-media-has-caption -->
+		<video controls>
+			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
+			Your browser does not support the video tag.
+		</video>
+
+		<footer>
+			<p>
+				Note: All your data including the code is stored <b>locally</b> on your
+				computer and is <b>NEVER</b> sent to the server.
+			</p>
+			<small
+				>For any bugs or suggestions, please reach out at contact [at]
+				aithal.dev</small
+			>
+		</footer>
+	</article>
+{/if}
+
 <div class="grid">
 	{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -153,5 +192,15 @@
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.card {
+		max-width: 576px;
+		margin: 0 auto;
+	}
+
+	video {
+		width: 100%;
+		height: auto;
 	}
 </style>
