@@ -106,66 +106,70 @@
 {#if codeSnippets.length === 0}
 	<article class="card">
 		<header>
+			<h6>README</h6>
 			<h1>CodeClippy</h1>
 			<p>
 				CodeClippy is a Highlight.ing app that helps you capture code snippets
 				like Pieces.app without the complexity.
 			</p>
+			<!-- svelte-ignore a11y-media-has-caption -->
+			<video controls>
+				<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
+				Your browser does not support the video tag.
+			</video>
 		</header>
-		<h4>How to use CodeClippy?</h4>
-		<ol>
+
+		<h4>How to use?</h4>
+		<ul>
 			<li>Select a code snippet.</li>
 			<li>Copy to the clipboard.</li>
 			<li>Invoke the Highlight app by hovering over it.</li>
 			<li>Type relevant description for it or use the AI generated text.</li>
+			<li>Thats all your code will be saved in the CodeClippy app.</li>
 			<li>
-				Thats all your code will be saved in the CodeClippy app. You can access
-				it anytime by just visiting CodeClippy on Highlight app.
+				You can access it anytime by just visiting CodeClippy on Highlight app.
 			</li>
-		</ol>
-		<!-- svelte-ignore a11y-media-has-caption -->
-		<video controls>
-			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
-			Your browser does not support the video tag.
-		</video>
+		</ul>
+		<hr />
+		<p>
+			Note: All your data including the code is stored <b>locally</b> on your
+			computer and is <b>NEVER</b> sent to the server.
+		</p>
 
 		<footer>
-			<p>
-				Note: All your data including the code is stored <b>locally</b> on your
-				computer and is <b>NEVER</b> sent to the server.
-			</p>
 			<small
 				>For any bugs or suggestions, please reach out at contact [at]
 				aithal.dev</small
 			>
 		</footer>
 	</article>
+{:else}
+	<h1>CodeClippy</h1>
+	<div class="grid">
+		{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+			<article
+				on:click={() => {
+					isModalOpen = true
+					console.log('clicked', codeSnippet)
+					selectedCodeSnippet = {
+						created_at: created_at,
+						description: description,
+						code: code,
+						language: 'javascript',
+						updated_at: updated_at,
+						title: title,
+						tags: [],
+						i: i,
+					}
+				}}
+			>
+				<h6>{title}</h6>
+			</article>
+		{/each}
+	</div>
 {/if}
-
-<div class="grid">
-	{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<article
-			on:click={() => {
-				isModalOpen = true
-				console.log('clicked', codeSnippet)
-				selectedCodeSnippet = {
-					created_at: created_at,
-					description: description,
-					code: code,
-					language: 'javascript',
-					updated_at: updated_at,
-					title: title,
-					tags: [],
-					i: i,
-				}
-			}}
-		>
-			<h6>{title}</h6>
-		</article>
-	{/each}
-</div>
 
 <dialog open={isModalOpen}>
 	<article>
@@ -195,7 +199,7 @@
 	}
 
 	.card {
-		max-width: 576px;
+		max-width: 768px;
 		margin: 0 auto;
 	}
 
