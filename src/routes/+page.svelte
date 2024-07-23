@@ -18,7 +18,7 @@
 		title: '',
 		description: '',
 		code: '',
-		language: 'javascript',
+		language: '',
 		tags: [],
 		i: 0,
 	}
@@ -173,7 +173,7 @@
 
 <dialog open={isModalOpen}>
 	<article>
-		<h2>{selectedCodeSnippet.title}</h2>
+		<h3>{selectedCodeSnippet.title}</h3>
 		<pre><code id="code" contenteditable="true">{selectedCodeSnippet.code}</code
 			></pre>
 		<footer>
