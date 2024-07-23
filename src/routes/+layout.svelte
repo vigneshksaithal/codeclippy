@@ -5,6 +5,5 @@
 <style>
 	main {
 		padding: 2em;
-		background-color: white;
 	}
 </style>
