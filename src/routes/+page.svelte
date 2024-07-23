@@ -104,6 +104,7 @@
 </script>
 
 {#if codeSnippets.length === 0}
+	<!-- README -->
 	<article class="card">
 		<header>
 			<h6>README</h6>
@@ -165,7 +166,7 @@
 					}
 				}}
 			>
-				<h6>{title}</h6>
+				<h5>{title}</h5>
 			</article>
 		{/each}
 	</div>
