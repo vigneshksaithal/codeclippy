@@ -166,7 +166,7 @@
 					}
 				}}
 			>
-				<h5>{title}</h5>
+				<h6>{title}</h6>
 			</article>
 		{/each}
 	</div>
