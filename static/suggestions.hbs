@@ -1,22 +1,20 @@
 {{#system}}
-Your job is to generate a title for the selected code.
-Understand what the code does by ONLY the selected text.
+Your job is to generate a title for the copied code.
+The code is a snippet the users wants to reference in future so generate a user friendly, easy to remember, and relevant title.
+Title should be what the code does.
+Ignore the boilerplate text on the code.
+Understand only from the code syntax.
 Be very specific with your title. 
 It should clearly define what specific objective the code does.
-Don't generate general titles.
 
-Generate a list of title suggestions.
+Generate a list of titles.
 Only go to 5.
-Format the list in a JSON array like this: ["suggestion 1","suggestion 2","suggestion 3"].
+Format the list in a JSON array like this: ["title 1","title 2","title 3"].
 {{/system}}
 
 {{#user}}
-{{#if application.focusedWindow.rawContents}}
-The contents of everything else on the screen:
-{{application.focusedWindow.rawContents}}
-{{/if}}
-{{#if application.focusedWindow.selectedText}}
-  The code that is selected right now:
-  {{application.focusedWindow.selectedText}}
+{{#if environment.clipboardText}}
+  The code that is copied right now:
+  {{environment.clipboardText}}
 {{/if}}
 {{/user}}
