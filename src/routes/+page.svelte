@@ -9,8 +9,6 @@
 		title: '',
 		description: '',
 		code: '',
-		language: '',
-		tags: [],
 	}
 	let selectedCodeSnippet: codeSnippet & { i: number } = {
 		created_at: '',
@@ -18,8 +16,6 @@
 		title: '',
 		description: '',
 		code: '',
-		language: '',
-		tags: [],
 		i: 0,
 	}
 
@@ -61,8 +57,6 @@
 		title,
 		description,
 		code,
-		language,
-		tags,
 	}: codeSnippet) => {
 		codeSnippets.push({
 			created_at: createdAt,
@@ -70,8 +64,6 @@
 			title: title,
 			description,
 			code: code,
-			language: language,
-			tags: tags,
 		})
 		codeSnippets = codeSnippets
 
@@ -114,7 +106,7 @@
 				like Pieces.app without the complexity.
 			</p>
 			<!-- svelte-ignore a11y-media-has-caption -->
-			<video controls>
+			<video autoplay>
 				<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
@@ -158,10 +150,8 @@
 						created_at: created_at,
 						description: description,
 						code: code,
-						language: 'javascript',
 						updated_at: updated_at,
 						title: title,
-						tags: [],
 						i: i,
 					}
 				}}
@@ -175,8 +165,7 @@
 <dialog open={isModalOpen}>
 	<article>
 		<h3>{selectedCodeSnippet.title}</h3>
-		<pre><code id="code" contenteditable="true">{selectedCodeSnippet.code}</code
-			></pre>
+		<pre><code id="code">{selectedCodeSnippet.code}</code></pre>
 		<footer>
 			<button
 				class="secondary outline"
@@ -207,5 +196,7 @@
 	video {
 		width: 100%;
 		height: auto;
+		border-radius: 4px;
+		margin-bottom: 1em;
 	}
 </style>
