@@ -38,7 +38,6 @@
 			'onContext',
 			async (context: HighlightContext) => {
 				console.log('Invoked')
-
 				codeSnippet.title = context.suggestion || ''
 				codeSnippet.created_at = new Date().toISOString()
 				codeSnippet.updated_at = new Date().toISOString()
@@ -46,8 +45,11 @@
 				/**
 				 * Get code from Clipboard
 				 */
-
-				codeSnippet.code = context.environment.clipboardText || ''
+				if (context.environment.clipboardText) {
+					codeSnippet.code = context.environment.clipboardText
+				} else {
+					alert('No code found in clipboard')
+				}
 
 				await saveCode(codeSnippet)
 			},
