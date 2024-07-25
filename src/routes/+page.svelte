@@ -174,7 +174,6 @@
 <dialog open={isModalOpen}>
 	<article>
 		<h3>{selectedCodeSnippet.title}</h3>
-		<!-- <pre><code id="code">{selectedCodeSnippet.code}</code></pre> -->
 		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
 		<footer>
 			<button
@@ -184,7 +183,13 @@
 					isModalOpen = false
 				}}>Delete</button
 			>
-			<button class="secondary outline" on:click={copyToClipboard}>Copy</button>
+			<button
+				class="secondary outline"
+				on:click={() => {
+					copyToClipboard()
+					isModalOpen = false
+				}}>Copy</button
+			>
 			<button class="secondary" on:click={() => (isModalOpen = false)}>
 				Back
 			</button>
@@ -201,6 +206,10 @@
 	.card {
 		max-width: 768px;
 		margin: 0 auto;
+	}
+
+	:global(#code) {
+		font-size: 0.8rem;
 	}
 
 	video {
