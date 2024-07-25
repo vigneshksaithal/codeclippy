@@ -47,8 +47,6 @@
 				 */
 				if (context.environment.clipboardText) {
 					codeSnippet.code = context.environment.clipboardText
-				} else {
-					alert('No code found in clipboard')
 				}
 
 				await saveCode(codeSnippet)
