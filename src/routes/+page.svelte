@@ -101,36 +101,40 @@
 
 {#if codeSnippets.length === 0}
 	<!-- README -->
-	<article class="card">
+	<article class="readme">
 		<header>
-			<h6>README</h6>
+			<!-- <h6>README</h6> -->
 			<h1>CodeClippy</h1>
 			<p>
 				CodeClippy is a Highlight.ing app that helps you capture code snippets
 				like Pieces.app without the complexity.
 			</p>
-			<!-- svelte-ignore a11y-media-has-caption -->
-			<video autoplay>
-				<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
-				Your browser does not support the video tag.
-			</video>
 		</header>
 
+		<!-- svelte-ignore a11y-media-has-caption -->
+
+		<video autoplay>
+			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
+			Your browser does not support the video tag.
+		</video>
+
 		<h4>How to use?</h4>
-		<ul>
-			<li>Select a code snippet.</li>
-			<li>Copy to the clipboard.</li>
-			<li>Invoke the Highlight app by hovering over it.</li>
-			<li>Type relevant description for it or use the AI generated text.</li>
-			<li>Thats all your code will be saved in the CodeClippy app.</li>
+		<ol>
+			<li>Copy the code snippet(Command/Ctrl + C) you would like to save.</li>
 			<li>
-				You can access it anytime by just visiting CodeClippy on Highlight app.
+				Then, hover over the Highlight app and select CodeClippy app by pressing
+				Tab.
 			</li>
-		</ul>
-		<hr />
+			<li>Type a description or choose from the AI generated suggestions.</li>
+			<li>That's all! Your code is saved in CodeClippy.</li>
+			<li>
+				You can access it anytime by just visiting CodeClippy in the Highlight
+				app.
+			</li>
+		</ol>
+		<p>Simple, right?</p>
 		<p>
-			Note: All your data including the code is stored <b>locally</b> on your
-			computer and is <b>NEVER</b> sent to the server.
+			<strong>Note: All data is stored only on your computer.</strong>
 		</p>
 
 		<footer>
@@ -147,6 +151,7 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 			<article
+				class="card"
 				on:click={() => {
 					isModalOpen = true
 
@@ -198,14 +203,17 @@
 </dialog>
 
 <style>
+	.readme {
+		max-width: 567px;
+		margin: 0 auto;
+	}
+
 	.grid {
-		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 	}
 
 	.card {
-		max-width: 768px;
-		margin: 0 auto;
+		width: 100%;
 	}
 
 	:global(#code) {
