@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 	import { onMount } from 'svelte'
+	import { HighlightAuto } from 'svelte-highlight'
+	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 
 	let codeSnippets: codeSnippet[] = []
 	let codeSnippet: codeSnippet = {
@@ -35,7 +37,7 @@
 		Highlight.app.addListener(
 			'onContext',
 			async (context: HighlightContext) => {
-				console.log('Invoked', context)
+				console.log('Invoked')
 
 				codeSnippet.title = context.suggestion || ''
 				codeSnippet.created_at = new Date().toISOString()
@@ -44,28 +46,30 @@
 				/**
 				 * Get code from Clipboard
 				 */
+
 				codeSnippet.code = context.environment.clipboardText || ''
 
-				saveCode(codeSnippet)
+				await saveCode(codeSnippet)
 			},
 		)
 	})
 
 	const saveCode = async ({
-		created_at: createdAt,
-		updated_at: updatedAt,
+		created_at,
+		updated_at,
 		title,
 		description,
 		code,
 	}: codeSnippet) => {
 		codeSnippets.push({
-			created_at: createdAt,
-			updated_at: updatedAt,
+			created_at: created_at,
+			updated_at: updated_at,
 			title: title,
 			description,
 			code: code,
 		})
 		codeSnippets = codeSnippets
+		console.log('CODE SNIPPETS', codeSnippets)
 
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
 	}
@@ -145,7 +149,7 @@
 			<article
 				on:click={() => {
 					isModalOpen = true
-					console.log('clicked', codeSnippet)
+
 					selectedCodeSnippet = {
 						created_at: created_at,
 						description: description,
@@ -162,10 +166,16 @@
 	</div>
 {/if}
 
+<!-- Import Atom One Light theme -->
+<svelte:head>
+	{@html atomOneLight}
+</svelte:head>
+
 <dialog open={isModalOpen}>
 	<article>
 		<h3>{selectedCodeSnippet.title}</h3>
-		<pre><code id="code">{selectedCodeSnippet.code}</code></pre>
+		<!-- <pre><code id="code">{selectedCodeSnippet.code}</code></pre> -->
+		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
 		<footer>
 			<button
 				class="secondary outline"
