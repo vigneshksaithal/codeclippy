@@ -75,9 +75,7 @@
 	}
 
 	const getCodeSnippets = async () => {
-		const kcodeSnippets = (await Highlight.appStorage.get('codeSnippets')) || []
-
-		return kcodeSnippets
+		return (await Highlight.appStorage.get('codeSnippets')) || []
 	}
 
 	const copyToClipboard = async () => {
