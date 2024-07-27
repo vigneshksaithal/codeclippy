@@ -5,13 +5,7 @@
 	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 
 	let codeSnippets: codeSnippet[] = []
-	let codeSnippet: codeSnippet = {
-		created_at: '',
-		updated_at: '',
-		title: '',
-		description: '',
-		code: '',
-	}
+	let codeSnippet: codeSnippet
 	let selectedCodeSnippet: codeSnippet & { i: number } = {
 		created_at: '',
 		updated_at: '',
@@ -24,6 +18,19 @@
 	let isModalOpen = false
 
 	onMount(async () => {
+		/**
+		 * Check if it is running in Highlight
+		 */
+		if (typeof window.Highlight === 'undefined') {
+			console.error('Highlight environment is not available')
+			return
+		}
+
+		/**
+		 * Reset code snippets
+		 */
+		codeSnippets = []
+
 		/**
 		 * Wait till the Highlight app is hydrated
 		 */
@@ -69,7 +76,6 @@
 			code: code,
 		})
 		codeSnippets = codeSnippets
-		console.log('CODE SNIPPETS', codeSnippets)
 
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
 	}
@@ -101,7 +107,6 @@
 	<!-- README -->
 	<article class="readme">
 		<header>
-			<!-- <h6>README</h6> -->
 			<h1>CodeClippy</h1>
 			<p>
 				CodeClippy is a Highlight.ing app that helps you capture code snippets
@@ -110,7 +115,6 @@
 		</header>
 
 		<!-- svelte-ignore a11y-media-has-caption -->
-
 		<video autoplay>
 			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
 			Your browser does not support the video tag.
