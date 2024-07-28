@@ -23,6 +23,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@highlight-ai/app-runtime": "^0.0.43"
+		"@highlight-ai/app-runtime": "^0.0.44"
 	}
 }
