@@ -84,10 +84,9 @@
 		return (await Highlight.appStorage.get('codeSnippets')) || []
 	}
 
-	const copyToClipboard = async () => {
-		const element = document.getElementById('code') as HTMLElement
+	const copyToClipboard = async (text: string) => {
 		try {
-			await navigator.clipboard.writeText(element.innerText)
+			await navigator.clipboard.writeText(text)
 			alert('Code copied successfully!')
 		} catch (error) {
 			console.error('Failed to copy text', error)
@@ -182,34 +181,6 @@
 
 <dialog open={isModalOpen}>
 	<article>
-		<p>
-			<strong>{selectedCodeSnippet.title}</strong>
-		</p>
-		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
-		<footer>
-			<button
-				class="secondary outline"
-				on:click={() => {
-					deleteSnippet(selectedCodeSnippet.i)
-					isModalOpen = false
-				}}>Delete</button
-			>
-			<button
-				class="secondary outline"
-				on:click={() => {
-					copyToClipboard()
-					isModalOpen = false
-				}}>Copy</button
-			>
-			<button class="secondary" on:click={() => (isModalOpen = false)}>
-				Back
-			</button>
-		</footer>
-	</article>
-</dialog>
-
-<dialog open={isModalOpen}>
-	<article>
 		<header>
 			<button
 				aria-label="Close"
@@ -232,7 +203,7 @@
 			<button
 				class="contrast"
 				on:click={() => {
-					copyToClipboard()
+					copyToClipboard(selectedCodeSnippet.code)
 					isModalOpen = false
 				}}>Copy</button
 			>
