@@ -167,7 +167,9 @@
 					}
 				}}
 			>
-				<h6>{title}</h6>
+				<p>
+					<strong>{title}</strong>
+				</p>
 			</article>
 		{/each}
 	</div>
@@ -180,7 +182,9 @@
 
 <dialog open={isModalOpen}>
 	<article>
-		<h3>{selectedCodeSnippet.title}</h3>
+		<p>
+			<strong>{selectedCodeSnippet.title}</strong>
+		</p>
 		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
 		<footer>
 			<button
@@ -200,6 +204,38 @@
 			<button class="secondary" on:click={() => (isModalOpen = false)}>
 				Back
 			</button>
+		</footer>
+	</article>
+</dialog>
+
+<dialog open={isModalOpen}>
+	<article>
+		<header>
+			<button
+				aria-label="Close"
+				rel="prev"
+				on:click={() => (isModalOpen = false)}
+			></button>
+			<p>
+				<strong>{selectedCodeSnippet.title}</strong>
+			</p>
+		</header>
+		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
+		<footer>
+			<button
+				class="contrast outline"
+				on:click={() => {
+					deleteSnippet(selectedCodeSnippet.i)
+					isModalOpen = false
+				}}>Delete</button
+			>
+			<button
+				class="contrast"
+				on:click={() => {
+					copyToClipboard()
+					isModalOpen = false
+				}}>Copy</button
+			>
 		</footer>
 	</article>
 </dialog>
@@ -227,5 +263,9 @@
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 1em;
+	}
+
+	.card {
+		cursor: pointer;
 	}
 </style>
