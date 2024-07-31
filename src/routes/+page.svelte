@@ -137,7 +137,7 @@
 							<strong>{title}</strong>
 						</p>
 					</header>
-					<HighlightAuto class="code" {code} />
+					<HighlightAuto id="code" {code} />
 					<footer style="display: flex; gap: 0.8em; justify-content: right;">
 						<button
 							class="secondary outline"
@@ -163,11 +163,7 @@
 </svelte:head>
 
 <style>
-	.readme {
-		max-width: 567px;
-		margin: 0 auto;
-	}
-
+	.readme,
 	.code-snippets__container {
 		max-width: 640px;
 		margin: 0 auto;
@@ -175,13 +171,6 @@
 
 	.grid {
 		grid-template-columns: repeat(1, 1fr);
-		max-width: 640px;
-		margin: 0 auto;
-	}
-
-	.card {
-		width: 100%;
-		margin: 0 auto;
 	}
 
 	:global(#code) {
