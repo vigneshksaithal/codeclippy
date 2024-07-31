@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
+	import Fuse from 'fuse.js'
 	import { onMount } from 'svelte'
 	import { HighlightAuto } from 'svelte-highlight'
 	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
@@ -12,6 +13,7 @@
 		description: '',
 		code: '',
 	}
+	let query = ''
 
 	onMount(async () => {
 		/**
@@ -57,6 +59,27 @@
 		codeSnippets = codeSnippets
 
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
+	}
+
+	const searchCode = (query: string) => {
+		const fuseOptions = {
+			// isCaseSensitive: false,
+			// includeScore: false,
+			// shouldSort: true,
+			// includeMatches: false,
+			// findAllMatches: false,
+			// minMatchCharLength: 1,
+			// location: 0,
+			// threshold: 0.6,
+			// distance: 100,
+			// useExtendedSearch: false,
+			// ignoreLocation: false,
+			// ignoreFieldNorm: false,
+			// fieldNormWeight: 1,
+			keys: ['title'],
+		}
+		const fuse = new Fuse(codeSnippets, fuseOptions)
+		return fuse.search(query)
 	}
 
 	Highlight.app.addListener('onContext', async (context: HighlightContext) => {
@@ -127,32 +150,67 @@
 {:else}
 	<div class="code-snippets__container">
 		<h1>CodeClippy</h1>
+		<input
+			type="search"
+			placeholder="Search"
+			aria-label="Search"
+			bind:value={query}
+			on:input={() => {
+				console.log(searchCode(query))
+			}}
+		/>
 		<div class="grid">
-			{#each codeSnippets as { title, code }, i}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-				<article class="card">
-					<header>
-						<p style="margin-bottom: 0;">
-							<strong>{title}</strong>
-						</p>
-					</header>
-					<HighlightAuto id="code" {code} />
-					<footer style="display: flex; gap: 0.8em; justify-content: right;">
-						<button
-							class="secondary outline"
-							on:click={() => {
-								deleteSnippet(i)
-							}}>Delete</button
-						>
-						<button
-							on:click={() => {
-								copyToClipboard(code)
-							}}>Copy</button
-						>
-					</footer>
-				</article>
-			{/each}
+			{#if query !== ''}
+				{#each searchCode(query) as result}
+					<article class="card">
+						<header>
+							<p style="margin-bottom: 0;">
+								<strong>{result.item.title}</strong>
+							</p>
+						</header>
+						<HighlightAuto id="code" code={result.item.code} />
+						<footer style="display: flex; gap: 0.8em; justify-content: right;">
+							<button
+								class="secondary outline"
+								on:click={() => {
+									deleteSnippet(i)
+								}}>Delete</button
+							>
+							<button
+								on:click={() => {
+									copyToClipboard(code)
+								}}>Copy</button
+							>
+						</footer>
+					</article>
+				{/each}
+			{:else}
+				{#each codeSnippets as { title, code }, i}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+					<article class="card">
+						<header>
+							<p style="margin-bottom: 0;">
+								<strong>{title}</strong>
+							</p>
+						</header>
+						<HighlightAuto id="code" {code} />
+						<footer style="display: flex; gap: 0.8em; justify-content: right;">
+							<button
+								class="secondary outline"
+								on:click={() => {
+									deleteSnippet(i)
+								}}>Delete</button
+							>
+							<button
+								on:click={() => {
+									copyToClipboard(code)
+								}}>Copy</button
+							>
+						</footer>
+					</article>
+				{/each}
+			{/if}
 		</div>
 	</div>
 {/if}

@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@highlight-ai/app-runtime": "^0.0.44"
+		"@highlight-ai/app-runtime": "^0.0.44",
+		"fuse.js": "^7.0.0"
 	}
 }
