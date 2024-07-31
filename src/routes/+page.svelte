@@ -5,15 +5,6 @@
 	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 
 	let codeSnippets: codeSnippet[] = []
-	let codeSnippet: codeSnippet
-	let selectedCodeSnippet: codeSnippet & { i: number } = {
-		created_at: '',
-		updated_at: '',
-		title: '',
-		description: '',
-		code: '',
-		i: 0,
-	}
 
 	onMount(async () => {
 		/**
@@ -24,55 +15,17 @@
 			return
 		}
 
-		/**
-		 * Reset code snippets
-		 */
-		codeSnippets = []
-
-		/**
-		 * Wait till the Highlight app is hydrated
-		 */
-		await Highlight.appStorage.whenHydrated()
-
-		/**
-		 * Get code snippets on initial load
-		 */
 		codeSnippets = await getCodeSnippets()
-
-		Highlight.app.addListener(
-			'onContext',
-			async (context: HighlightContext) => {
-				console.log('Invoked')
-				codeSnippet.title = context.suggestion || ''
-				codeSnippet.created_at = new Date().toISOString()
-				codeSnippet.updated_at = new Date().toISOString()
-
-				/**
-				 * Get code from Clipboard
-				 */
-				if (context.environment.clipboardText) {
-					codeSnippet.code = context.environment.clipboardText
-				}
-
-				await saveCode(codeSnippet)
-			},
-		)
 	})
 
-	const saveCode = async ({
-		created_at,
-		updated_at,
-		title,
-		description,
-		code,
-	}: codeSnippet) => {
-		codeSnippets.push({
-			created_at: created_at,
-			updated_at: updated_at,
-			title: title,
-			description,
-			code: code,
-		})
+	const saveCode = async (snippet: codeSnippet) => {
+		const newSnippet = {
+			...snippet,
+			created_at: new Date().toISOString(),
+			updated_at: new Date().toISOString(),
+		}
+
+		codeSnippets.unshift(newSnippet)
 		codeSnippets = codeSnippets
 
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
@@ -98,6 +51,35 @@
 
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
 	}
+
+	Highlight.app.addListener('onContext', async (context: HighlightContext) => {
+		const codeSnippet: codeSnippet = {
+			created_at: '',
+			updated_at: '',
+			title: '',
+			description: '',
+			code: '',
+		}
+
+		console.log('Invoked', context.suggestion)
+		codeSnippet.title = context.suggestion || ''
+		codeSnippet.created_at = new Date().toISOString()
+		codeSnippet.updated_at = new Date().toISOString()
+
+		/**
+		 * Get code from Clipboard
+		 */
+		const attachments = context.attachments
+		if (attachments) {
+			attachments.forEach((attachment) => {
+				if (attachment.type === 'clipboard') {
+					codeSnippet.code = attachment.value
+				}
+			})
+		}
+
+		await saveCode(codeSnippet)
+	})
 </script>
 
 {#if codeSnippets.length === 0}
@@ -147,25 +129,13 @@
 	<div class="code-snippets__container">
 		<h1>CodeClippy</h1>
 		<div class="grid">
-			{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
+			{#each codeSnippets as { title, code }, i}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-				<article
-					class="card"
-					on:click={() => {
-						selectedCodeSnippet = {
-							created_at: created_at,
-							description: description,
-							code: code,
-							updated_at: updated_at,
-							title: title,
-							i: i,
-						}
-					}}
-				>
+				<article class="card">
 					<header>
 						<p style="margin-bottom: 0;">
-							<strong>{title}</strong>
+							{i}<strong>{title}</strong>
 						</p>
 					</header>
 					<HighlightAuto class="code" {code} />
@@ -173,12 +143,12 @@
 						<button
 							class="secondary outline"
 							on:click={() => {
-								deleteSnippet(selectedCodeSnippet.i)
+								deleteSnippet(i)
 							}}>Delete</button
 						>
 						<button
 							on:click={() => {
-								copyToClipboard(selectedCodeSnippet.code)
+								copyToClipboard(code)
 							}}>Copy</button
 						>
 					</footer>
@@ -224,9 +194,5 @@
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 1em;
-	}
-
-	.card {
-		cursor: pointer;
 	}
 </style>
