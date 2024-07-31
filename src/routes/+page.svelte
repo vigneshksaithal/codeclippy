@@ -15,8 +15,6 @@
 		i: 0,
 	}
 
-	let isModalOpen = false
-
 	onMount(async () => {
 		/**
 		 * Check if it is running in Highlight
@@ -176,13 +174,11 @@
 							class="secondary outline"
 							on:click={() => {
 								deleteSnippet(selectedCodeSnippet.i)
-								isModalOpen = false
 							}}>Delete</button
 						>
 						<button
 							on:click={() => {
 								copyToClipboard(selectedCodeSnippet.code)
-								isModalOpen = false
 							}}>Copy</button
 						>
 					</footer>
