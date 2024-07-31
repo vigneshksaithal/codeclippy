@@ -161,7 +161,7 @@
 		/>
 		<div class="grid">
 			{#if query !== ''}
-				{#each searchCode(query) as result}
+				{#each searchCode(query) as result, i}
 					<article class="card">
 						<header>
 							<p style="margin-bottom: 0;">
@@ -169,19 +169,6 @@
 							</p>
 						</header>
 						<HighlightAuto id="code" code={result.item.code} />
-						<footer style="display: flex; gap: 0.8em; justify-content: right;">
-							<button
-								class="secondary outline"
-								on:click={() => {
-									deleteSnippet(i)
-								}}>Delete</button
-							>
-							<button
-								on:click={() => {
-									copyToClipboard(code)
-								}}>Copy</button
-							>
-						</footer>
 					</article>
 				{/each}
 			{:else}
