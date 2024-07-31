@@ -146,31 +146,49 @@
 		</footer>
 	</article>
 {:else}
-	<h1>CodeClippy</h1>
-	<div class="grid">
-		{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-			<article
-				class="card"
-				on:click={() => {
-					isModalOpen = true
-
-					selectedCodeSnippet = {
-						created_at: created_at,
-						description: description,
-						code: code,
-						updated_at: updated_at,
-						title: title,
-						i: i,
-					}
-				}}
-			>
-				<p>
-					<strong>{title}</strong>
-				</p>
-			</article>
-		{/each}
+	<div class="code-snippets__container">
+		<h1>CodeClippy</h1>
+		<div class="grid">
+			{#each codeSnippets as { created_at, updated_at, title, description, code }, i (i)}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+				<article
+					class="card"
+					on:click={() => {
+						selectedCodeSnippet = {
+							created_at: created_at,
+							description: description,
+							code: code,
+							updated_at: updated_at,
+							title: title,
+							i: i,
+						}
+					}}
+				>
+					<header>
+						<p style="margin-bottom: 0;">
+							<strong>{title}</strong>
+						</p>
+					</header>
+					<HighlightAuto class="code" {code} />
+					<footer style="display: flex; gap: 0.8em; justify-content: right;">
+						<button
+							class="secondary outline"
+							on:click={() => {
+								deleteSnippet(selectedCodeSnippet.i)
+								isModalOpen = false
+							}}>Delete</button
+						>
+						<button
+							on:click={() => {
+								copyToClipboard(selectedCodeSnippet.code)
+								isModalOpen = false
+							}}>Copy</button
+						>
+					</footer>
+				</article>
+			{/each}
+		</div>
 	</div>
 {/if}
 
@@ -179,50 +197,26 @@
 	{@html atomOneLight}
 </svelte:head>
 
-<dialog open={isModalOpen}>
-	<article>
-		<header>
-			<button
-				aria-label="Close"
-				rel="prev"
-				on:click={() => (isModalOpen = false)}
-			></button>
-			<p>
-				<strong>{selectedCodeSnippet.title}</strong>
-			</p>
-		</header>
-		<HighlightAuto id="code" code={selectedCodeSnippet.code} />
-		<footer>
-			<button
-				class="contrast outline"
-				on:click={() => {
-					deleteSnippet(selectedCodeSnippet.i)
-					isModalOpen = false
-				}}>Delete</button
-			>
-			<button
-				class="contrast"
-				on:click={() => {
-					copyToClipboard(selectedCodeSnippet.code)
-					isModalOpen = false
-				}}>Copy</button
-			>
-		</footer>
-	</article>
-</dialog>
-
 <style>
 	.readme {
 		max-width: 567px;
 		margin: 0 auto;
 	}
 
+	.code-snippets__container {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
 	.grid {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(1, 1fr);
+		max-width: 640px;
+		margin: 0 auto;
 	}
 
 	.card {
 		width: 100%;
+		margin: 0 auto;
 	}
 
 	:global(#code) {
