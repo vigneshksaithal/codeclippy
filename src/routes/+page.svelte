@@ -5,6 +5,13 @@
 	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 
 	let codeSnippets: codeSnippet[] = []
+	const codeSnippet: codeSnippet = {
+		created_at: '',
+		updated_at: '',
+		title: '',
+		description: '',
+		code: '',
+	}
 
 	onMount(async () => {
 		/**
@@ -53,14 +60,6 @@
 	}
 
 	Highlight.app.addListener('onContext', async (context: HighlightContext) => {
-		const codeSnippet: codeSnippet = {
-			created_at: '',
-			updated_at: '',
-			title: '',
-			description: '',
-			code: '',
-		}
-
 		console.log('Invoked', context.suggestion)
 		codeSnippet.title = context.suggestion || ''
 		codeSnippet.created_at = new Date().toISOString()
@@ -135,7 +134,7 @@
 				<article class="card">
 					<header>
 						<p style="margin-bottom: 0;">
-							{i}<strong>{title}</strong>
+							<strong>{title}</strong>
 						</p>
 					</header>
 					<HighlightAuto class="code" {code} />
