@@ -175,6 +175,7 @@
 
 	:global(#code) {
 		font-size: 0.8rem;
+		max-height: 240px;
 	}
 
 	video {
