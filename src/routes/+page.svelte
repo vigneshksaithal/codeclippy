@@ -16,7 +16,13 @@
 	let query = ''
 
 	onMount(async () => {
-		console.log('GET CODE SNIPPETS', await getCodeSnippets())
+		if ((await Highlight.appStorage.get('deleteCodeSnippets')) === false) {
+			Highlight.appStorage.delete('codeSnippets')
+			Highlight.appStorage.set('deleteCodeSnippets', true)
+		} else {
+			Highlight.appStorage.delete('deleteCodeSnippets')
+		}
+
 		/**
 		 * Check if it is running in Highlight
 		 */
