@@ -16,11 +16,11 @@
 	let query = ''
 
 	onMount(async () => {
-		if (await Highlight.appStorage.get('deleteCodeSnippets')) {
+		if (Highlight.appStorage.get('deleteCodeSnippets')) {
+			Highlight.appStorage.delete('deleteCodeSnippets')
+		} else {
 			Highlight.appStorage.delete('codeSnippets')
 			Highlight.appStorage.set('deleteCodeSnippets', true)
-		} else {
-			Highlight.appStorage.delete('deleteCodeSnippets')
 		}
 
 		/**
@@ -93,6 +93,12 @@
 		async (context: HighlightContext) => {
 			if (!context.suggestion) {
 				return
+			}
+
+			if (Highlight.appStorage.get('deleteCodeSnippets')) {
+				console.log('DELETE CODE SNIPPETS')
+			} else {
+				console.log('NOT DELETE CODE SNIPPETS')
 			}
 
 			codeSnippet.title = context.suggestion
