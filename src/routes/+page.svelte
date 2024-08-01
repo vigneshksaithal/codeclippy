@@ -16,6 +16,7 @@
 	let query = ''
 
 	onMount(async () => {
+		// TODO: DELETE THIS CODE AFTER 5th AUGUST 2024
 		if (Highlight.appStorage.get('deleteCodeSnippets')) {
 			Highlight.appStorage.delete('deleteCodeSnippets')
 		} else {
