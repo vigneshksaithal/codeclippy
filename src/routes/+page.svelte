@@ -16,6 +16,7 @@
 	let query = ''
 
 	onMount(async () => {
+		console.log('GET CODE SNIPPETS', await getCodeSnippets())
 		/**
 		 * Check if it is running in Highlight
 		 */
@@ -23,39 +24,14 @@
 			console.error('Highlight environment is not available')
 			return
 		}
+
+		codeSnippets.length = 0 // Reset
 		codeSnippets = await getCodeSnippets()
-
-		const destroyHighlightListener = Highlight.app.addListener(
-			'onContext',
-			async (context: HighlightContext) => {
-				console.log(new Date())
-				console.log('Invoked', context.suggestion)
-				codeSnippet.title = context.suggestion ?? ''
-				codeSnippet.created_at = new Date().toISOString()
-				codeSnippet.updated_at = new Date().toISOString()
-
-				/**
-				 * Get code from Clipboard
-				 */
-				const attachments = context.attachments
-				if (attachments) {
-					attachments.forEach((attachment) => {
-						if (attachment.type === 'clipboard') {
-							codeSnippet.code = attachment.value
-						}
-					})
-				}
-
-				await saveCode(codeSnippet)
-			},
-		)
 	})
 
 	const saveCode = async (snippet: codeSnippet) => {
 		const newSnippet = {
 			...snippet,
-			created_at: new Date().toISOString(),
-			updated_at: new Date().toISOString(),
 		}
 
 		codeSnippets.unshift(newSnippet)
@@ -109,9 +85,11 @@
 	const destroyHighlightListener = Highlight.app.addListener(
 		'onContext',
 		async (context: HighlightContext) => {
-			console.log(new Date())
-			console.log('Invoked', context.suggestion)
-			codeSnippet.title = context.suggestion ?? ''
+			if (!context.suggestion) {
+				return
+			}
+
+			codeSnippet.title = context.suggestion
 			codeSnippet.created_at = new Date().toISOString()
 			codeSnippet.updated_at = new Date().toISOString()
 
