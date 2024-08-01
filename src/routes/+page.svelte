@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 	import Fuse from 'fuse.js'
-	import { onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 	import { HighlightAuto } from 'svelte-highlight'
 	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 
@@ -23,8 +23,32 @@
 			console.error('Highlight environment is not available')
 			return
 		}
-
 		codeSnippets = await getCodeSnippets()
+
+		const destroyHighlightListener = Highlight.app.addListener(
+			'onContext',
+			async (context: HighlightContext) => {
+				console.log(new Date())
+				console.log('Invoked', context.suggestion)
+				codeSnippet.title = context.suggestion ?? ''
+				codeSnippet.created_at = new Date().toISOString()
+				codeSnippet.updated_at = new Date().toISOString()
+
+				/**
+				 * Get code from Clipboard
+				 */
+				const attachments = context.attachments
+				if (attachments) {
+					attachments.forEach((attachment) => {
+						if (attachment.type === 'clipboard') {
+							codeSnippet.code = attachment.value
+						}
+					})
+				}
+
+				await saveCode(codeSnippet)
+			},
+		)
 	})
 
 	const saveCode = async (snippet: codeSnippet) => {
@@ -41,7 +65,7 @@
 	}
 
 	const getCodeSnippets = async () => {
-		return (await Highlight.appStorage.get('codeSnippets')) || []
+		return (await Highlight.appStorage.get('codeSnippets')) ?? []
 	}
 
 	const copyToClipboard = async (text: string) => {
@@ -82,25 +106,33 @@
 		return fuse.search(query)
 	}
 
-	Highlight.app.addListener('onContext', async (context: HighlightContext) => {
-		console.log('Invoked', context.suggestion)
-		codeSnippet.title = context.suggestion ?? ''
-		codeSnippet.created_at = new Date().toISOString()
-		codeSnippet.updated_at = new Date().toISOString()
+	const destroyHighlightListener = Highlight.app.addListener(
+		'onContext',
+		async (context: HighlightContext) => {
+			console.log(new Date())
+			console.log('Invoked', context.suggestion)
+			codeSnippet.title = context.suggestion ?? ''
+			codeSnippet.created_at = new Date().toISOString()
+			codeSnippet.updated_at = new Date().toISOString()
 
-		/**
-		 * Get code from Clipboard
-		 */
-		const attachments = context.attachments
-		if (attachments) {
-			attachments.forEach((attachment) => {
-				if (attachment.type === 'clipboard') {
-					codeSnippet.code = attachment.value
-				}
-			})
-		}
+			/**
+			 * Get code from Clipboard
+			 */
+			const attachments = context.attachments
+			if (attachments) {
+				attachments.forEach((attachment) => {
+					if (attachment.type === 'clipboard') {
+						codeSnippet.code = attachment.value
+					}
+				})
+			}
 
-		await saveCode(codeSnippet)
+			await saveCode(codeSnippet)
+		},
+	)
+
+	onDestroy(() => {
+		destroyHighlightListener()
 	})
 </script>
 
@@ -155,13 +187,10 @@
 			placeholder="Search"
 			aria-label="Search"
 			bind:value={query}
-			on:input={() => {
-				console.log(searchCode(query))
-			}}
 		/>
 		<div class="grid">
 			{#if query !== ''}
-				{#each searchCode(query) as result, i}
+				{#each searchCode(query) as result}
 					<article class="card">
 						<header>
 							<p style="margin-bottom: 0;">
@@ -173,9 +202,7 @@
 				{/each}
 			{:else}
 				{#each codeSnippets as { title, code }, i}
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-					<article class="card">
+					<article>
 						<header>
 							<p style="margin-bottom: 0;">
 								<strong>{title}</strong>
