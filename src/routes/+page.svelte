@@ -173,6 +173,12 @@
 {:else}
 	<div class="code-snippets__container">
 		<h1>CodeClippy</h1>
+		<p>
+			For bugs or suggestions <a
+				href="https://tally.so/r/3N0jdb"
+				target="_blank">click here</a
+			>
+		</p>
 		<input
 			type="search"
 			placeholder="Search"
