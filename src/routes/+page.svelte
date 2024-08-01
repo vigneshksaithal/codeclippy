@@ -16,7 +16,7 @@
 	let query = ''
 
 	onMount(async () => {
-		if ((await Highlight.appStorage.get('deleteCodeSnippets')) === false) {
+		if (await Highlight.appStorage.get('deleteCodeSnippets')) {
 			Highlight.appStorage.delete('codeSnippets')
 			Highlight.appStorage.set('deleteCodeSnippets', true)
 		} else {
