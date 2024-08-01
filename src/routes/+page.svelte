@@ -84,7 +84,7 @@
 
 	Highlight.app.addListener('onContext', async (context: HighlightContext) => {
 		console.log('Invoked', context.suggestion)
-		codeSnippet.title = context.suggestion || ''
+		codeSnippet.title = context.suggestion ?? ''
 		codeSnippet.created_at = new Date().toISOString()
 		codeSnippet.updated_at = new Date().toISOString()
 
