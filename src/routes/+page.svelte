@@ -16,14 +16,6 @@
 	let query = ''
 
 	onMount(async () => {
-		// TODO: DELETE THIS CODE AFTER 5th AUGUST 2024
-		if (Highlight.appStorage.get('deleteCodeSnippets')) {
-			Highlight.appStorage.delete('deleteCodeSnippets')
-		} else {
-			Highlight.appStorage.delete('codeSnippets')
-			Highlight.appStorage.set('deleteCodeSnippets', true)
-		}
-
 		/**
 		 * Check if it is running in Highlight
 		 */
@@ -96,12 +88,6 @@
 				return
 			}
 
-			if (Highlight.appStorage.get('deleteCodeSnippets')) {
-				console.log('DELETE CODE SNIPPETS')
-			} else {
-				console.log('NOT DELETE CODE SNIPPETS')
-			}
-
 			codeSnippet.title = context.suggestion
 			codeSnippet.created_at = new Date().toISOString()
 			codeSnippet.updated_at = new Date().toISOString()
@@ -109,6 +95,7 @@
 			/**
 			 * Get code from Clipboard
 			 */
+
 			const attachments = context.attachments
 			if (attachments) {
 				attachments.forEach((attachment) => {
@@ -136,39 +123,16 @@
 				CodeClippy is a Highlight.ing app that helps you capture code snippets
 				like Pieces.app without the complexity.
 			</p>
+			<p>Just copy the code and invoke the app with Highlight.</p>
+			<p style="margin-bottom: 0;">
+				<strong>Note: All data is stored only on your computer.</strong>
+			</p>
 		</header>
 
-		<!-- svelte-ignore a11y-media-has-caption -->
-		<video autoplay>
+		<video autoplay loop muted>
 			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
 			Your browser does not support the video tag.
 		</video>
-
-		<h4>How to use?</h4>
-		<ol>
-			<li>Copy the code snippet(Command/Ctrl + C) you would like to save.</li>
-			<li>
-				Then, hover over the Highlight app and select CodeClippy app by pressing
-				Tab.
-			</li>
-			<li>Type a description or choose from the AI generated suggestions.</li>
-			<li>That's all! Your code is saved in CodeClippy.</li>
-			<li>
-				You can access it anytime by just visiting CodeClippy in the Highlight
-				app.
-			</li>
-		</ol>
-		<p>Simple, right?</p>
-		<p>
-			<strong>Note: All data is stored only on your computer.</strong>
-		</p>
-
-		<footer>
-			<small
-				>For any bugs or suggestions, please reach out at contact [at]
-				aithal.dev</small
-			>
-		</footer>
 	</article>
 {:else}
 	<div class="code-snippets__container">
@@ -251,6 +215,5 @@
 		width: 100%;
 		height: auto;
 		border-radius: 4px;
-		margin-bottom: 1em;
 	}
 </style>
