@@ -7,6 +7,7 @@
 
 	let codeSnippets: codeSnippet[] = []
 	const codeSnippet: codeSnippet = {
+		id: -1,
 		created_at: '',
 		updated_at: '',
 		title: '',
@@ -25,6 +26,7 @@
 		}
 
 		codeSnippets.length = 0 // Reset
+
 		codeSnippets = await getCodeSnippets()
 	})
 
@@ -53,10 +55,8 @@
 		}
 	}
 
-	const deleteSnippet = (i: number) => {
-		codeSnippets.splice(i, 1)
-		codeSnippets = codeSnippets
-
+	const deleteSnippet = (id: number) => {
+		codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
 	}
 
@@ -81,12 +81,29 @@
 		return fuse.search(query)
 	}
 
+	const generateId = () => {
+		return Math.floor(Math.random() * 1000000)
+	}
+
 	const destroyHighlightListener = Highlight.app.addListener(
 		'onContext',
 		async (context: HighlightContext) => {
 			if (!context.suggestion) {
 				return
 			}
+
+			/**
+			 * Check if id already exists
+			 */
+			let idExists = true
+			let newId = generateId()
+			while (idExists) {
+				idExists = codeSnippets.some((snippet) => snippet.id === newId)
+				if (idExists) {
+					newId = generateId()
+				}
+			}
+			codeSnippet.id = newId
 
 			codeSnippet.title = context.suggestion
 			codeSnippet.created_at = new Date().toISOString()
@@ -136,13 +153,26 @@
 	</article>
 {:else}
 	<div class="code-snippets__container">
-		<h1>CodeClippy</h1>
-		<p>
-			For bugs or suggestions <a
-				href="https://tally.so/r/3N0jdb"
-				target="_blank">click here</a
-			>
-		</p>
+		<nav>
+			<ul>
+				<li><h1>CodeClippy</h1></li>
+			</ul>
+			<ul>
+				<li>
+					<a href="https://tally.so/r/3N0jdb" target="_blank">Feedback</a>
+				</li>
+				<li>
+					<button
+						class="secondary"
+						on:click={() => {
+							codeSnippets = []
+							Highlight.appStorage.delete('codeSnippets')
+						}}>Reset</button
+					>
+				</li>
+			</ul>
+		</nav>
+		<p>If you are facing bugs, try resetting using the above button.</p>
 		<input
 			type="search"
 			placeholder="Search"
@@ -159,10 +189,24 @@
 							</p>
 						</header>
 						<HighlightAuto id="code" code={result.item.code} />
+						<footer style="display: flex; gap: 0.8em; justify-content: right;">
+							<button
+								class="secondary outline"
+								on:click={() => {
+									deleteSnippet(result.item.id)
+									query = ''
+								}}>Delete</button
+							>
+							<button
+								on:click={() => {
+									copyToClipboard(result.item.code)
+								}}>Copy</button
+							>
+						</footer>
 					</article>
 				{/each}
 			{:else}
-				{#each codeSnippets as { title, code }, i}
+				{#each codeSnippets as { id, title, code }, i}
 					<article>
 						<header>
 							<p style="margin-bottom: 0;">
@@ -174,7 +218,7 @@
 							<button
 								class="secondary outline"
 								on:click={() => {
-									deleteSnippet(i)
+									deleteSnippet(id)
 								}}>Delete</button
 							>
 							<button

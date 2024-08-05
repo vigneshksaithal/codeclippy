@@ -10,12 +10,13 @@ declare global {
 	}
 
 	type codeSnippet = {
-		created_at: string;
-		updated_at: string;
-		title: string;
-		description: string;
-		code: string;
-	};
+		id: number
+		created_at: string
+		updated_at: string
+		title: string
+		description: string
+		code: string
+	}
 }
 
 export { }
