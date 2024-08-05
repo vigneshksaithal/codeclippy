@@ -147,7 +147,7 @@
 		</header>
 
 		<video autoplay loop muted>
-			<source src="/CodeClippy-Tutorial.mp4" type="video/mp4" />
+			<source src="/codeclippy-demo.mp4" type="video/mp4" />
 			Your browser does not support the video tag.
 		</video>
 	</article>
