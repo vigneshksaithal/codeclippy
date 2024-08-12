@@ -29,7 +29,7 @@ onMount(async () => {
 	codeSnippets = await getCodeSnippets()
 })
 
-const saveCode = async (snippet: codeSnippet) => {
+const saveCode = async (snippet: codeSnippet): Promise<void> => {
 	const newSnippet = {
 		...snippet,
 	}
@@ -55,7 +55,7 @@ const copyToClipboard = async (text: string) => {
 	}
 }
 
-const deleteSnippet = (id: number) => {
+const deleteSnippet = (id: number): void => {
 	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
 	Highlight.appStorage.set("codeSnippets", codeSnippets)
 }
@@ -68,7 +68,7 @@ const searchCode = (query: string) => {
 	return fuse.search(query)
 }
 
-const generateId = () => {
+const generateId = (): number => {
 	return Math.floor(Math.random() * 1000000)
 }
 
