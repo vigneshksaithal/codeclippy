@@ -1,116 +1,116 @@
 <script lang="ts">
-	import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
-	import Fuse from 'fuse.js'
-	import { onDestroy, onMount } from 'svelte'
-	import { HighlightAuto } from 'svelte-highlight'
-	import atomOneLight from 'svelte-highlight/styles/atom-one-light'
+import Highlight, { type HighlightContext } from "@highlight-ai/app-runtime"
+import Fuse from "fuse.js"
+import { onDestroy, onMount } from "svelte"
+import { HighlightAuto } from "svelte-highlight"
+import atomOneLight from "svelte-highlight/styles/atom-one-light"
 
-	let codeSnippets: codeSnippet[] = []
-	const codeSnippet: codeSnippet = {
-		id: -1,
-		created_at: '',
-		updated_at: '',
-		title: '',
-		description: '',
-		code: '',
+let codeSnippets: codeSnippet[] = []
+const codeSnippet: codeSnippet = {
+	id: -1,
+	created_at: "",
+	updated_at: "",
+	title: "",
+	description: "",
+	code: "",
+}
+// biome-ignore lint/style/useConst: <explanation>
+let query = ""
+
+onMount(async () => {
+	/* Check if it is running in Highlight */
+	if (typeof window.Highlight === "undefined") {
+		console.error("Highlight environment is not available")
+		return
 	}
-	// biome-ignore lint/style/useConst: <explanation>
-	let query = ''
 
-	onMount(async () => {
-		/* Check if it is running in Highlight */
-		if (typeof window.Highlight === 'undefined') {
-			console.error('Highlight environment is not available')
+	codeSnippets.length = 0 // Reset
+
+	codeSnippets = await getCodeSnippets()
+})
+
+const saveCode = async (snippet: codeSnippet) => {
+	const newSnippet = {
+		...snippet,
+	}
+
+	codeSnippets.unshift(newSnippet)
+	// biome-ignore lint/correctness/noSelfAssign: <explanation>
+	codeSnippets = codeSnippets
+
+	Highlight.appStorage.set("codeSnippets", codeSnippets)
+}
+
+const getCodeSnippets = async () => {
+	return (await Highlight.appStorage.get("codeSnippets")) ?? []
+}
+
+const copyToClipboard = async (text: string) => {
+	try {
+		await navigator.clipboard.writeText(text)
+		alert("Code copied successfully!")
+	} catch (error) {
+		console.error("Failed to copy text", error)
+		alert("Failed to copy code :(")
+	}
+}
+
+const deleteSnippet = (id: number) => {
+	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
+	Highlight.appStorage.set("codeSnippets", codeSnippets)
+}
+
+const searchCode = (query: string) => {
+	const fuseOptions = {
+		keys: ["title"],
+	}
+	const fuse = new Fuse(codeSnippets, fuseOptions)
+	return fuse.search(query)
+}
+
+const generateId = () => {
+	return Math.floor(Math.random() * 1000000)
+}
+
+const destroyHighlightListener = Highlight.app.addListener(
+	"onContext",
+	async (context: HighlightContext) => {
+		if (!context.suggestion) {
 			return
 		}
 
-		codeSnippets.length = 0 // Reset
-
-		codeSnippets = await getCodeSnippets()
-	})
-
-	const saveCode = async (snippet: codeSnippet) => {
-		const newSnippet = {
-			...snippet,
-		}
-
-		codeSnippets.unshift(newSnippet)
-		// biome-ignore lint/correctness/noSelfAssign: <explanation>
-		codeSnippets = codeSnippets
-
-		Highlight.appStorage.set('codeSnippets', codeSnippets)
-	}
-
-	const getCodeSnippets = async () => {
-		return (await Highlight.appStorage.get('codeSnippets')) ?? []
-	}
-
-	const copyToClipboard = async (text: string) => {
-		try {
-			await navigator.clipboard.writeText(text)
-			alert('Code copied successfully!')
-		} catch (error) {
-			console.error('Failed to copy text', error)
-			alert('Failed to copy code :(')
-		}
-	}
-
-	const deleteSnippet = (id: number) => {
-		codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
-		Highlight.appStorage.set('codeSnippets', codeSnippets)
-	}
-
-	const searchCode = (query: string) => {
-		const fuseOptions = {
-			keys: ['title'],
-		}
-		const fuse = new Fuse(codeSnippets, fuseOptions)
-		return fuse.search(query)
-	}
-
-	const generateId = () => {
-		return Math.floor(Math.random() * 1000000)
-	}
-
-	const destroyHighlightListener = Highlight.app.addListener(
-		'onContext',
-		async (context: HighlightContext) => {
-			if (!context.suggestion) {
-				return
+		/* Check if ID already exists */
+		let idExists = true
+		let newId = generateId()
+		while (idExists) {
+			idExists = codeSnippets.some((snippet) => snippet.id === newId)
+			if (idExists) {
+				newId = generateId()
 			}
+		}
+		codeSnippet.id = newId
 
-			/* Check if ID already exists */
-			let idExists = true
-			let newId = generateId()
-			while (idExists) {
-				idExists = codeSnippets.some((snippet) => snippet.id === newId)
-				if (idExists) {
-					newId = generateId()
+		codeSnippet.title = context.suggestion
+		codeSnippet.created_at = new Date().toISOString()
+		codeSnippet.updated_at = new Date().toISOString()
+
+		/* Get code from Clipboard */
+		const attachments = context.attachments
+		if (attachments) {
+			for (const attachment of attachments) {
+				if (attachment.type === "clipboard") {
+					codeSnippet.code = attachment.value
 				}
 			}
-			codeSnippet.id = newId
+		}
 
-			codeSnippet.title = context.suggestion
-			codeSnippet.created_at = new Date().toISOString()
-			codeSnippet.updated_at = new Date().toISOString()
+		await saveCode(codeSnippet)
+	},
+)
 
-			/* Get code from Clipboard */
-			const attachments = context.attachments
-			if (attachments) {
-				for (const attachment of attachments) {
-					if (attachment.type === 'clipboard') {
-						codeSnippet.code = attachment.value
-					}
-				}
-			}
-
-			await saveCode(codeSnippet)
-		},
-	)
-
-	onDestroy(() => {
-		destroyHighlightListener()
-	})
+onDestroy(() => {
+	destroyHighlightListener()
+})
 </script>
 
 {#if codeSnippets.length === 0}
