@@ -4,6 +4,8 @@ import Fuse from "fuse.js"
 import { onDestroy, onMount } from "svelte"
 import { HighlightAuto } from "svelte-highlight"
 import atomOneLight from "svelte-highlight/styles/atom-one-light"
+import NavBar from "./NavBar.svelte"
+import Readme from "./README.svelte"
 
 let codeSnippets: codeSnippet[] = []
 // biome-ignore lint/style/useConst: <explanation>
@@ -55,21 +57,21 @@ onMount(async () => {
 	}
 })
 
-const saveCode = async (snippet: codeSnippet): Promise<void> => {
+const saveCode = (snippet: codeSnippet): void => {
 	codeSnippets = [snippet, ...codeSnippets]
 	if (isHighlight) {
-		await Highlight.appStorage.set("codeSnippets", codeSnippets)
+		Highlight.appStorage.set("codeSnippets", codeSnippets)
 	}
 }
 
-const getCodeSnippets = async () => {
+const getCodeSnippets = async (): Promise<codeSnippet[]> => {
 	if (isHighlight) {
 		return (await Highlight.appStorage.get("codeSnippets")) ?? []
 	}
 	return []
 }
 
-const copyToClipboard = async (text: string) => {
+const copyToClipboard = async (text: string): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text)
 		alert("Code copied successfully!")
@@ -103,27 +105,7 @@ onDestroy(() => {
 
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
-    <nav>
-      <ul>
-        <li><h1>CodeClippy</h1></li>
-      </ul>
-      <ul>
-        <li>
-          <a href="https://tally.so/r/3N0jdb" target="_blank">Feedback</a>
-        </li>
-        <li>
-          <button
-            class="secondary"
-            on:click={() => {
-              codeSnippets = []
-              if (isHighlight) {
-                Highlight.appStorage.delete('codeSnippets')
-              }
-            }}>Reset</button
-          >
-        </li>
-      </ul>
-    </nav>
+    <NavBar />
     <p>If you are facing bugs, try resetting using the above button.</p>
     <input
       type="search"
@@ -185,30 +167,7 @@ onDestroy(() => {
     </div>
   </div>
 {:else}
-  <article class="readme">
-    <header>
-      <h1>CodeClippy</h1>
-      <p>
-        CodeClippy is a Highlight.ing app that helps you capture code snippets
-        like Pieces.app without the complexity.
-      </p>
-      <p>Just copy the code and invoke the app with Highlight.</p>
-      <p style="margin-bottom: 0;">
-        <strong>Note: All data is stored only on your computer.</strong>
-      </p>
-      {#if !isHighlight}
-        <p>
-          <strong>This app is designed to run inside the Highlight environment.
-          Some features may be limited when running outside of Highlight.</strong>
-        </p>
-      {/if}
-    </header>
-
-    <video autoplay loop muted>
-      <source src="/codeclippy-demo.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </article>
+  <Readme {isHighlight} />
 {/if}
 
 <!-- Import Atom One Light theme -->
@@ -217,7 +176,6 @@ onDestroy(() => {
 </svelte:head>
 
 <style>
-  .readme,
   .code-snippets__container {
     max-width: 640px;
     margin: 0 auto;
@@ -226,11 +184,5 @@ onDestroy(() => {
   :global(#code) {
     font-size: 0.8rem;
     max-height: 240px;
-  }
-
-  video {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
   }
 </style>
