@@ -1,6 +1,6 @@
 <nav>
   <ul>
-    <li><strong>CodeClippy</strong></li>
+    <li><h1>CodeClippy</h1></li>
   </ul>
   <ul>
     <li>

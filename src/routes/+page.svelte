@@ -5,7 +5,7 @@ import Fuse from "fuse.js"
 import { onDestroy, onMount } from "svelte"
 import { HighlightAuto } from "svelte-highlight"
 import atomOneLight from "svelte-highlight/styles/atom-one-light"
-import NavBar from "./NavBar.svelte"
+import NavBar from "./Navbar.svelte"
 import Readme from "./README.svelte"
 
 let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
