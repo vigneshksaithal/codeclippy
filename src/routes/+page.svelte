@@ -138,8 +138,18 @@ onDestroy(() => {
 
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
-    <NavBar />
-    <p>If you are facing bugs, try resetting using the above button.</p>
+    <NavBar {isHighlight} {codeSnippets} />
+    <p>If you are facing bugs, try resetting using this button.  <a class="secondary outline" href="/#" on:click={() => {
+      codeSnippets = []
+      if (isHighlight) {
+       
+        Highlight.appStorage.delete("codeSnippets")
+
+        codeSnippets = []
+        codeSnippets = codeSnippets
+        }
+      }}>Reset</a></p>
+   
     <input
       type="search"
       placeholder="Search"
