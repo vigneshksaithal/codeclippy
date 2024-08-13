@@ -81,23 +81,6 @@ const copyToClipboard = async (text: string): Promise<void> => {
 	}
 }
 
-const shareCode = async (code: string): Promise<void> => {
-	try {
-		const response = await fetch("/api/share", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ code }),
-		})
-		const { id } = await response.json()
-		const shareUrl = `${window.location.origin}/share/${id}`
-		await navigator.clipboard.writeText(shareUrl)
-		alert("Share link copied to clipboard!")
-	} catch (error) {
-		console.error("Failed to share code", error)
-		alert("Failed to share code")
-	}
-}
-
 const deleteSnippet = (id: number): void => {
 	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
 	if (isHighlight) {
@@ -153,11 +136,6 @@ onDestroy(() => {
                   copyToClipboard(result.item.code)
                 }}>Copy</button
               >
-              <button
-                on:click={() => {
-                  shareCode(result.item.code)
-                }}>Share</button
-              >
             </footer>
           </article>
         {/each}
@@ -181,11 +159,6 @@ onDestroy(() => {
                 on:click={() => {
                   copyToClipboard(code)
                 }}>Copy</button
-              >
-              <button
-                on:click={() => {
-                  shareCode(code)
-                }}>Share</button
               >
             </footer>
           </article>

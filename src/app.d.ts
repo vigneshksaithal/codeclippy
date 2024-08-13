@@ -1,14 +1,13 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
-	namespace App {// interface Error {}
+	namespace App {
+		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
 		interface Platform {
-			env?: {
-				CODESNIPPETS: KVNamespace
-			}
+
 		}
 	}
 
@@ -23,4 +22,3 @@ declare global {
 }
 
 export type { }
-
