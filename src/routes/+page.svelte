@@ -5,7 +5,7 @@ import Fuse from "fuse.js"
 import { onDestroy, onMount } from "svelte"
 import { HighlightAuto } from "svelte-highlight"
 import atomOneLight from "svelte-highlight/styles/atom-one-light"
-import NavBar from "./Navbar.svelte"
+import Navbar from "./Navbar.svelte"
 import Readme from "./README.svelte"
 
 let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
@@ -138,7 +138,7 @@ onDestroy(() => {
 
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
-    <NavBar />
+    <Navbar />
     <p>If you are facing bugs, try resetting using this button.  <a class="secondary outline" href="/#" on:click={() => {
       codeSnippets = []
       if (isHighlight) {
