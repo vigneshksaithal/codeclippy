@@ -72,10 +72,13 @@ const getCodeSnippets = async (): Promise<codeSnippet[]> => {
 	return []
 }
 
-const copyToClipboard = async (text: string): Promise<void> => {
+const copyToClipboard = async (
+	text: string,
+	message = "Code copied successfully!",
+): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text)
-		alert("Code copied successfully!")
+		alert(message)
 	} catch (error) {
 		console.error("Failed to copy text", error)
 		alert("Failed to copy code :(")
@@ -110,8 +113,7 @@ const shareCode = async (snippet: {
 			code: snippet.code,
 		})
 		const shareUrl = `${window.location.origin}/share/${record.id}`
-		await navigator.clipboard.writeText(shareUrl)
-		alert("Share link copied to clipboard!")
+		await copyToClipboard(shareUrl, "Share URL copied to clipboard")
 	} catch (error) {
 		console.error("Error sharing code:", error)
 		alert("Failed to share code. Please try again.")
