@@ -6,7 +6,7 @@ import { onDestroy, onMount } from "svelte"
 import { HighlightAuto } from "svelte-highlight"
 import atomOneLight from "svelte-highlight/styles/atom-one-light"
 import Navbar from "./Navbar.svelte"
-import Readme from "./README.svelte"
+import ReadMe from "./ReadMe.svelte"
 
 let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
 // biome-ignore lint/style/useConst: <explanation>
@@ -224,7 +224,7 @@ onDestroy(() => {
     </div>
   </div>
 {:else}
-  <Readme {isHighlight} />
+  <ReadMe {isHighlight} />
 {/if}
 
 <style>
