@@ -138,7 +138,7 @@ onDestroy(() => {
 
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
-    <NavBar {isHighlight} {codeSnippets} />
+    <NavBar />
     <p>If you are facing bugs, try resetting using this button.  <a class="secondary outline" href="/#" on:click={() => {
       codeSnippets = []
       if (isHighlight) {
