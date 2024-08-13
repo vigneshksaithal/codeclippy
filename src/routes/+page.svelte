@@ -1,4 +1,5 @@
 <script lang="ts">
+import { pb } from "$lib/pocketbase"
 import Highlight, { type HighlightContext } from "@highlight-ai/app-runtime"
 import Fuse from "fuse.js"
 import { onDestroy, onMount } from "svelte"
@@ -7,7 +8,7 @@ import atomOneLight from "svelte-highlight/styles/atom-one-light"
 import NavBar from "./NavBar.svelte"
 import Readme from "./README.svelte"
 
-let codeSnippets: codeSnippet[] = []
+let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
 // biome-ignore lint/style/useConst: <explanation>
 let query = ""
 let isHighlight = false
@@ -95,6 +96,31 @@ const searchCode = (query: string) => {
 
 const generateId = (): number => Math.floor(Math.random() * 1000000)
 
+const shareCode = async (snippet: {
+	id: number
+	title: string
+	code: string
+}) => {
+	codeSnippets = codeSnippets.map((s) =>
+		s.id === snippet.id ? { ...s, isSharing: true } : s,
+	)
+	try {
+		const record = await pb.collection("codes").create({
+			title: snippet.title,
+			code: snippet.code,
+		})
+		const shareUrl = `${window.location.origin}/share/${record.id}`
+		await navigator.clipboard.writeText(shareUrl)
+		alert("Share link copied to clipboard!")
+	} catch (error) {
+		console.error("Error sharing code:", error)
+		alert("Failed to share code. Please try again.")
+	}
+	codeSnippets = codeSnippets.map((s) =>
+		s.id === snippet.id ? { ...s, isSharing: false } : s,
+	)
+}
+
 onDestroy(() => {
 	if (isHighlight && destroyHighlightListener) {
 		console.log("Destroying Highlight listener")
@@ -102,6 +128,11 @@ onDestroy(() => {
 	}
 })
 </script>
+
+<!-- Import Atom One Light theme -->
+<svelte:head>
+  {@html atomOneLight}
+</svelte:head>
 
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
@@ -136,6 +167,13 @@ onDestroy(() => {
                   copyToClipboard(result.item.code)
                 }}>Copy</button
               >
+              <button on:click={() => shareCode({ id: result.item.id, title: result.item.title, code: result.item.code })} aria-busy={result.item.isSharing}>
+                {#if result.item.isSharing}
+                  Sharing...
+                {:else}
+                  Share
+                {/if}
+              </button>
             </footer>
           </article>
         {/each}
@@ -160,6 +198,13 @@ onDestroy(() => {
                   copyToClipboard(code)
                 }}>Copy</button
               >
+              <button on:click={() => shareCode({ id, title, code })} aria-busy={codeSnippets.find(s => s.id === id)?.isSharing}>
+                {#if codeSnippets.find(s => s.id === id)?.isSharing}
+                  Sharing...
+                {:else}
+                  Share
+                {/if}
+              </button>
             </footer>
           </article>
         {/each}
@@ -169,11 +214,6 @@ onDestroy(() => {
 {:else}
   <Readme {isHighlight} />
 {/if}
-
-<!-- Import Atom One Light theme -->
-<svelte:head>
-  {@html atomOneLight}
-</svelte:head>
 
 <style>
   .code-snippets__container {
