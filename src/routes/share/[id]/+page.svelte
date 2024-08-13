@@ -14,9 +14,9 @@ const copyToClipboard = async () => {
 }
 </script>
 
-<article style="max-width: 576px; margin: 0 auto;">
+<article style="max-width: 700px; margin: 0 auto;">
   <header>
-    <h2>{title}</h2>
+    <h4>{title}</h4>
   </header>
   <pre><code>{code}</code></pre>
   <footer style="display: flex; justify-content: end;">
