@@ -11,8 +11,8 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
-		"@sveltejs/adapter-cloudflare": "^4.7.1",
-		"@sveltejs/kit": "^2.5.21",
+		"@sveltejs/adapter-cloudflare": "^4.7.2",
+		"@sveltejs/kit": "^2.5.22",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"highlight.js": "^11.10.0",
 		"svelte": "^4.2.18",
