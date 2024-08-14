@@ -1,6 +1,6 @@
 # CodeClippy
 
-CodeClippy is a Highlight.ing app that helps you capture code snippets like Pieces.app without the complexity.
+CodeClippy is a Highlight.ing app that helps you capture and share code snippets like Pieces.app without the complexity.
 
 ## Installation
 
