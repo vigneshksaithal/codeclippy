@@ -139,7 +139,7 @@ const shareCode = async (snippet: {
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
     <Navbar />
-    <p>If you are facing bugs, try resetting using this button.  <a class="secondary outline" href="/#" on:click={() => {
+    <p>If you are facing bugs, try resetting here: <a class="secondary outline" href="/#" on:click={() => {
       codeSnippets = []
       if (isHighlight) {
        
@@ -148,7 +148,7 @@ const shareCode = async (snippet: {
         codeSnippets = []
         codeSnippets = codeSnippets
         }
-      }}>Reset</a></p>
+      }}>RESET</a></p>
    
     <input
       type="search"
