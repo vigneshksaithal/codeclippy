@@ -139,7 +139,8 @@ const shareCode = async (snippet: {
 {#if isHighlight && codeSnippets.length > 0}
   <div class="code-snippets__container">
     <Navbar />
-    <p>If you are facing bugs, try resetting here: <a class="secondary outline" href="/#" on:click={() => {
+   <p>
+     <small>If you are facing bugs, try resetting here: <a class="secondary outline" href="/#" on:click={() => {
       codeSnippets = []
       if (isHighlight) {
        
@@ -148,7 +149,8 @@ const shareCode = async (snippet: {
         codeSnippets = []
         codeSnippets = codeSnippets
         }
-      }}>Reset</a></p>
+      }}>Reset</a> and for giving feedback <a href="https://tally.so/r/3N0jdb" target="_blank">click here</a></small> 
+   </p>
    
     <input
       type="search"
