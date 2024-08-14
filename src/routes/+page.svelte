@@ -148,7 +148,7 @@ const shareCode = async (snippet: {
         codeSnippets = []
         codeSnippets = codeSnippets
         }
-      }}>RESET</a></p>
+      }}>Reset</a></p>
    
     <input
       type="search"
