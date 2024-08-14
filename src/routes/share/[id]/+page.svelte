@@ -33,10 +33,3 @@ const copyToClipboard = async () => {
 <p style="text-align: center; padding-top: 1em;">
   This code was saved on <a href="https://highlight.ing/apps/codeclippy">CodeClippy</a> on <a href="https://highlight.ing">Highlight</a>.
 </p>
-
-<style>
-  pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-</style>
