@@ -4,6 +4,6 @@
 
 <style>
 	main {
-		padding: 2em;
+		padding: 0 0.8em;
 	}
 </style>
