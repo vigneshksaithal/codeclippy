@@ -58,6 +58,13 @@ onMount(async () => {
 	}
 })
 
+onDestroy(() => {
+	if (isHighlight && destroyHighlightListener) {
+		console.log("Destroying Highlight listener")
+		destroyHighlightListener()
+	}
+})
+
 const saveCode = (snippet: codeSnippet): void => {
 	codeSnippets = [snippet, ...codeSnippets]
 	if (isHighlight) {
@@ -122,13 +129,6 @@ const shareCode = async (snippet: {
 		s.id === snippet.id ? { ...s, isSharing: false } : s,
 	)
 }
-
-onDestroy(() => {
-	if (isHighlight && destroyHighlightListener) {
-		console.log("Destroying Highlight listener")
-		destroyHighlightListener()
-	}
-})
 </script>
 
 <!-- Import Atom One Light theme -->
