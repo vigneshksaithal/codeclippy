@@ -1,4 +1,6 @@
 <script lang="ts">
+import { HighlightAuto } from "svelte-highlight"
+import atomOneLight from "svelte-highlight/styles/atom-one-light"
 import type { PageData } from "./$types"
 
 export let data: PageData
@@ -13,11 +15,16 @@ const copyToClipboard = async () => {
 }
 </script>
 
-<article style="max-width: 700px; margin: 0 auto;">
+<!-- Import Atom One Light theme -->
+<svelte:head>
+  {@html atomOneLight}
+</svelte:head>
+
+<article style="max-width: 720px; margin: 1.2em auto;">
   <header>
     <h4>{title}</h4>
   </header>
-  <pre><code>{code}</code></pre>
+  <HighlightAuto id="code" code={code} />
   <footer style="display: flex; justify-content: end;">
     <button on:click={copyToClipboard}>Copy Code</button>
   </footer>
