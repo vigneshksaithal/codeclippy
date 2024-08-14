@@ -1,5 +1,5 @@
 <nav>
   <ul>
-    <li><h1>CodeClippy</h1></li>
+    <li><strong>CodeClippy</strong></li>
   </ul>
 </nav>
