@@ -25,6 +25,7 @@ CodeClippy is a Highlight.ing app that helps you capture and share code snippets
 - Svelte
 - Vite
 - Cloudflare Pages
+- Plausible Analytics
 - TypeScript
 
 ## Contributing
