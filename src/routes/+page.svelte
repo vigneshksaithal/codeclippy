@@ -5,6 +5,7 @@ import Fuse from 'fuse.js'
 import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
+import { fade } from 'svelte/transition'
 import Navbar from './Navbar.svelte'
 import ReadMe from './ReadMe.svelte'
 
@@ -12,9 +13,12 @@ let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
 // biome-ignore lint/style/useConst: <explanation>
 let query = ''
 let isHighlight = false
+let isReady = false
 let destroyHighlightListener: () => void
 
 onMount(async () => {
+	isReady = true
+
 	if (typeof Highlight !== 'undefined' && Highlight.isRunningInHighlight) {
 		isHighlight = Highlight.isRunningInHighlight()
 
@@ -136,44 +140,44 @@ const shareCode = async (snippet: {
 	{@html atomOneLight}
 </svelte:head>
 
-{#if isHighlight && codeSnippets.length > 0}
-	<div class="code-snippets__container">
-		<Navbar />
+<Navbar />
+<!-- Reset & Feedback text -->
+<p>
+	<small
+		>If you are facing bugs, <a
+			href="/#"
+			on:click={() => {
+				codeSnippets = []
+				if (isHighlight) {
+					Highlight.appStorage.delete('codeSnippets')
 
-		<p>
-			<small
-				>If you are facing bugs, <a
-					href="/#"
-					on:click={() => {
-						codeSnippets = []
-						if (isHighlight) {
-							Highlight.appStorage.delete('codeSnippets')
+					codeSnippets = []
+					codeSnippets = codeSnippets
+				}
+			}}>reset here</a
+		>. For giving feedback
+		<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a></small
+	>
+</p>
+<input
+	type="search"
+	placeholder="Search"
+	aria-label="Search"
+	bind:value={query}
+/>
 
-							codeSnippets = []
-							codeSnippets = codeSnippets
-						}
-					}}>reset here</a
-				>. For giving feedback
-				<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a
-				></small
-			>
-		</p>
-
-		<input
-			type="search"
-			placeholder="Search"
-			aria-label="Search"
-			bind:value={query}
-		/>
+{#if isHighlight && codeSnippets.length > 0 && isReady}
+	<div
+		class="code-snippets__container"
+		transition:fade={{ delay: 250, duration: 500 }}
+	>
 		<div class="grid" style="grid-template-columns: repeat(1, 1fr);">
 			<!-- Search Results -->
 			{#if query !== ''}
 				{#each searchCode(query) as result}
 					<article class="card">
 						<header>
-							<p style="margin-bottom: 0;">
-								<strong>{result.item.title}</strong>
-							</p>
+							<p>{result.item.title}</p>
 						</header>
 						<HighlightAuto id="code" code={result.item.code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
@@ -212,9 +216,7 @@ const shareCode = async (snippet: {
 			{:else}
 				{#each codeSnippets as { id, title, code }, i}
 					<article>
-						<p>
-							<strong>{title}</strong>
-						</p>
+						<p>{title}</p>
 						<HighlightAuto id="code" {code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
@@ -251,11 +253,6 @@ const shareCode = async (snippet: {
 {/if}
 
 <style>
-.code-snippets__container {
-	max-width: 640px;
-	margin: 0 auto;
-}
-
 :global(#code) {
 	font-size: 0.8rem;
 	max-height: 240px;
