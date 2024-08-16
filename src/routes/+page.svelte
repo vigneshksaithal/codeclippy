@@ -185,11 +185,7 @@ const shareCode = async (snippet: {
 								}}>Delete</button
 							>
 							<button
-								on:click={() => {
-									copyToClipboard(result.item.code)
-								}}>Copy</button
-							>
-							<button
+								class="secondary outline"
 								on:click={() =>
 									shareCode({
 										id: result.item.id,
@@ -204,6 +200,12 @@ const shareCode = async (snippet: {
 									Share
 								{/if}
 							</button>
+							<button
+								class="outline"
+								on:click={() => {
+									copyToClipboard(result.item.code)
+								}}>Copy</button
+							>
 						</footer>
 					</article>
 				{/each}
