@@ -49,7 +49,7 @@ onMount(async () => {
 						}
 					}
 
-					await saveCode(newSnippet)
+					saveCode(newSnippet)
 				},
 			)
 			console.log('Highlight listener set up successfully')
@@ -82,10 +82,7 @@ const getCodeSnippets = async (): Promise<codeSnippet[]> => {
 	return []
 }
 
-const copyToClipboard = async (
-	text: string,
-	message = 'Code copied successfully!',
-): Promise<void> => {
+const copyToClipboard = async (text: string): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text)
 	} catch (error) {
@@ -122,7 +119,7 @@ const shareCode = async (snippet: {
 			code: snippet.code,
 		})
 		const shareUrl = `${window.location.origin}/share/${record.id}`
-		await copyToClipboard(shareUrl, 'Share URL copied to clipboard')
+		await copyToClipboard(shareUrl)
 	} catch (error) {
 		console.error('Error sharing code:', error)
 		alert('Failed to share code. Please try again.')
