@@ -8,7 +8,7 @@ import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import { fade } from 'svelte/transition'
 import Description from './Description.svelte'
 
-let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
+let codeSnippets: (CodeSnippet & { isSharing?: boolean })[] = []
 // biome-ignore lint/style/useConst: <explanation>
 let query = ''
 let isHighlight = false
@@ -31,7 +31,7 @@ onMount(async () => {
 					console.log('onContext event received', context)
 					if (!context.suggestion) return
 
-					const newSnippet: codeSnippet = {
+					const newSnippet: CodeSnippet = {
 						id: generateId(),
 						title: context.suggestion,
 						created_at: new Date().toISOString(),
@@ -68,14 +68,14 @@ onDestroy(() => {
 	}
 })
 
-const saveCode = (snippet: codeSnippet): void => {
+const saveCode = (snippet: CodeSnippet): void => {
 	codeSnippets = [snippet, ...codeSnippets]
 	if (isHighlight) {
 		Highlight.appStorage.set('codeSnippets', codeSnippets)
 	}
 }
 
-const getCodeSnippets = async (): Promise<codeSnippet[]> => {
+const getCodeSnippets = async (): Promise<CodeSnippet[]> => {
 	if (isHighlight) {
 		return (await Highlight.appStorage.get('codeSnippets')) ?? []
 	}

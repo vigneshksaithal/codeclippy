@@ -9,7 +9,7 @@ declare global {
 		// interface Platform {}
 	}
 
-	type codeSnippet = {
+	type CodeSnippet = {
 		id: number
 		created_at: string
 		updated_at: string
@@ -20,3 +20,4 @@ declare global {
 }
 
 export type { }
+
