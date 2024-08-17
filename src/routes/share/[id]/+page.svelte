@@ -21,7 +21,7 @@ const copyToClipboard = async () => {
 </svelte:head>
 
 <article style="max-width: 720px; margin: 1.2em auto;">
-	<h4>{title}</h4>
+	<h6>{title}</h6>
 	<HighlightAuto id="code" {code} />
 	<footer style="display: flex; justify-content: end;">
 		<button
