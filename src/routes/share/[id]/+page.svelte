@@ -1,7 +1,7 @@
 <script lang="ts">
-import { HighlightAuto } from "svelte-highlight"
-import atomOneLight from "svelte-highlight/styles/atom-one-light"
-import type { PageData } from "./$types"
+import { HighlightAuto } from 'svelte-highlight'
+import atomOneLight from 'svelte-highlight/styles/atom-one-light'
+import type { PageData } from './$types'
 
 export let data: PageData
 const { title, code } = data
@@ -10,26 +10,31 @@ const copyToClipboard = async () => {
 	try {
 		await navigator.clipboard.writeText(code)
 	} catch (err) {
-		console.error("Failed to copy: ", err)
+		console.error('Failed to copy: ', err)
 	}
 }
 </script>
 
 <!-- Import Atom One Light theme -->
 <svelte:head>
-  {@html atomOneLight}
+	{@html atomOneLight}
 </svelte:head>
 
 <article style="max-width: 720px; margin: 1.2em auto;">
-  <header>
-    <h4>{title}</h4>
-  </header>
-  <HighlightAuto id="code" code={code} />
-  <footer style="display: flex; justify-content: end;">
-    <button on:click={copyToClipboard}>Copy Code</button>
-  </footer>
+	<h4>{title}</h4>
+	<HighlightAuto id="code" {code} />
+	<footer style="display: flex; justify-content: end;">
+		<button
+			class="secondary outline"
+			style="padding: 4px 6px;"
+			on:click={copyToClipboard}>Copy Code</button
+		>
+	</footer>
 </article>
 
 <p style="text-align: center; padding-top: 1em;">
-  This code was saved on <a href="https://highlight.ing/apps/codeclippy">CodeClippy</a> on <a href="https://highlight.ing">Highlight</a>.
+	This code was saved on <a href="https://highlight.ing/apps/codeclippy"
+		>CodeClippy</a
+	>
+	on <a href="https://highlight.ing">Highlight</a>.
 </p>
