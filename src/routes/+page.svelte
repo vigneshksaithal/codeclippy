@@ -6,7 +6,6 @@ import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import { fade } from 'svelte/transition'
-import Navbar from './Navbar.svelte'
 import ReadMe from './ReadMe.svelte'
 
 let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
@@ -139,7 +138,10 @@ const shareCode = async (snippet: {
 	{@html atomOneLight}
 </svelte:head>
 
-<Navbar />
+<!-- Title Text -->
+<h4 style="margin-bottom: 0; text-align: center; margin: 1em 0 0.6em;">
+	CodeClippy
+</h4>
 
 {#if isHighlight && codeSnippets.length > 0 && isReady}
 	<div
