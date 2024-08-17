@@ -38,3 +38,9 @@ const copyToClipboard = async () => {
 	>
 	on <a href="https://highlight.ing">Highlight</a>.
 </p>
+
+<style>
+:global(#code) {
+	font-size: 0.8rem;
+}
+</style>
