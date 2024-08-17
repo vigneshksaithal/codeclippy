@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@highlight-ai/app-runtime':
-        specifier: ^0.0.45
-        version: 0.0.45
+        specifier: ^0.0.46
+        version: 0.0.46
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
@@ -436,8 +436,8 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
-  '@highlight-ai/app-runtime@0.0.45':
-    resolution: {integrity: sha512-LNj84B8KKU2fUnK3EaJ9MN7UYB25Z1XRFSESSwf3/+ycPAaQqIFCWInFIqNQ3+jiQ2mExA84v3bdzRlnquDVZQ==}
+  '@highlight-ai/app-runtime@0.0.46':
+    resolution: {integrity: sha512-o3jmI4WCbCasJxe0FyH3UOhGTjwCVipxsl5gcan3ewn1C4uqPowC7CCWld/LvkUoYT6H2KCeZbcqBCrRdgquWg==}
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -1450,7 +1450,7 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@highlight-ai/app-runtime@0.0.45':
+  '@highlight-ai/app-runtime@0.0.46':
     optionalDependencies:
       bun: 1.1.24
 

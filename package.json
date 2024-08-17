@@ -24,7 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@highlight-ai/app-runtime": "^0.0.45",
+		"@highlight-ai/app-runtime": "^0.0.46",
 		"fuse.js": "^7.0.0",
 		"pocketbase": "^0.21.4"
 	}
