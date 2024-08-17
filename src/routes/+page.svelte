@@ -6,7 +6,7 @@ import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import { fade } from 'svelte/transition'
-import ReadMe from './Description.svelte'
+import Description from './Description.svelte'
 
 let codeSnippets: (codeSnippet & { isSharing?: boolean })[] = []
 // biome-ignore lint/style/useConst: <explanation>
@@ -250,7 +250,7 @@ const shareCode = async (snippet: {
 		</div>
 	</div>
 {:else}
-	<ReadMe {isHighlight} />
+	<Description {isHighlight} />
 {/if}
 
 <style>
