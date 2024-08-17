@@ -140,36 +140,37 @@ const shareCode = async (snippet: {
 </svelte:head>
 
 <Navbar />
-<!-- Reset & Feedback text -->
-<p>
-	<small
-		>If you are facing bugs, <a
-			href="/#"
-			on:click={() => {
-				codeSnippets = []
-				if (isHighlight) {
-					Highlight.appStorage.delete('codeSnippets')
-
-					codeSnippets = []
-					codeSnippets = codeSnippets
-				}
-			}}>reset here</a
-		>. For giving feedback
-		<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a></small
-	>
-</p>
-<input
-	type="search"
-	placeholder="Search"
-	aria-label="Search"
-	bind:value={query}
-/>
 
 {#if isHighlight && codeSnippets.length > 0 && isReady}
 	<div
 		class="code-snippets__container"
 		transition:fade={{ delay: 250, duration: 500 }}
 	>
+		<!-- Reset & Feedback text -->
+		<p style="text-align: center;">
+			<small
+				>If you are facing bugs, <a
+					href="/#"
+					on:click={() => {
+						codeSnippets = []
+						if (isHighlight) {
+							Highlight.appStorage.delete('codeSnippets')
+
+							codeSnippets = []
+							codeSnippets = codeSnippets
+						}
+					}}>reset here</a
+				>. For giving feedback
+				<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a
+				></small
+			>
+		</p>
+		<input
+			type="search"
+			placeholder="Search"
+			aria-label="Search"
+			bind:value={query}
+		/>
 		<div class="grid" style="grid-template-columns: repeat(1, 1fr);">
 			<!-- Search Results -->
 			{#if query !== ''}
