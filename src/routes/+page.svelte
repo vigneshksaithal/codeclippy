@@ -240,7 +240,7 @@ const shareCode = async (snippet: {
 							</button>
 							<button
 								class="secondary outline"
-								style="padding: 2px 5px; font-size: 0.8rem;"
+								style="padding: 4px 6px; font-size: 0.8rem;"
 								on:click={(event) => copyToClipboard(code)}>Copy</button
 							>
 						</footer>
