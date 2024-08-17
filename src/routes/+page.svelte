@@ -89,7 +89,6 @@ const copyToClipboard = async (
 ): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text)
-		alert(message)
 	} catch (error) {
 		console.error('Failed to copy text', error)
 		alert('Failed to copy code :(')
@@ -176,13 +175,12 @@ const shareCode = async (snippet: {
 			{#if query !== ''}
 				{#each searchCode(query) as result}
 					<article class="card">
-						<header>
-							<p>{result.item.title}</p>
-						</header>
+						<p>{result.item.title}</p>
 						<HighlightAuto id="code" code={result.item.code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
 								class="secondary outline"
+								style="padding: 4px 6px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(result.item.id)
 									query = ''
@@ -190,6 +188,7 @@ const shareCode = async (snippet: {
 							>
 							<button
 								class="secondary outline"
+								style="padding: 4px 6px; font-size: 0.8rem;"
 								on:click={() =>
 									shareCode({
 										id: result.item.id,
@@ -199,17 +198,18 @@ const shareCode = async (snippet: {
 								aria-busy={result.item.isSharing}
 							>
 								{#if result.item.isSharing}
-									Sharing...
+									Generating link...
 								{:else}
 									Share
 								{/if}
 							</button>
 							<button
-								class="outline"
-								on:click={() => {
-									copyToClipboard(result.item.code)
-								}}>Copy</button
+								class="secondary outline"
+								style="padding: 4px 6px; font-size: 0.8rem;"
+								on:click={() => copyToClipboard(result.item.code)}
 							>
+								Copy
+							</button>
 						</footer>
 					</article>
 				{/each}
@@ -221,26 +221,27 @@ const shareCode = async (snippet: {
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
 								class="secondary outline"
+								style="padding: 4px 6px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(id)
 								}}>Delete</button
 							>
 							<button
 								class="secondary outline"
+								style="padding: 4px 6px; font-size: 0.8rem;"
 								on:click={() => shareCode({ id, title, code })}
 								aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
 							>
 								{#if codeSnippets.find((s) => s.id === id)?.isSharing}
-									Sharing...
+									Generating link...
 								{:else}
 									Share
 								{/if}
 							</button>
 							<button
-								class="primary outline"
-								on:click={() => {
-									copyToClipboard(code)
-								}}>Copy</button
+								class="secondary outline"
+								style="padding: 2px 5px; font-size: 0.8rem;"
+								on:click={(event) => copyToClipboard(code)}>Copy</button
 							>
 						</footer>
 					</article>
