@@ -1,5 +1,3 @@
-export const prerender = false
-
 import { PUBLIC_POCKETBASE_URL } from '$env/static/public'
 import type { PageLoad } from './$types'
 
