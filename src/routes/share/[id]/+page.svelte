@@ -6,11 +6,18 @@ import type { PageData } from './$types'
 export let data: PageData
 const { title, code } = data
 
+let copyButtonText = 'Copy'
+
 const copyToClipboard = async () => {
 	try {
 		await navigator.clipboard.writeText(code)
+		copyButtonText = 'Copied!'
+		setTimeout(() => {
+			copyButtonText = 'Copy'
+		}, 2000)
 	} catch (err) {
 		console.error('Failed to copy: ', err)
+		copyButtonText = 'Failed'
 	}
 }
 </script>
@@ -20,29 +27,41 @@ const copyToClipboard = async () => {
 	{@html atomOneLight}
 </svelte:head>
 
-<article style="max-width: 720px; margin: 1.2em auto;">
+<article style="max-width: 720px; margin: 1.6em auto;">
 	<header>
 		<h5 style="margin-bottom: 0;">{title}</h5>
 	</header>
-	<HighlightAuto id="code" {code} />
-	<footer style="display: flex; justify-content: end;">
-		<button
-			class="secondary outline"
-			style="padding: 4px 6px; font-size: 0.8rem;"
-			on:click={copyToClipboard}>Copy Code</button
+	<div class="code-container">
+		<HighlightAuto id="code" {code} />
+		<button class="secondary copy-button" on:click={copyToClipboard}
+			>{copyButtonText}</button
 		>
-	</footer>
+	</div>
 </article>
 
-<p style="text-align: center; padding-top: 1em;">
-	This code was saved on <a href="https://highlight.ing/apps/codeclippy"
-		>CodeClippy</a
-	>
-	on <a href="https://highlight.ing">Highlight</a>.
+<p style="text-align: center;">
+	<small>
+		This code was saved on <a href="https://highlight.ing/apps/codeclippy"
+			>CodeClippy</a
+		>
+		on <a href="https://highlight.ing">Highlight</a>.
+	</small>
 </p>
 
 <style>
 :global(#code) {
 	font-size: 0.8rem;
+}
+
+.code-container {
+	position: relative;
+}
+
+.copy-button {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	padding: 4px 10px;
+	font-size: 0.75rem;
 }
 </style>
