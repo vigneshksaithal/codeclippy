@@ -1,4 +1,5 @@
 <script lang="ts">
+import MetaTags from '$lib/MetaTags.svelte'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
@@ -133,6 +134,8 @@ const shareCode = async (snippet: {
 <!-- Import Atom One Light theme -->
 <svelte:head>
 	{@html atomOneLight}
+
+	<MetaTags />
 </svelte:head>
 
 <!-- Title Text -->

@@ -19,7 +19,7 @@ export let isHighlight = false
 	</p>
 
 	<video autoplay loop muted style="width: 100%;">
-		<source src="/codeclippy-demo.mp4" type="video/mp4" />
+		<source src="/demo.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
 </article>

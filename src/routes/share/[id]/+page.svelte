@@ -1,4 +1,5 @@
 <script lang="ts">
+import MetaTags from '$lib/MetaTags.svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import type { PageData } from './$types'
@@ -25,6 +26,8 @@ const copyToClipboard = async () => {
 <!-- Import Atom One Light theme -->
 <svelte:head>
 	{@html atomOneLight}
+
+	<MetaTags {title} />
 </svelte:head>
 
 <article style="max-width: 720px; margin: 1.6em auto;">
