@@ -7,6 +7,7 @@ CodeClippy is a Highlight.ing app that helps you capture and share code snippets
 1. Clone this repository
 2. Install dependencies with `pnpm install`
 3. Start the app with `pnpm dev --port=3000`
+4. Create a `.env.local` according to `.env.example`.
 
 ## Usage
 
