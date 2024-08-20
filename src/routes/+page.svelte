@@ -136,9 +136,9 @@ const shareCode = async (snippet: {
 </svelte:head>
 
 <!-- Title Text -->
-<h4 style="margin-bottom: 0; text-align: center; margin: 1em 0 0.6em;">
+<h3 style="margin-bottom: 0; text-align: center; margin: 1em 0 0.6em;">
 	CodeClippy
-</h4>
+</h3>
 
 {#if isHighlight && codeSnippets.length > 0 && isReady}
 	<div
@@ -175,12 +175,12 @@ const shareCode = async (snippet: {
 			{#if query !== ''}
 				{#each searchCode(query) as result}
 					<article class="card">
-						<p>{result.item.title}</p>
+						<h6>{result.item.title}</h6>
 						<HighlightAuto id="code" code={result.item.code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(result.item.id)
 									query = ''
@@ -188,7 +188,7 @@ const shareCode = async (snippet: {
 							>
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() =>
 									shareCode({
 										id: result.item.id,
@@ -205,7 +205,7 @@ const shareCode = async (snippet: {
 							</button>
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => copyToClipboard(result.item.code)}
 							>
 								Copy
@@ -214,21 +214,21 @@ const shareCode = async (snippet: {
 					</article>
 				{/each}
 			{:else}
-				{#each codeSnippets as { id, title, code }, i}
+				{#each codeSnippets as { id, title, code }}
 					<article>
-						<p>{title}</p>
+						<h6>{title}</h6>
 						<HighlightAuto id="code" {code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(id)
 								}}>Delete</button
 							>
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => shareCode({ id, title, code })}
 								aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
 							>
@@ -240,7 +240,7 @@ const shareCode = async (snippet: {
 							</button>
 							<button
 								class="secondary outline"
-								style="padding: 4px 6px; font-size: 0.8rem;"
+								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => copyToClipboard(code)}>Copy</button
 							>
 						</footer>
