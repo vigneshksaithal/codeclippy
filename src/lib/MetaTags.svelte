@@ -1,6 +1,6 @@
 <script lang="ts">
 // biome-ignore lint/style/useConst: <explanation>
-export let title = 'CodeClippy - Capture and Share Code Snippets Easily'
+export let title = 'CodeClippy: Save and Share Code Snippets Easily'
 // biome-ignore lint/style/useConst: <explanation>
 export let description =
 	'CodeClippy is a Highlight.ing app that helps you capture and share code snippets effortlessly. Save, organize, and access your code snippets with ease.'
