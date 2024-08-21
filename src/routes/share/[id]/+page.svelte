@@ -26,9 +26,9 @@ const copyToClipboard = async () => {
 <!-- Import Atom One Light theme -->
 <svelte:head>
 	{@html atomOneLight}
-
-	<MetaTags {title} />
 </svelte:head>
+
+<MetaTags {title} />
 
 <article style="max-width: 720px; margin: 1.6em auto;">
 	<header>

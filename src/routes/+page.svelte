@@ -134,9 +134,9 @@ const shareCode = async (snippet: {
 <!-- Import Atom One Light theme -->
 <svelte:head>
 	{@html atomOneLight}
-
-	<MetaTags />
 </svelte:head>
+
+<MetaTags />
 
 <!-- Title Text -->
 <h3 style="margin-bottom: 0; text-align: center; margin: 1em 0 0.6em;">
