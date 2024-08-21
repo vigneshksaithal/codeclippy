@@ -14,6 +14,7 @@ export const load = (async ({ params }) => {
 
     return {
         title,
-        code
+        code,
+        url: `${PUBLIC_POCKETBASE_URL}/share/${id}`
     }
 }) satisfies PageLoad

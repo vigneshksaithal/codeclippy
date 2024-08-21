@@ -5,7 +5,7 @@ import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import type { PageData } from './$types'
 
 export let data: PageData
-const { title, code } = data
+const { title, code, url } = data
 
 let copyButtonText = 'Copy'
 
@@ -23,7 +23,7 @@ const copyToClipboard = async () => {
 }
 </script>
 
-<MetaTags {title} />
+<MetaTags {title} {url} />
 
 <!-- Import Atom One Light theme -->
 <svelte:head>
