@@ -207,7 +207,7 @@ const shareCode = async (snippet: {
 								{/if}
 							</button>
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Copy+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => copyToClipboard(result.item.code)}
 							>
@@ -242,7 +242,7 @@ const shareCode = async (snippet: {
 								{/if}
 							</button>
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Copy+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => copyToClipboard(code)}>Copy</button
 							>
