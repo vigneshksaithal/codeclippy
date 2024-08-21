@@ -182,7 +182,7 @@ const shareCode = async (snippet: {
 						<HighlightAuto id="code" code={result.item.code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Delete+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(result.item.id)
@@ -190,7 +190,7 @@ const shareCode = async (snippet: {
 								}}>Delete</button
 							>
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Share+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() =>
 									shareCode({
@@ -223,14 +223,14 @@ const shareCode = async (snippet: {
 						<HighlightAuto id="code" {code} />
 						<footer style="display: flex; gap: 0.8em; justify-content: right;">
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Delete+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => {
 									deleteSnippet(id)
 								}}>Delete</button
 							>
 							<button
-								class="secondary outline"
+								class="secondary outline plausible-event-name=Share+Code"
 								style="padding: 8px 12px; font-size: 0.8rem;"
 								on:click={() => shareCode({ id, title, code })}
 								aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
