@@ -23,12 +23,12 @@ const copyToClipboard = async () => {
 }
 </script>
 
+<MetaTags {title} />
+
 <!-- Import Atom One Light theme -->
 <svelte:head>
 	{@html atomOneLight}
 </svelte:head>
-
-<MetaTags {title} />
 
 <article style="max-width: 720px; margin: 1.6em auto;">
 	<header>
