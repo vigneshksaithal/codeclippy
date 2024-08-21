@@ -27,6 +27,11 @@ export let image = 'https://codeclippy.aithal.dev/og-image.jpg'
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="codeclippy.aithal.dev" />
+	<meta property="twitter:url" content={url} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={image} />
 
 	<!-- Canonical URL -->
 	<link rel="canonical" href={url} />
