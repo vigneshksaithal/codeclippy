@@ -1,8 +1,12 @@
 <script lang="ts">
+import { Button } from '$lib/components/ui/button'
+import * as Card from '$lib/components/ui/card'
+import { Input } from '$lib/components/ui/input'
 import MetaTags from '$lib/MetaTags.svelte'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
+import { CopyIcon, ShareIcon, Trash2Icon } from 'lucide-svelte'
 import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
@@ -138,20 +142,23 @@ const shareCode = async (snippet: {
 	{@html atomOneLight}
 </svelte:head>
 
-<!-- Title Text -->
-<h3 style="margin-bottom: 0; text-align: center; margin: 1em 0 0.6em;">
-	CodeClippy
-</h3>
+<section class="max-w-2xl mx-auto">
+	<!-- Title Text -->
+	<div class="flex gap-12 justify-between items-center mt-8 mb-4">
+		<h3 class="text-2xl font-bold text-slate-600">CodeClippy</h3>
+		<Input
+			type="search"
+			placeholder="Search"
+			aria-label="Search"
+			bind:value={query}
+		/>
+	</div>
 
-{#if isHighlight && codeSnippets.length > 0 && isReady}
-	<div
-		class="code-snippets__container"
-		transition:fade={{ delay: 250, duration: 500 }}
-	>
-		<!-- Reset & Feedback text -->
-		<p style="text-align: center;">
-			<small
-				>If you are facing bugs, <a
+	{#if isHighlight && codeSnippets.length > 0 && isReady}
+		<div class="max-w-2xl mb-8" transition:fade={{ delay: 100, duration: 250 }}>
+			<!-- Reset & Feedback text -->
+			<p class="text-sm mb-8 text-slate-600">
+				If you are facing bugs, <a
 					href="/#"
 					on:click={() => {
 						codeSnippets = []
@@ -163,102 +170,123 @@ const shareCode = async (snippet: {
 						}
 					}}>reset here</a
 				>. For giving feedback
-				<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a
-				></small
-			>
-		</p>
-		<input
-			type="search"
-			placeholder="Search"
-			aria-label="Search"
-			bind:value={query}
-		/>
-		<div class="grid" style="grid-template-columns: repeat(1, 1fr);">
-			<!-- Search Results -->
-			{#if query !== ''}
-				{#each searchCode(query) as result}
-					<article class="card">
-						<h6>{result.item.title}</h6>
-						<HighlightAuto id="code" code={result.item.code} />
-						<footer style="display: flex; gap: 0.8em; justify-content: right;">
-							<button
-								class="secondary outline plausible-event-name=Delete+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() => {
-									deleteSnippet(result.item.id)
-									query = ''
-								}}>Delete</button
-							>
-							<button
-								class="secondary outline plausible-event-name=Share+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() =>
-									shareCode({
-										id: result.item.id,
-										title: result.item.title,
-										code: result.item.code,
-									})}
-								aria-busy={result.item.isSharing}
-							>
-								{#if result.item.isSharing}
-									Generating link...
-								{:else}
-									Share
-								{/if}
-							</button>
-							<button
-								class="secondary outline plausible-event-name=Copy+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() => copyToClipboard(result.item.code)}
-							>
-								Copy
-							</button>
-						</footer>
-					</article>
-				{/each}
-			{:else}
-				{#each codeSnippets as { id, title, code }}
-					<article>
-						<h6>{title}</h6>
-						<HighlightAuto id="code" {code} />
-						<footer style="display: flex; gap: 0.8em; justify-content: right;">
-							<button
-								class="secondary outline plausible-event-name=Delete+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() => {
-									deleteSnippet(id)
-								}}>Delete</button
-							>
-							<button
-								class="secondary outline plausible-event-name=Share+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() => shareCode({ id, title, code })}
-								aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
-							>
-								{#if codeSnippets.find((s) => s.id === id)?.isSharing}
-									Generating link...
-								{:else}
-									Share
-								{/if}
-							</button>
-							<button
-								class="secondary outline plausible-event-name=Copy+Code"
-								style="padding: 8px 12px; font-size: 0.8rem;"
-								on:click={() => copyToClipboard(code)}>Copy</button
-							>
-						</footer>
-					</article>
-				{/each}
-			{/if}
+				<a href="https://tally.so/r/3N0jdb" target="_blank">click here</a>
+			</p>
+
+			<div class="grid grid-cols-1 gap-6">
+				<!-- Search Results -->
+				{#if query !== ''}
+					{#each searchCode(query) as result}
+						<Card.Root>
+							<Card.Header>
+								<Card.Title class="text-slate-600 tracking-normal"
+									>{result.item.title}</Card.Title
+								>
+							</Card.Header>
+							<Card.Content>
+								<HighlightAuto
+									class="text-sm border- rounded-l"
+									code={result.item.code}
+								/>
+							</Card.Content>
+							<Card.Footer class="flex gap-2 justify-end">
+								<Button
+									variant="outline"
+									class="plausible-event-name=Delete+Code"
+									on:click={() => {
+										deleteSnippet(result.item.id)
+										query = ''
+									}}
+								>
+									<Trash2Icon size="16" class="mr-2" />
+									Delete
+								</Button>
+								<Button
+									variant="outline"
+									class="plausible-event-name=Share+Code"
+									on:click={() =>
+										shareCode({
+											id: result.item.id,
+											title: result.item.title,
+											code: result.item.code,
+										})}
+									aria-busy={result.item.isSharing}
+								>
+									{#if result.item.isSharing}
+										Generating link...
+									{:else}
+										<ShareIcon size="16" class="mr-2" />
+										Share
+									{/if}
+								</Button>
+								<Button
+									variant="outline"
+									class="plausible-event-name=Copy+Code"
+									on:click={() => copyToClipboard(result.item.code)}
+								>
+									<CopyIcon size="16" class="mr-2" />
+									Copy
+								</Button>
+							</Card.Footer>
+						</Card.Root>
+					{/each}
+				{:else}
+					{#each codeSnippets as { id, title, code }}
+						<Card.Root>
+							<Card.Header>
+								<Card.Title class="text-slate-600 tracking-normal"
+									>{title}</Card.Title
+								>
+							</Card.Header>
+							<Card.Content>
+								<HighlightAuto class="text-sm border- rounded-l" {code} />
+							</Card.Content>
+							<Card.Footer class="flex gap-2 justify-end">
+								<Button
+									variant="outline"
+									class="plausible-event-name=Delete+Code"
+									on:click={() => {
+										deleteSnippet(id)
+									}}
+								>
+									<Trash2Icon size="16" class="mr-2" />
+									Delete
+								</Button>
+								<Button
+									variant="outline"
+									class="plausible-event-name=Share+Code"
+									on:click={() => shareCode({ id, title, code })}
+									aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
+								>
+									{#if codeSnippets.find((s) => s.id === id)?.isSharing}
+										Generating link...
+									{:else}
+										<ShareIcon size="16" class="mr-2" />
+										Share
+									{/if}
+								</Button>
+								<Button
+									variant="outline"
+									class="plausible-event-name=Copy+Code"
+									on:click={() => copyToClipboard(code)}
+								>
+									<CopyIcon size="16" class="mr-2" />
+									Copy</Button
+								>
+							</Card.Footer>
+						</Card.Root>
+					{/each}
+				{/if}
+			</div>
 		</div>
-	</div>
-{:else}
-	<Description {isHighlight} />
-{/if}
+	{:else}
+		<Description {isHighlight} />
+	{/if}
+</section>
 
 <style>
 :global(#code) {
-	font-size: 0.8rem;
+	/* font-size: 0.8rem; */
 	max-height: 240px;
 }
 </style>
