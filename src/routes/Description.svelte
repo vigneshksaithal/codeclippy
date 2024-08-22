@@ -9,20 +9,15 @@ export let isHighlight = false
 	<Card.Root class="max-w-xl">
 		<Card.Header>
 			<Card.Title class="text-2xl font-bold">CodeClippy</Card.Title>
-			<Card.Description>
-				A Highlight.ing app for capturing code snippets with simplicity
+			<Card.Description class="text-base">
+				CodeClippy is a Highlight.ing app that helps you capture and share code
+				snippets effortlessly.
 			</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<p class="mb-4">
-				CodeClippy helps you capture code snippets like Pieces.app without the
-				complexity.
-			</p>
-			<h4 class="text-xl font-semibold mb-2">How to use?</h4>
-			<p>Just copy the code and invoke the app with Highlight.</p>
-			<p class="mb-4 font-semibold">
-				Note: All data is stored only on your computer.
-			</p>
+			<h4 class="text-lg font-semibold mb-2">How to use it?</h4>
+			<p>1. Just copy the code and invoke the app with Highlight.</p>
+			<p>2. See the demo video below for more...</p>
 			{#if !isHighlight}
 				<p class="text-sm text-muted-foreground">
 					This app is designed to run inside the Highlight environment.
