@@ -1,8 +1,8 @@
 <script lang="ts">
+import MetaTags from '$lib/MetaTags.svelte'
 import { Button } from '$lib/components/ui/button'
 import * as Card from '$lib/components/ui/card'
 import { Input } from '$lib/components/ui/input'
-import MetaTags from '$lib/MetaTags.svelte'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
@@ -12,6 +12,7 @@ import Trash2Icon from 'lucide-svelte/icons/trash-2'
 import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
+import { toast } from 'svelte-sonner'
 import { fade } from 'svelte/transition'
 import Description from './Description.svelte'
 
@@ -21,6 +22,34 @@ let query = ''
 let isHighlight = false
 let isReady = false
 let destroyHighlightListener: () => void
+
+const showToast = (
+	message: string,
+	type: 'success' | 'error' = 'success',
+): void => {
+	toast[type](message)
+}
+
+const copyToClipboard = async (
+	text: string,
+	message: string,
+): Promise<void> => {
+	try {
+		await navigator.clipboard.writeText(text)
+		showToast(message)
+	} catch (error) {
+		console.error('Failed to copy text', error)
+		showToast('Failed to copy text', 'error')
+	}
+}
+
+const deleteSnippet = (id: number): void => {
+	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
+	if (isHighlight) {
+		Highlight.appStorage.set('codeSnippets', codeSnippets)
+	}
+	showToast('Code snippet deleted successfully!')
+}
 
 onMount(async () => {
 	isReady = true
@@ -89,22 +118,6 @@ const getCodeSnippets = async (): Promise<CodeSnippet[]> => {
 	return []
 }
 
-const copyToClipboard = async (text: string): Promise<void> => {
-	try {
-		await navigator.clipboard.writeText(text)
-	} catch (error) {
-		console.error('Failed to copy text', error)
-		alert('Failed to copy code :(')
-	}
-}
-
-const deleteSnippet = (id: number): void => {
-	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
-	if (isHighlight) {
-		Highlight.appStorage.set('codeSnippets', codeSnippets)
-	}
-}
-
 const searchCode = (query: string) => {
 	const fuse = new Fuse(codeSnippets, { keys: ['title'] })
 	return fuse.search(query)
@@ -112,11 +125,17 @@ const searchCode = (query: string) => {
 
 const generateId = (): number => Math.floor(Math.random() * 1000000)
 
+const updateSnippetSharingStatus = (id: number, isSharing: boolean) => {
+	codeSnippets = codeSnippets.map((s) =>
+		s.id === id ? { ...s, isSharing } : s,
+	)
+}
+
 const shareCode = async (snippet: {
 	id: number
 	title: string
 	code: string
-}) => {
+}): Promise<void> => {
 	codeSnippets = codeSnippets.map((s) =>
 		s.id === snippet.id ? { ...s, isSharing: true } : s,
 	)
@@ -124,12 +143,14 @@ const shareCode = async (snippet: {
 		const record = await pb.collection('codes').create({
 			title: snippet.title,
 			code: snippet.code,
+			created_at: new Date().toISOString(),
+			updated_at: new Date().toISOString(),
 		})
 		const shareUrl = `${window.location.origin}/share/${record.id}`
-		await copyToClipboard(shareUrl)
+		await copyToClipboard(shareUrl, 'Code link copied to clipboard')
 	} catch (error) {
 		console.error('Error sharing code:', error)
-		alert('Failed to share code. Please try again.')
+		showToast('Failed to share code. Please try again.', 'error')
 	}
 	codeSnippets = codeSnippets.map((s) =>
 		s.id === snippet.id ? { ...s, isSharing: false } : s,
@@ -224,7 +245,11 @@ const shareCode = async (snippet: {
 								<Button
 									variant="outline"
 									class="plausible-event-name=Copy+Code"
-									on:click={() => copyToClipboard(result.item.code)}
+									on:click={() =>
+										copyToClipboard(
+											result.item.code,
+											'Code copied successfully',
+										)}
 								>
 									<CopyIcon size="16" class="mr-2" />
 									Copy
@@ -270,7 +295,8 @@ const shareCode = async (snippet: {
 								<Button
 									variant="outline"
 									class="plausible-event-name=Copy+Code"
-									on:click={() => copyToClipboard(code)}
+									on:click={() =>
+										copyToClipboard(code, 'Code copied successfully')}
 								>
 									<CopyIcon size="16" class="mr-2" />
 									Copy</Button
