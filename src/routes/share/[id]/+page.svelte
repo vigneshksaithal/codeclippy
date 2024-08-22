@@ -1,8 +1,8 @@
 <script lang="ts">
+import MetaTags from '$lib/MetaTags.svelte'
 import { Button } from '$lib/components/ui/button'
 import * as Card from '$lib/components/ui/card'
-import MetaTags from '$lib/MetaTags.svelte'
-import { CopyIcon } from 'lucide-svelte'
+import CopyIcon from 'lucide-svelte/icons/copy'
 import { HighlightAuto } from 'svelte-highlight'
 import atomOneLight from 'svelte-highlight/styles/atom-one-light'
 import type { PageData } from './$types'
