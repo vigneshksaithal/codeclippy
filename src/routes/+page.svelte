@@ -166,18 +166,17 @@ const shareCode = async (snippet: {
 </svelte:head>
 
 <section class="max-w-2xl mx-auto">
-	<!-- Title Text -->
-	<div class="flex gap-12 justify-between items-center mt-8 mb-4">
-		<h3 class="text-2xl font-bold text-slate-600">CodeClippy</h3>
-		<Input
-			type="search"
-			placeholder="Search"
-			aria-label="Search"
-			bind:value={query}
-		/>
-	</div>
-
 	{#if isHighlight && codeSnippets.length > 0 && isReady}
+		<!-- Title Text -->
+		<div class="flex gap-12 justify-between items-center mt-8 mb-4">
+			<h3 class="text-2xl font-bold text-slate-600">CodeClippy</h3>
+			<Input
+				type="search"
+				placeholder="Search"
+				aria-label="Search"
+				bind:value={query}
+			/>
+		</div>
 		<div class="max-w-2xl mb-8" transition:fade={{ delay: 100, duration: 250 }}>
 			<!-- Reset & Feedback text -->
 			<p class="text-sm mb-8 text-slate-600">
@@ -207,10 +206,9 @@ const shareCode = async (snippet: {
 								>
 							</Card.Header>
 							<Card.Content>
-								<HighlightAuto
-									class="text-sm border- rounded-l"
-									code={result.item.code}
-								/>
+								<div class="max-h-48 overflow-auto">
+									<HighlightAuto class="text-sm" code={result.item.code} />
+								</div>
 							</Card.Content>
 							<Card.Footer class="flex gap-2 justify-end">
 								<Button
@@ -266,7 +264,9 @@ const shareCode = async (snippet: {
 								>
 							</Card.Header>
 							<Card.Content>
-								<HighlightAuto class="text-sm border- rounded-l" {code} />
+								<div class="max-h-48 overflow-auto">
+									<HighlightAuto class="text-sm" {code} />
+								</div>
 							</Card.Content>
 							<Card.Footer class="flex gap-2 justify-end">
 								<Button
@@ -314,7 +314,6 @@ const shareCode = async (snippet: {
 
 <style>
 :global(#code) {
-	/* font-size: 0.8rem; */
 	max-height: 240px;
 }
 </style>
