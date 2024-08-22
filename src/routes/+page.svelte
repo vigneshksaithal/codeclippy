@@ -206,7 +206,7 @@ const shareCode = async (snippet: {
 								>
 							</Card.Header>
 							<Card.Content>
-								<div class="max-h-48 overflow-auto">
+								<div class="max-h-72 overflow-auto">
 									<HighlightAuto class="text-sm" code={result.item.code} />
 								</div>
 							</Card.Content>
@@ -264,7 +264,7 @@ const shareCode = async (snippet: {
 								>
 							</Card.Header>
 							<Card.Content>
-								<div class="max-h-48 overflow-auto">
+								<div class="max-h-72 overflow-auto">
 									<HighlightAuto class="text-sm" {code} />
 								</div>
 							</Card.Content>
@@ -311,9 +311,3 @@ const shareCode = async (snippet: {
 		<Description {isHighlight} />
 	{/if}
 </section>
-
-<style>
-:global(#code) {
-	max-height: 240px;
-}
-</style>
