@@ -49,8 +49,10 @@ export let isHighlight = false
 			{#if !isHighlight}
 				<p class="text-sm text-muted-foreground mt-12 text-center">
 					This app is designed to run inside the Highlight environment.
-					<a href="https://highlight.ing" class="text-blue-500 hover:underline"
-						>Learn more about Highlight</a
+					<a
+						href="https://highlight.ing"
+						class="text-blue-500 hover:underline"
+						target="_blank">Learn more about Highlight</a
 					>
 				</p>
 			{/if}
