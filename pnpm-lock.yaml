@@ -21,8 +21,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       lucide-svelte:
-        specifier: ^0.429.0
-        version: 0.429.0(svelte@4.2.19)
+        specifier: ^0.436.0
+        version: 0.436.0(svelte@4.2.19)
       mode-watcher:
         specifier: ^0.4.1
         version: 0.4.1(svelte@4.2.19)
@@ -1096,8 +1096,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lucide-svelte@0.429.0:
-    resolution: {integrity: sha512-3LwbxQn5i9/zQwMg0ZWT875djOEQoR3eM8ytOGqk0eRk4wkoqqgZX0Gr+aQjkd+RSDEVMXkIEoyW/1zLyXr/6g==}
+  lucide-svelte@0.436.0:
+    resolution: {integrity: sha512-oRyTPzqudX01WWcSohl/Ob44GFqV/sw4moKQbsqtQ0EnKPjDPYh/v0wSaQ0wYljwSEaJ7zkBwY2lkgYFMX9PVg==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
 
@@ -1534,9 +1534,6 @@ packages:
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
-
-  tslib@2.6.3:
-    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
@@ -2207,7 +2204,7 @@ snapshots:
   capnp-ts@0.7.0:
     dependencies:
       debug: 4.3.6
-      tslib: 2.6.3
+      tslib: 2.7.0
     transitivePeerDependencies:
       - supports-color
 
@@ -2499,7 +2496,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lucide-svelte@0.429.0(svelte@4.2.19):
+  lucide-svelte@0.436.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
 
@@ -2948,8 +2945,6 @@ snapshots:
   totalist@3.0.1: {}
 
   ts-interface-checker@0.1.13: {}
-
-  tslib@2.6.3: {}
 
   tslib@2.7.0: {}
 
