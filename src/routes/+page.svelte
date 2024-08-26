@@ -165,11 +165,13 @@ const shareCode = async (snippet: {
 	{@html atomOneLight}
 </svelte:head>
 
-<section class="max-w-2xl mx-auto">
+<section>
 	{#if isHighlight && codeSnippets.length > 0 && isReady}
 		<!-- Title Text -->
-		<div class="flex gap-12 justify-between items-center mt-8 mb-4">
-			<h3 class="text-2xl font-bold text-slate-600">CodeClippy</h3>
+		<div
+			class="max-w-2xl mx-auto flex gap-12 justify-between items-center mt-8 mb-4"
+		>
+			<h3 class="text-3xl font-extrabold text-slate-700">CodeClippy</h3>
 			<Input
 				type="search"
 				placeholder="Search"
@@ -177,7 +179,10 @@ const shareCode = async (snippet: {
 				bind:value={query}
 			/>
 		</div>
-		<div class="max-w-2xl mb-8" transition:fade={{ delay: 100, duration: 250 }}>
+		<div
+			class="max-w-2xl mx-auto mb-8"
+			transition:fade={{ delay: 100, duration: 250 }}
+		>
 			<!-- Reset & Feedback text -->
 			<p class="text-sm mb-8 text-slate-600">
 				If you are facing bugs, <a
