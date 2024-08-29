@@ -1,5 +1,5 @@
 import { PUBLIC_POCKETBASE_URL } from '$env/static/public'
-import type { PageLoad } from './$types'
+import type { PageServerLoad } from './$types'
 
 export const load = (async ({ params }) => {
     const { id } = params
@@ -17,4 +17,4 @@ export const load = (async ({ params }) => {
         code,
         url: `${PUBLIC_POCKETBASE_URL}/share/${id}`
     }
-}) satisfies PageLoad
+}) satisfies PageServerLoad
