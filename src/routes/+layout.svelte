@@ -1,10 +1,12 @@
 <script>
-import { Toaster } from '$lib/components/ui/sonner'
-import { setMode } from 'mode-watcher'
-import '../app.css'
+import { Toaster } from "$lib/components/ui/sonner"
+import { ModeWatcher, setMode } from "mode-watcher"
+import "../app.css"
 
-setMode('light')
+setMode("system")
 </script>
+
+<ModeWatcher />
 
 <Toaster />
 
