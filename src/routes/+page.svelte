@@ -126,12 +126,6 @@ const searchCode = (query: string) => {
 
 const generateId = (): number => Math.floor(Math.random() * 1000000)
 
-const updateSnippetSharingStatus = (id: number, isSharing: boolean) => {
-	codeSnippets = codeSnippets.map((s) =>
-		s.id === id ? { ...s, isSharing } : s,
-	)
-}
-
 const shareCode = async (snippet: {
 	id: number
 	title: string
@@ -144,8 +138,6 @@ const shareCode = async (snippet: {
 		const record = await pb.collection("codes").create({
 			title: snippet.title,
 			code: snippet.code,
-			created_at: new Date().toISOString(),
-			updated_at: new Date().toISOString(),
 		})
 		const shareUrl = `${window.location.origin}/share/${record.id}`
 		await copyToClipboard(shareUrl, "Code link copied to clipboard")
