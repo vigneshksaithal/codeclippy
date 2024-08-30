@@ -38,9 +38,10 @@ export let isHighlight = false
 				</div>
 			</div>
 			{#if !isHighlight}
-				<p class="text-sm text-green-300 mt-8 text-center">
-					[WARNING] This app is designed to run inside the Highlight environment.
-					<a href="https://highlight.ing" class="text-green-400 hover:underline" target="_blank">
+				<p class="text-red-600 mt-8 text-center">
+					[WARNING] This app is designed to run inside the Highlight.ing app.
+					<br>
+					<a href="https://highlight.ing" class="text-primary hover:underline" target="_blank">
 						Learn more about Highlight
 					</a>
 				</p>
