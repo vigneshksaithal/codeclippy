@@ -1,7 +1,7 @@
 <script lang="ts">
+import MetaTags from "$lib/MetaTags.svelte"
 import { Button } from "$lib/components/ui/button"
 import * as Card from "$lib/components/ui/card"
-import MetaTags from "$lib/MetaTags.svelte"
 import CheckIcon from "lucide-svelte/icons/check"
 import CopyIcon from "lucide-svelte/icons/copy"
 import { onMount } from "svelte"
@@ -54,7 +54,7 @@ const showToast = (
 {#if isPageLoaded}
 	<div
 		class="max-w-2xl mx-auto p-4 md:p-8 w-full"
-		in:fade={{ duration: 300, delay: 150 }}
+		in:fade={{ delay: 50, duration: 100 }}
 	>
 		<h3 class="text-3xl font-extrabold text-primary mb-4">CodeClippy</h3>
 
@@ -83,7 +83,7 @@ const showToast = (
 			</Card.Footer>
 		</Card.Root>
 
-		<p class="text-center text-xs text-muted-foreground mt-4">
+		<p class="text-center text-sm text-muted-foreground mt-4">
 			Saved on <a
 				href="https://highlight.ing/apps/codeclippy"
 				class="text-primary hover:underline">CodeClippy</a
