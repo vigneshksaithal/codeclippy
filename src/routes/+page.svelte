@@ -179,24 +179,6 @@ const shareCode = async (snippet: {
 			class="max-w-2xl mx-auto mb-8"
 			transition:fade={{ delay: 100, duration: 250 }}
 		>
-			<!-- Reset & Feedback text -->
-			<p class="text-sm mb-8 text-muted-foreground">
-				If you are facing bugs, <a
-					href="/#"
-					class="text-primary hover:underline"
-					on:click={() => {
-						codeSnippets = []
-						if (isHighlight) {
-							Highlight.appStorage.delete('codeSnippets')
-
-							codeSnippets = []
-							codeSnippets = codeSnippets
-						}
-					}}>reset here</a
-				>. For giving feedback
-				<a href="https://tally.so/r/3N0jdb" target="_blank" class="text-primary hover:underline">click here</a>
-			</p>
-
 			<div class="grid grid-cols-1 gap-6">
 				<!-- Search Results -->
 				{#if query !== ''}
