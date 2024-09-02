@@ -14,7 +14,6 @@
 		"@sveltejs/adapter-cloudflare": "^4.7.2",
 		"@sveltejs/kit": "^2.5.25",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
-		"@tailwindcss/typography": "^0.5.15",
 		"autoprefixer": "^10.4.20",
 		"highlight.js": "^11.10.0",
 		"svelte": "^4.2.19",
