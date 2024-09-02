@@ -110,6 +110,8 @@ const saveCode = (snippet: CodeSnippet): void => {
 	if (isHighlight) {
 		Highlight.appStorage.set("codeSnippets", codeSnippets)
 	}
+
+	plausible("Save Code")
 }
 
 const getCodeSnippets = async (): Promise<CodeSnippet[]> => {
