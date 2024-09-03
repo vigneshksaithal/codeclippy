@@ -1,0 +1,16 @@
+meta {
+  name: Save Code
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://pbcodeclippy.aithal.dev/api/collections/codes/records
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  code: DELETE
+  title: DELETE
+}
