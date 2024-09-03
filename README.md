@@ -27,9 +27,5 @@ CodeClippy is a Highlight.ing app that helps you capture and share code snippets
 - TypeScript
 - Cloudflare Pages
 - Plausible Analytics
-
-## Contributing
-A Higlight.ing app for capturing code snippets like Pieces app.
-
-
-
+- Highlight.js
+- PocketBase
