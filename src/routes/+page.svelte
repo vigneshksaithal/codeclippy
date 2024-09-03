@@ -24,34 +24,6 @@ let isHighlight = false
 let isReady = false
 let destroyHighlightListener: () => void
 
-const showToast = (
-	message: string,
-	type: "success" | "error" = "success",
-): void => {
-	toast[type](message)
-}
-
-const copyToClipboard = async (
-	text: string,
-	message: string,
-): Promise<void> => {
-	try {
-		await navigator.clipboard.writeText(text)
-		showToast(message)
-	} catch (error) {
-		console.error("Failed to copy text", error)
-		showToast("Failed to copy text", "error")
-	}
-}
-
-const deleteSnippet = (id: number): void => {
-	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
-	if (isHighlight) {
-		Highlight.appStorage.set("codeSnippets", codeSnippets)
-	}
-	showToast("Code snippet deleted successfully!")
-}
-
 onMount(async () => {
 	isReady = true
 
@@ -105,6 +77,34 @@ onDestroy(() => {
 	}
 })
 
+const showToast = (
+	message: string,
+	type: "success" | "error" = "success",
+): void => {
+	toast[type](message)
+}
+
+const copyToClipboard = async (
+	text: string,
+	message: string,
+): Promise<void> => {
+	try {
+		await navigator.clipboard.writeText(text)
+		showToast(message)
+	} catch (error) {
+		console.error("Failed to copy text", error)
+		showToast("Failed to copy text", "error")
+	}
+}
+
+const deleteSnippet = (id: number): void => {
+	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
+	if (isHighlight) {
+		Highlight.appStorage.set("codeSnippets", codeSnippets)
+	}
+	showToast("Code snippet deleted successfully!")
+}
+
 const saveCode = (snippet: CodeSnippet): void => {
 	codeSnippets = [snippet, ...codeSnippets]
 	if (isHighlight) {
@@ -135,11 +135,11 @@ const shareCode = async (snippet: {
 		s.id === snippet.id ? { ...s, isSharing: true } : s,
 	)
 	try {
-		const record = await pb.collection("codes").create({
+		const { id } = await pb.collection("codes").create({
 			title: snippet.title,
 			code: snippet.code,
 		})
-		const shareUrl = `${window.location.origin}/share/${record.id}`
+		const shareUrl = `${window.location.origin}/share/${id}`
 		await copyToClipboard(shareUrl, "Code link copied to clipboard")
 	} catch (error) {
 		console.error("Error sharing code:", error)
