@@ -21,7 +21,7 @@ onMount(() => {
 	isPageLoaded = true
 })
 
-const copyToClipboard = async () => {
+const copyToClipboard = async (code: string) => {
 	try {
 		await navigator.clipboard.writeText(code)
 		isCopied = true
@@ -46,10 +46,8 @@ const copyToClipboard = async () => {
 {#if isPageLoaded}
 	<div
 		class="max-w-2xl mx-auto p-4 md:p-8 w-full"
-		in:fade={{ delay: 50, duration: 100 }}
+		in:fade={{ delay: 100, duration: 100 }}
 	>
-		<h3 class="text-3xl font-extrabold text-primary mb-4">CodeClippy</h3>
-
 		<Card.Root>
 			<Card.Header>
 				<Card.Title class="text-primary tracking-normal">{title}</Card.Title>
@@ -63,7 +61,7 @@ const copyToClipboard = async () => {
 				<Button
 					variant="outline"
 					class="plausible-event-name=Copy+Code"
-					on:click={copyToClipboard}
+					on:click={() => copyToClipboard(code)}
 				>
 					{#if isCopied}
 						<CheckIcon class="mr-2 w-4 h-4" />
@@ -75,8 +73,8 @@ const copyToClipboard = async () => {
 			</Card.Footer>
 		</Card.Root>
 
-		<p class="text-center text-sm text-muted-foreground mt-4">
-			Saved on <a
+		<p class="text-center tracking-wide text-muted-foreground mt-4">
+		 Saved on <a
 				href="https://highlight.ing/apps/codeclippy"
 				class="text-primary hover:underline">CodeClippy</a
 			>
