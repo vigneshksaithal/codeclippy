@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types'
 
 export const load = (async ({ params }) => {
     const { id } = params
-    const { title, code } = await getCodeData(id)
+    const { title, code } = await getCodeFromDB(id)
 
     return {
         title,
@@ -13,7 +13,7 @@ export const load = (async ({ params }) => {
 }) satisfies PageServerLoad
 
 
-const getCodeData = async (id: string) => {
+const getCodeFromDB = async (id: string) => {
     const url = `${PUBLIC_POCKETBASE_URL}/api/collections/codes/records/${id}?fields=title,code`
 
     const response = await fetch(url)
