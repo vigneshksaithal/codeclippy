@@ -7,7 +7,6 @@ import CopyIcon from "lucide-svelte/icons/copy"
 import { onMount } from "svelte"
 import { HighlightAuto } from "svelte-highlight"
 import greenScreen from "svelte-highlight/styles/green-screen"
-import { toast } from "svelte-sonner"
 import { fade } from "svelte/transition"
 import type { PageData } from "./$types"
 
@@ -35,13 +34,6 @@ const copyToClipboard = async () => {
 		console.error("Failed to copy: ", err)
 		copyButtonText = "Failed"
 	}
-}
-
-const showToast = (
-	message: string,
-	type: "success" | "error" = "success",
-): void => {
-	toast[type](message)
 }
 </script>
 
