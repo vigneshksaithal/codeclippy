@@ -72,7 +72,6 @@ onMount(async () => {
 
 onDestroy(() => {
 	if (isHighlight && destroyHighlightListener) {
-		console.log("Destroying Highlight listener")
 		destroyHighlightListener()
 	}
 })
@@ -177,7 +176,7 @@ const shareCode = async (snippet: {
 		</div>
 		<div
 			class="max-w-2xl mx-auto mb-8"
-			transition:fade={{ delay: 100, duration: 250 }}
+			transition:fade={{ delay: 100, duration: 200 }}
 		>
 			<div class="grid grid-cols-1 gap-6">
 				<!-- Search Results -->
