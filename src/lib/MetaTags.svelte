@@ -1,15 +1,10 @@
 <script lang="ts">
-// biome-ignore lint/style/useConst: <explanation>
 export let title = "CodeClippy: Save and Share Code Snippets Easily"
-// biome-ignore lint/style/useConst: <explanation>
 export let description =
 	"CodeClippy is a Highlight.ing app that helps you capture and share code snippets effortlessly. Save, organize, and access your code snippets with ease."
-// biome-ignore lint/style/useConst: <explanation>
 export let keywords =
 	"code snippets, code sharing, programming, developer tools, Highlight.ing app"
-// biome-ignore lint/style/useConst: <explanation>
 export let url = "https://codeclippy.aithal.dev"
-// biome-ignore lint/style/useConst: <explanation>
 export let image = "https://codeclippy.aithal.dev/og-image.jpg"
 </script>
 
