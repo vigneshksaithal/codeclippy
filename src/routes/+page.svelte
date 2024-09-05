@@ -178,8 +178,8 @@ const shareCode = async (snippet: {
 					{#each searchCode(query) as result}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary tracking-normal"
-									>{result.item.title}</Card.Title
+								<Card.Title class="text-primary text-xl"
+									>{'> ' + result.item.title}</Card.Title
 								>
 							</Card.Header>
 							<Card.Content>
@@ -236,7 +236,7 @@ const shareCode = async (snippet: {
 					{#each codeSnippets as { id, title, code }}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary text-lg"
+								<Card.Title class="text-primary text-xl"
 									>{'> ' + title}</Card.Title
 								>
 							</Card.Header>
