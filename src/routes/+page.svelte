@@ -161,7 +161,7 @@ const shareCode = async (snippet: {
 	{#if isHighlight && codeSnippets.length > 0 && isReady}
 		<!-- Title Text -->
 		<div
-			class="max-w-2xl mx-auto flex gap-12 justify-between items-center mt-8 mb-4"
+			class="max-w-2xl mx-auto flex gap-12 justify-between items-center my-8"
 		>
 		<div class="flex gap-2 justify-start items-center">
 			<ThemeSwitchButton />
@@ -242,12 +242,12 @@ const shareCode = async (snippet: {
 					{#each codeSnippets as { id, title, code }}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary tracking-normal"
+								<Card.Title class="text-primary"
 									>{title}</Card.Title
 								>
 							</Card.Header>
 							<Card.Content>
-								<div class="max-h-72 overflow-auto">
+								<div class="max-h-80 overflow-auto">
 									<HighlightAuto class="text-sm" {code} />
 								</div>
 							</Card.Content>
