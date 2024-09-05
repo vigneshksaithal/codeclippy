@@ -3,7 +3,6 @@ import * as Card from "$lib/components/ui/card"
 import CopyIcon from "lucide-svelte/icons/copy"
 import ShareIcon from "lucide-svelte/icons/share"
 
-// biome-ignore lint/style/useConst: <explanation>
 export let isHighlight = false
 </script>
 

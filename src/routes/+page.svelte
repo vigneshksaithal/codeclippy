@@ -22,7 +22,6 @@ let codeSnippets: (CodeSnippet & {
 	isCopied?: boolean
 	linkCopied?: boolean
 })[] = []
-// biome-ignore lint/style/useConst: <explanation>
 let query = ""
 let isHighlight = false
 let isReady = false
