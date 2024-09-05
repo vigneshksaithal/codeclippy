@@ -159,7 +159,7 @@ const shareCode = async (snippet: {
 		>
 		<div class="flex gap-2 justify-start items-center">
 			<ThemeSwitchButton />
-			<h3 class="text-3xl font-extrabold text-primary">CodeClippy</h3>
+			<h1 class="text-4xl font-extrabold text-primary">CodeClippy</h1>
 		</div>
 			<Input
 				type="search"
@@ -236,8 +236,8 @@ const shareCode = async (snippet: {
 					{#each codeSnippets as { id, title, code }}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary"
-									>{title}</Card.Title
+								<Card.Title class="text-primary text-lg"
+									>{'> ' + title}</Card.Title
 								>
 							</Card.Header>
 							<Card.Content>

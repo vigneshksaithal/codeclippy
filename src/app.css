@@ -75,5 +75,20 @@
 
   body {
     @apply bg-background text-foreground;
+
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  button {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
   }
 }
