@@ -20,6 +20,7 @@ import ThemeSwitchButton from "./ThemeSwitchButton.svelte"
 let codeSnippets: (CodeSnippet & {
 	isSharing?: boolean
 	isCopied?: boolean
+	linkCopied?: boolean
 })[] = []
 // biome-ignore lint/style/useConst: <explanation>
 let query = ""
@@ -140,15 +141,22 @@ const shareCode = async (snippet: {
 			code: snippet.code,
 		})
 		const shareUrl = `${window.location.origin}/share/${id}`
-		await copyToClipboard(shareUrl, snippet.id)
-		showToast("Code link copied to clipboard")
+		await navigator.clipboard.writeText(shareUrl)
+		codeSnippets = codeSnippets.map((s) =>
+			s.id === snippet.id ? { ...s, isSharing: false, linkCopied: true } : s,
+		)
+		setTimeout(() => {
+			codeSnippets = codeSnippets.map((s) =>
+				s.id === snippet.id ? { ...s, linkCopied: false } : s,
+			)
+		}, 3000)
 	} catch (error) {
 		console.error("Error sharing code:", error)
 		showToast("Failed to share code. Please try again.", "error")
+		codeSnippets = codeSnippets.map((s) =>
+			s.id === snippet.id ? { ...s, isSharing: false } : s,
+		)
 	}
-	codeSnippets = codeSnippets.map((s) =>
-		s.id === snippet.id ? { ...s, isSharing: false } : s,
-	)
 }
 </script>
 
@@ -220,6 +228,8 @@ const shareCode = async (snippet: {
 								>
 									{#if result.item.isSharing}
 										Generating link...
+									{:else if result.item.linkCopied}
+										Link copied to clipboard
 									{:else}
 										<ShareIcon size="16" class="mr-2" />
 										Share
@@ -245,7 +255,7 @@ const shareCode = async (snippet: {
 						</Card.Root>
 					{/each}
 				{:else}
-					{#each codeSnippets as { id, title, code, isSharing, isCopied }}
+					{#each codeSnippets as { id, title, code, isSharing, isCopied, linkCopied }}
 						<Card.Root>
 							<Card.Header>
 								<Card.Title class="text-primary text-xl"
@@ -276,6 +286,8 @@ const shareCode = async (snippet: {
 								>
 									{#if isSharing}
 										Generating link...
+									{:else if linkCopied}
+										Link copied to clipboard
 									{:else}
 										<ShareIcon size="16" class="mr-2" />
 										Share
