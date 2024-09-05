@@ -98,24 +98,18 @@ const copyToClipboard = async (
 
 const deleteSnippet = (id: number): void => {
 	codeSnippets = codeSnippets.filter((snippet) => snippet.id !== id)
-	if (isHighlight) {
-		Highlight.appStorage.set("codeSnippets", codeSnippets)
-	}
+	Highlight.appStorage.set("codeSnippets", codeSnippets)
+
 	showToast("Code snippet deleted successfully!")
 }
 
 const saveCode = (snippet: CodeSnippet): void => {
 	codeSnippets = [snippet, ...codeSnippets]
-	if (isHighlight) {
-		Highlight.appStorage.set("codeSnippets", codeSnippets)
-	}
+	Highlight.appStorage.set("codeSnippets", codeSnippets)
 }
 
 const getCodeSnippets = async (): Promise<CodeSnippet[]> => {
-	if (isHighlight) {
-		return (await Highlight.appStorage.get("codeSnippets")) ?? []
-	}
-	return []
+	return (await Highlight.appStorage.get("codeSnippets")) ?? []
 }
 
 const searchCode = (query: string) => {
