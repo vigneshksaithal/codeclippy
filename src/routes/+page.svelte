@@ -17,7 +17,10 @@ import { fade } from "svelte/transition"
 import Description from "./Description.svelte"
 import ThemeSwitchButton from "./ThemeSwitchButton.svelte"
 
-let codeSnippets: (CodeSnippet & { isSharing?: boolean })[] = []
+let codeSnippets: (CodeSnippet & {
+	isSharing?: boolean
+	isCopied?: boolean
+})[] = []
 // biome-ignore lint/style/useConst: <explanation>
 let query = ""
 let isHighlight = false
@@ -83,13 +86,17 @@ const showToast = (
 	toast[type](message)
 }
 
-const copyToClipboard = async (
-	text: string,
-	message: string,
-): Promise<void> => {
+const copyToClipboard = async (text: string, id: number): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text)
-		showToast(message)
+		codeSnippets = codeSnippets.map((s) =>
+			s.id === id ? { ...s, isCopied: true } : s,
+		)
+		setTimeout(() => {
+			codeSnippets = codeSnippets.map((s) =>
+				s.id === id ? { ...s, isCopied: false } : s,
+			)
+		}, 3000)
 	} catch (error) {
 		console.error("Failed to copy text", error)
 		showToast("Failed to copy text", "error")
@@ -133,7 +140,8 @@ const shareCode = async (snippet: {
 			code: snippet.code,
 		})
 		const shareUrl = `${window.location.origin}/share/${id}`
-		await copyToClipboard(shareUrl, "Code link copied to clipboard")
+		await copyToClipboard(shareUrl, snippet.id)
+		showToast("Code link copied to clipboard")
 	} catch (error) {
 		console.error("Error sharing code:", error)
 		showToast("Failed to share code. Please try again.", "error")
@@ -223,17 +231,21 @@ const shareCode = async (snippet: {
 									on:click={() =>
 										copyToClipboard(
 											result.item.code,
-											'Code copied successfully',
+											result.item.id,
 										)}
 								>
-									<CopyIcon size="16" class="mr-2" />
-									Copy
+									{#if result.item.isCopied}
+										Copied
+									{:else}
+										<CopyIcon size="16" class="mr-2" />
+										Copy
+									{/if}
 								</Button>
 							</Card.Footer>
 						</Card.Root>
 					{/each}
 				{:else}
-					{#each codeSnippets as { id, title, code }}
+					{#each codeSnippets as { id, title, code, isSharing, isCopied }}
 						<Card.Root>
 							<Card.Header>
 								<Card.Title class="text-primary text-xl"
@@ -260,9 +272,9 @@ const shareCode = async (snippet: {
 									variant="outline"
 									class="plausible-event-name=Share+Code"
 									on:click={() => shareCode({ id, title, code })}
-									aria-busy={codeSnippets.find((s) => s.id === id)?.isSharing}
+									aria-busy={isSharing}
 								>
-									{#if codeSnippets.find((s) => s.id === id)?.isSharing}
+									{#if isSharing}
 										Generating link...
 									{:else}
 										<ShareIcon size="16" class="mr-2" />
@@ -273,11 +285,15 @@ const shareCode = async (snippet: {
 									variant="outline"
 									class="plausible-event-name=Copy+Code"
 									on:click={() =>
-										copyToClipboard(code, 'Code copied successfully')}
+										copyToClipboard(code, id)}
 								>
-									<CopyIcon size="16" class="mr-2" />
-									Copy</Button
-								>
+									{#if isCopied}
+										Copied
+									{:else}
+										<CopyIcon size="16" class="mr-2" />
+										Copy
+									{/if}
+								</Button>
 							</Card.Footer>
 						</Card.Root>
 					{/each}
