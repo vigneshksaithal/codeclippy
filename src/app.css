@@ -80,12 +80,7 @@
 
   h1,
   h2,
-  h3 {
-    font-family: "IBM Plex Mono", monospace;
-    font-weight: 600;
-    font-style: normal;
-  }
-
+  h3,
   button {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
