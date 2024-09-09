@@ -192,7 +192,7 @@ const shareCode = async (snippet: {
 						<Card.Root>
 							<Card.Header>
 								<Card.Title class="text-primary text-xl"
-									>{'> ' + result.item.title}</Card.Title
+									>{result.item.title}</Card.Title
 								>
 							</Card.Header>
 							<Card.Content>
@@ -252,9 +252,7 @@ const shareCode = async (snippet: {
 					{#each codeSnippets as { id, title, code, isSharing, isCopied, linkCopied }}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary text-xl"
-									>{'> ' + title}</Card.Title
-								>
+								<Card.Title class="text-primary text-xl">{title}</Card.Title>
 							</Card.Header>
 							<Card.Content>
 								<div class="max-h-80 overflow-auto">
