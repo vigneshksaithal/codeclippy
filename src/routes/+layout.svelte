@@ -1,10 +1,10 @@
 <script>
-import { Toaster } from "$lib/components/ui/sonner"
-import { ModeWatcher, setMode } from "mode-watcher"
-import "../app.css"
-import HelpDialog from "./HelpDialog.svelte"
+import { Toaster } from '$lib/components/ui/sonner'
+import { ModeWatcher, setMode } from 'mode-watcher'
+import '../app.css'
+import HelpDialog from './HelpDialog.svelte'
 
-setMode("system")
+setMode('system')
 </script>
 
 <ModeWatcher />

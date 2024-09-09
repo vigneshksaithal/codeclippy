@@ -11,11 +11,10 @@ import ShareIcon from 'lucide-svelte/icons/share'
 import Trash2Icon from 'lucide-svelte/icons/trash-2'
 import { onDestroy, onMount } from 'svelte'
 import { HighlightAuto } from 'svelte-highlight'
-import greenScreen from 'svelte-highlight/styles/green-screen'
+import atomOneDark from 'svelte-highlight/styles/atom-one-dark'
 import { toast } from 'svelte-sonner'
 import { fade } from 'svelte/transition'
 import Description from './Description.svelte'
-import ThemeSwitchButton from './ThemeSwitchButton.svelte'
 
 let codeSnippets: (CodeSnippet & {
 	isSharing?: boolean
@@ -163,7 +162,7 @@ const shareCode = async (snippet: {
 
 <!-- Import Atom One Light theme -->
 <svelte:head>
-	{@html greenScreen}
+	{@html atomOneDark}
 </svelte:head>
 
 <section>
@@ -173,7 +172,6 @@ const shareCode = async (snippet: {
 			class="max-w-2xl mx-auto flex gap-12 justify-between items-center my-8"
 		>
 			<div class="flex gap-2 justify-start items-center">
-				<ThemeSwitchButton />
 				<h1 class="text-4xl font-extrabold text-primary">CodeClippy</h1>
 			</div>
 			<Input

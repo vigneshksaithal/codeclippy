@@ -1,19 +1,19 @@
 <script lang="ts">
-import MetaTags from "$lib/MetaTags.svelte"
-import { Button } from "$lib/components/ui/button"
-import * as Card from "$lib/components/ui/card"
-import CheckIcon from "lucide-svelte/icons/check"
-import CopyIcon from "lucide-svelte/icons/copy"
-import { onMount } from "svelte"
-import { HighlightAuto } from "svelte-highlight"
-import greenScreen from "svelte-highlight/styles/green-screen"
-import { fade } from "svelte/transition"
-import type { PageData } from "./$types"
+import MetaTags from '$lib/MetaTags.svelte'
+import { Button } from '$lib/components/ui/button'
+import * as Card from '$lib/components/ui/card'
+import CheckIcon from 'lucide-svelte/icons/check'
+import CopyIcon from 'lucide-svelte/icons/copy'
+import { onMount } from 'svelte'
+import { HighlightAuto } from 'svelte-highlight'
+import atomOneDark from 'svelte-highlight/styles/atom-one-dark'
+import { fade } from 'svelte/transition'
+import type { PageData } from './$types'
 
 export let data: PageData
 const { title, code, url } = data
 
-let copyButtonText = "Copy"
+let copyButtonText = 'Copy'
 let isCopied = false
 let isPageLoaded = false
 
@@ -25,14 +25,14 @@ const copyToClipboard = async (code: string) => {
 	try {
 		await navigator.clipboard.writeText(code)
 		isCopied = true
-		copyButtonText = "Copied!"
+		copyButtonText = 'Copied!'
 		setTimeout(() => {
 			isCopied = false
-			copyButtonText = "Copy"
+			copyButtonText = 'Copy'
 		}, 2000)
 	} catch (err) {
-		console.error("Failed to copy: ", err)
-		copyButtonText = "Failed"
+		console.error('Failed to copy: ', err)
+		copyButtonText = 'Failed'
 	}
 }
 </script>
@@ -40,7 +40,7 @@ const copyToClipboard = async (code: string) => {
 <MetaTags {title} {url} />
 
 <svelte:head>
-	{@html greenScreen}
+	{@html atomOneDark}
 </svelte:head>
 
 {#if isPageLoaded}
@@ -74,7 +74,7 @@ const copyToClipboard = async (code: string) => {
 		</Card.Root>
 
 		<p class="text-center tracking-wide text-muted-foreground mt-4">
-		 Saved on <a
+			Saved on <a
 				href="https://highlight.ing/apps/codeclippy"
 				class="text-primary hover:underline">CodeClippy</a
 			>

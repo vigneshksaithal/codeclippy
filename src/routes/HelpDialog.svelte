@@ -1,7 +1,7 @@
 <script lang="ts">
-import * as DropdownMenu from "$lib/components/ui/dropdown-menu"
-import Highlight from "@highlight-ai/app-runtime"
-import CircleHelp from "lucide-svelte/icons/circle-help"
+import * as DropdownMenu from '$lib/components/ui/dropdown-menu'
+import Highlight from '@highlight-ai/app-runtime'
+import CircleHelp from 'lucide-svelte/icons/circle-help'
 </script>
 
 <DropdownMenu.Root>
@@ -10,10 +10,13 @@ import CircleHelp from "lucide-svelte/icons/circle-help"
 	>
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
-			<DropdownMenu.Item href="/" on:click={async () => {
-				Highlight.appStorage.delete('codeSnippets')
-				location.reload()
-			}}>Reset</DropdownMenu.Item>
+			<DropdownMenu.Item
+				href="/"
+				on:click={async () => {
+					Highlight.appStorage.delete('codeSnippets')
+					location.reload()
+				}}>Reset</DropdownMenu.Item
+			>
 			<DropdownMenu.Item href="https://tally.so/r/3N0jdb" target="_blank"
 				>Feedback</DropdownMenu.Item
 			>
