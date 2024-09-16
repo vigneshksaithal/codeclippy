@@ -209,7 +209,7 @@ const shareCode = async (snippet: {
 										query = ''
 									}}
 								>
-									<Trash2Icon size="16" class="mr-2" />
+									<Trash2Icon size="14" class="mr-2" />
 									Delete
 								</Button>
 								<Button
@@ -228,7 +228,7 @@ const shareCode = async (snippet: {
 									{:else if result.item.linkCopied}
 										Link copied to clipboard
 									{:else}
-										<ShareIcon size="16" class="mr-2" />
+										<ShareIcon size="14" class="mr-2" />
 										Share
 									{/if}
 								</Button>
@@ -241,7 +241,7 @@ const shareCode = async (snippet: {
 									{#if result.item.isCopied}
 										Copied
 									{:else}
-										<CopyIcon size="16" class="mr-2" />
+										<CopyIcon size="14" class="mr-2" />
 										Copy
 									{/if}
 								</Button>
@@ -267,7 +267,7 @@ const shareCode = async (snippet: {
 										deleteSnippet(id)
 									}}
 								>
-									<Trash2Icon size="16" class="mr-2" />
+									<Trash2Icon size="14" class="mr-2" />
 									Delete
 								</Button>
 								<Button
@@ -281,7 +281,7 @@ const shareCode = async (snippet: {
 									{:else if linkCopied}
 										Link copied to clipboard
 									{:else}
-										<ShareIcon size="16" class="mr-2" />
+										<ShareIcon size="14" class="mr-2" />
 										Share
 									{/if}
 								</Button>
@@ -293,7 +293,7 @@ const shareCode = async (snippet: {
 									{#if isCopied}
 										Copied
 									{:else}
-										<CopyIcon size="16" class="mr-2" />
+										<CopyIcon size="14" class="mr-2" />
 										Copy
 									{/if}
 								</Button>
