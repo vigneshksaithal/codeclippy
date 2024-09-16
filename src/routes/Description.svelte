@@ -1,53 +1,41 @@
 <script lang="ts">
 import * as Card from '$lib/components/ui/card'
-import CopyIcon from 'lucide-svelte/icons/copy'
-import ShareIcon from 'lucide-svelte/icons/share'
 
 export let isHighlight = false
 </script>
 
-<div
-	class="flex items-center justify-center min-h-screen bg-black text-green-400 font-mono"
+<section
+	class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4"
 >
-	<Card.Root
-		class="max-w-3xl w-full m-4 bg-black border border-green-600 rounded-md shadow-lg shadow-green-500/20"
-	>
-		<Card.Header class="text-center border-b border-green-600 p-4">
-			<Card.Title class="text-4xl font-bold text-primary mb-2"
+	<Card.Root>
+		<Card.Header class="text-center">
+			<Card.Title class="text-4xl font-bold font-mono text-primary mb-2"
 				>CodeClippy_</Card.Title
 			>
-			<Card.Description class="text-lg text-primary">
-				&gt; Capture and share code snippets effortlessly with Highlight.ing
+			<Card.Description class="text-base text-slate-300">
+				Capture and share code snippets effortlessly with Highlight.ing
 			</Card.Description>
 		</Card.Header>
-		<Card.Content class="p-6">
-			<div class="grid md:grid-cols-2 gap-8 items-center">
-				<video
-					autoplay
-					loop
-					muted
-					class="w-full rounded border border-green-500"
-				>
+		<Card.Content>
+			<div class="space-y-4">
+				<video autoplay loop muted class="w-full">
 					<source src="/demo.mp4" type="video/mp4" />
 				</video>
-				<div class="bg-black p-4 rounded border border-green-500">
-					<h4 class="text-2xl font-semibold mb-4 text-primary">
-						&gt; How it works:
+				<div class="p-4 rounded">
+					<h4 class="text-2xl font-semibold font-mono mb-4 text-primary">
+						How to use?
 					</h4>
-					<ul class="space-y-4">
-						<li class="flex items-center">
-							<CopyIcon class="mr-3 text-green-500" />
-							<span>$ copy_code_snippet</span>
+					<ol class="list-decimal list-inside space-y-4">
+						<li>Copy any code snippet you want to save.</li>
+						<li>
+							Then invoke the Highlight app and select CodeClippy icon and enter
+							or choose the title for the code snippet.
 						</li>
-						<li class="flex items-center">
-							<ShareIcon class="mr-3 text-green-500" />
-							<span>$ invoke_codeclippy --with-highlight</span>
+						<li>
+							Then it will be automatically saved and you can share it with
+							others by clicking on the share button.
 						</li>
-						<li class="flex items-center">
-							<CopyIcon class="mr-3 text-green-500" />
-							<span>$ access_and_share_snippets</span>
-						</li>
-					</ul>
+					</ol>
 				</div>
 			</div>
 			{#if !isHighlight}
@@ -65,4 +53,4 @@ export let isHighlight = false
 			{/if}
 		</Card.Content>
 	</Card.Root>
-</div>
+</section>
