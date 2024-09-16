@@ -87,6 +87,7 @@ const copyToClipboard = async (code: string) => {
 			</Card.Footer>
 		</Card.Root>
 
+		<!-- Footer -->
 		<p class="text-center tracking-wide text-muted-foreground mt-4">
 			Saved on <a
 				href="https://highlight.ing/apps/codeclippy"
@@ -95,7 +96,7 @@ const copyToClipboard = async (code: string) => {
 			using
 			<a href="https://highlight.ing" class="text-primary hover:underline"
 				>Highlight</a
-			>.
+			>
 		</p>
 	</div>
 {/if}
