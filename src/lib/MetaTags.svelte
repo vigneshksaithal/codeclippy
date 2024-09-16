@@ -1,11 +1,11 @@
 <script lang="ts">
-export let title = "CodeClippy: Save and Share Code Snippets Easily"
+export let title = 'CodeClippy: Save and Share Code Snippets Easily'
 export let description =
-	"CodeClippy is a Highlight.ing app that helps you capture and share code snippets effortlessly. Save, organize, and access your code snippets with ease."
+	'CodeClippy is a Highlight.ing app that helps you capture and share code snippets effortlessly. Save, organize, and access your code snippets with ease.'
 export let keywords =
-	"code snippets, code sharing, programming, developer tools, Highlight.ing app"
-export let url = "https://codeclippy.aithal.dev"
-export let image = "https://codeclippy.aithal.dev/og-image.jpg"
+	'code snippets, code sharing, programming, developer tools, Highlight.ing app'
+export let url = 'https://codeclippy.aithal.dev'
+export let image = 'https://codeclippy.aithal.dev/og-image.jpg'
 </script>
 
 <svelte:head>
