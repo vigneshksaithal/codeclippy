@@ -9,7 +9,7 @@ export let isHighlight = false
 >
 	<Card.Root>
 		<Card.Header class="text-center">
-			<Card.Title class="text-4xl font-bold font-mono text-primary mb-2"
+			<Card.Title class="text-4xl font-bold text-primary mb-2"
 				>CodeClippy_</Card.Title
 			>
 			<Card.Description class="text-base text-slate-300">
@@ -22,9 +22,7 @@ export let isHighlight = false
 					<source src="/demo.mp4" type="video/mp4" />
 				</video>
 				<div class="p-4 rounded">
-					<h4 class="text-2xl font-semibold font-mono mb-4 text-primary">
-						How to use?
-					</h4>
+					<h4 class="text-2xl font-semibold mb-4 text-primary">How to use?</h4>
 					<ol class="list-decimal list-inside space-y-4">
 						<li>Copy any code snippet you want to save.</li>
 						<li>
