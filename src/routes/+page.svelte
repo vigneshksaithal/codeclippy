@@ -229,7 +229,7 @@ const shareCode = async (snippet: {
 									<Button
 										variant="outline"
 										size="sm"
-										class="absolute top-2 right-2 z-10 plausible-event-name=Copy+Code"
+										class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
 										on:click={() =>
 											copyToClipboard(result.item.code, result.item.id)}
 									>
