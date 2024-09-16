@@ -165,12 +165,10 @@ const shareCode = async (snippet: {
 	{@html atomOneDark}
 </svelte:head>
 
-<section>
+<section class="max-w-3xl mx-auto p-8">
 	{#if isHighlight && codeSnippets.length > 0 && isReady}
 		<!-- Title Text -->
-		<div
-			class="max-w-2xl mx-auto flex gap-12 justify-between items-center my-8"
-		>
+		<div class="flex gap-12 justify-between items-center mb-8">
 			<div class="flex gap-2 justify-start items-center">
 				<h1 class="text-4xl font-extrabold text-primary">CodeClippy</h1>
 			</div>
@@ -181,10 +179,7 @@ const shareCode = async (snippet: {
 				bind:value={query}
 			/>
 		</div>
-		<div
-			class="max-w-2xl mx-auto mb-8"
-			transition:fade={{ delay: 100, duration: 200 }}
-		>
+		<div class="mb-8" transition:fade={{ delay: 100, duration: 200 }}>
 			<div class="grid grid-cols-1 gap-6">
 				<!-- Search Results -->
 				{#if query !== ''}
