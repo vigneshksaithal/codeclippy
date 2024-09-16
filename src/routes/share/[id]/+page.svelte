@@ -53,14 +53,28 @@ const copyToClipboard = async (code: string) => {
 				<Card.Title class="text-primary tracking-normal">{title}</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<div class="max-h-[70vh] overflow-y-auto">
-					<HighlightAuto class="text-sm" {code} />
+				<div class="relative">
+					<Button
+						variant="outline"
+						class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
+						on:click={() => copyToClipboard(code)}
+					>
+						{#if isCopied}
+							<CheckIcon size="16" class="mr-2" />
+						{:else}
+							<CopyIcon size="16" class="mr-2" />
+						{/if}
+						{copyButtonText}
+					</Button>
+					<div class="max-h-72 overflow-auto">
+						<HighlightAuto class="text-sm" {code} />
+					</div>
 				</div>
 			</Card.Content>
 			<Card.Footer class="flex gap-2 justify-end">
 				<Button
 					variant="outline"
-					class="plausible-event-name=Copy+Code"
+					class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
 					on:click={() => copyToClipboard(code)}
 				>
 					{#if isCopied}
