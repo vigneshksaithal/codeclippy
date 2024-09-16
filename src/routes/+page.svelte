@@ -191,8 +191,24 @@ const shareCode = async (snippet: {
 								>
 							</Card.Header>
 							<Card.Content>
-								<div class="max-h-72 overflow-auto">
-									<HighlightAuto class="text-sm" code={result.item.code} />
+								<div class="relative">
+									<Button
+										variant="outline"
+										size="sm"
+										class="absolute top-2 right-2 z-10 plausible-event-name=Copy+Code"
+										on:click={() =>
+											copyToClipboard(result.item.code, result.item.id)}
+									>
+										{#if result.item.isCopied}
+											Copied
+										{:else}
+											<CopyIcon size="14" class="mr-2" />
+											Copy
+										{/if}
+									</Button>
+									<div class="max-h-72 overflow-auto">
+										<HighlightAuto class="text-sm" code={result.item.code} />
+									</div>
 								</div>
 							</Card.Content>
 							<Card.Footer class="flex gap-2 justify-end">
@@ -227,19 +243,6 @@ const shareCode = async (snippet: {
 										Share
 									{/if}
 								</Button>
-								<Button
-									variant="outline"
-									class="plausible-event-name=Copy+Code"
-									on:click={() =>
-										copyToClipboard(result.item.code, result.item.id)}
-								>
-									{#if result.item.isCopied}
-										Copied
-									{:else}
-										<CopyIcon size="14" class="mr-2" />
-										Copy
-									{/if}
-								</Button>
 							</Card.Footer>
 						</Card.Root>
 					{/each}
@@ -250,8 +253,23 @@ const shareCode = async (snippet: {
 								<Card.Title class="text-primary text-xl">{title}</Card.Title>
 							</Card.Header>
 							<Card.Content>
-								<div class="max-h-80 overflow-auto">
-									<HighlightAuto class="text-sm" {code} />
+								<div class="relative">
+									<Button
+										variant="outline"
+										size="sm"
+										class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
+										on:click={() => copyToClipboard(code, id)}
+									>
+										{#if isCopied}
+											Copied
+										{:else}
+											<CopyIcon size="14" class="mr-2" />
+											Copy
+										{/if}
+									</Button>
+									<div class="max-h-80 overflow-auto">
+										<HighlightAuto class="text-sm" {code} />
+									</div>
 								</div>
 							</Card.Content>
 							<Card.Footer class="flex gap-2 justify-end">
@@ -278,18 +296,6 @@ const shareCode = async (snippet: {
 									{:else}
 										<ShareIcon size="14" class="mr-2" />
 										Share
-									{/if}
-								</Button>
-								<Button
-									variant="outline"
-									class="plausible-event-name=Copy+Code"
-									on:click={() => copyToClipboard(code, id)}
-								>
-									{#if isCopied}
-										Copied
-									{:else}
-										<CopyIcon size="14" class="mr-2" />
-										Copy
 									{/if}
 								</Button>
 							</Card.Footer>
