@@ -12,7 +12,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.1",
 		"@sveltejs/adapter-cloudflare": "^4.7.2",
-		"@sveltejs/kit": "^2.5.26",
+		"@sveltejs/kit": "^2.5.27",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"autoprefixer": "^10.4.20",
 		"highlight.js": "^11.10.0",
