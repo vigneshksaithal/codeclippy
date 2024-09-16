@@ -7,8 +7,8 @@ import { Input } from '$lib/components/ui/input'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
+import { ChevronDownIcon } from 'lucide-svelte'
 import CopyIcon from 'lucide-svelte/icons/copy'
-import MoveVerticalIcon from 'lucide-svelte/icons/move-vertical'
 import ShareIcon from 'lucide-svelte/icons/share'
 import Trash2Icon from 'lucide-svelte/icons/trash-2'
 import { onDestroy, onMount } from 'svelte'
@@ -196,7 +196,7 @@ const shareCode = async (snippet: {
 									<DropdownMenu.Root>
 										<DropdownMenu.Trigger asChild let:builder>
 											<Button variant="ghost" size="icon" builders={[builder]}>
-												<MoveVerticalIcon class="h-4 w-4" />
+												<ChevronDownIcon size="24" />
 											</Button>
 										</DropdownMenu.Trigger>
 										<DropdownMenu.Content>
@@ -256,7 +256,7 @@ const shareCode = async (snippet: {
 									<DropdownMenu.Root>
 										<DropdownMenu.Trigger asChild let:builder>
 											<Button variant="ghost" size="icon" builders={[builder]}>
-												<MoveVerticalIcon class="h-4 w-4" />
+												<ChevronDownIcon size="24" />
 											</Button>
 										</DropdownMenu.Trigger>
 										<DropdownMenu.Content>
