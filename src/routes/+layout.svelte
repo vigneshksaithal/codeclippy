@@ -8,7 +8,7 @@ setMode('system')
 </script>
 
 <ModeWatcher />
-<Toaster />
+<Toaster position="top-right" />
 <HelpDialog />
 
 <main>

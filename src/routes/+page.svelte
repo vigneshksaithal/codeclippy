@@ -2,11 +2,13 @@
 import MetaTags from '$lib/MetaTags.svelte'
 import { Button } from '$lib/components/ui/button'
 import * as Card from '$lib/components/ui/card'
+import * as DropdownMenu from '$lib/components/ui/dropdown-menu'
 import { Input } from '$lib/components/ui/input'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
 import CopyIcon from 'lucide-svelte/icons/copy'
+import MoveVerticalIcon from 'lucide-svelte/icons/move-vertical'
 import ShareIcon from 'lucide-svelte/icons/share'
 import Trash2Icon from 'lucide-svelte/icons/trash-2'
 import { onDestroy, onMount } from 'svelte'
@@ -143,6 +145,7 @@ const shareCode = async (snippet: {
 		codeSnippets = codeSnippets.map((s) =>
 			s.id === snippet.id ? { ...s, isSharing: false, linkCopied: true } : s,
 		)
+		showToast('Share link generated and copied to clipboard!', 'success')
 		setTimeout(() => {
 			codeSnippets = codeSnippets.map((s) =>
 				s.id === snippet.id ? { ...s, linkCopied: false } : s,
@@ -186,9 +189,40 @@ const shareCode = async (snippet: {
 					{#each searchCode(query) as result}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary text-xl"
-									>{result.item.title}</Card.Title
-								>
+								<div class="flex justify-between items-center">
+									<Card.Title class="text-primary text-xl">
+										{result.item.title}
+									</Card.Title>
+									<DropdownMenu.Root>
+										<DropdownMenu.Trigger asChild let:builder>
+											<Button variant="ghost" size="icon" builders={[builder]}>
+												<MoveVerticalIcon class="h-4 w-4" />
+											</Button>
+										</DropdownMenu.Trigger>
+										<DropdownMenu.Content>
+											<DropdownMenu.Item
+												on:click={() =>
+													shareCode({
+														id: result.item.id,
+														title: result.item.title,
+														code: result.item.code,
+													})}
+											>
+												<ShareIcon class="mr-2 h-4 w-4" />
+												<span>Share</span>
+											</DropdownMenu.Item>
+											<DropdownMenu.Item
+												on:click={() => {
+													deleteSnippet(result.item.id)
+													query = ''
+												}}
+											>
+												<Trash2Icon class="mr-2 h-4 w-4" />
+												<span>Delete</span>
+											</DropdownMenu.Item>
+										</DropdownMenu.Content>
+									</DropdownMenu.Root>
+								</div>
 							</Card.Header>
 							<Card.Content>
 								<div class="relative">
@@ -211,46 +245,34 @@ const shareCode = async (snippet: {
 									</div>
 								</div>
 							</Card.Content>
-							<Card.Footer class="flex gap-2 justify-end">
-								<Button
-									variant="outline"
-									class="plausible-event-name=Delete+Code"
-									on:click={() => {
-										deleteSnippet(result.item.id)
-										query = ''
-									}}
-								>
-									<Trash2Icon size="14" class="mr-2" />
-									Delete
-								</Button>
-								<Button
-									variant="outline"
-									class="plausible-event-name=Share+Code"
-									on:click={() =>
-										shareCode({
-											id: result.item.id,
-											title: result.item.title,
-											code: result.item.code,
-										})}
-									aria-busy={result.item.isSharing}
-								>
-									{#if result.item.isSharing}
-										Generating link...
-									{:else if result.item.linkCopied}
-										Link copied to clipboard
-									{:else}
-										<ShareIcon size="14" class="mr-2" />
-										Share
-									{/if}
-								</Button>
-							</Card.Footer>
 						</Card.Root>
 					{/each}
 				{:else}
 					{#each codeSnippets as { id, title, code, isSharing, isCopied, linkCopied }}
 						<Card.Root>
 							<Card.Header>
-								<Card.Title class="text-primary text-xl">{title}</Card.Title>
+								<div class="flex justify-between items-center">
+									<Card.Title class="text-primary text-xl">{title}</Card.Title>
+									<DropdownMenu.Root>
+										<DropdownMenu.Trigger asChild let:builder>
+											<Button variant="ghost" size="icon" builders={[builder]}>
+												<MoveVerticalIcon class="h-4 w-4" />
+											</Button>
+										</DropdownMenu.Trigger>
+										<DropdownMenu.Content>
+											<DropdownMenu.Item
+												on:click={() => shareCode({ id, title, code })}
+											>
+												<ShareIcon class="mr-2 h-4 w-4" />
+												<span>Share</span>
+											</DropdownMenu.Item>
+											<DropdownMenu.Item on:click={() => deleteSnippet(id)}>
+												<Trash2Icon class="mr-2 h-4 w-4" />
+												<span>Delete</span>
+											</DropdownMenu.Item>
+										</DropdownMenu.Content>
+									</DropdownMenu.Root>
+								</div>
 							</Card.Header>
 							<Card.Content>
 								<div class="relative">
@@ -272,33 +294,6 @@ const shareCode = async (snippet: {
 									</div>
 								</div>
 							</Card.Content>
-							<Card.Footer class="flex gap-2 justify-end">
-								<Button
-									variant="outline"
-									class="plausible-event-name=Delete+Code"
-									on:click={() => {
-										deleteSnippet(id)
-									}}
-								>
-									<Trash2Icon size="14" class="mr-2" />
-									Delete
-								</Button>
-								<Button
-									variant="outline"
-									class="plausible-event-name=Share+Code"
-									on:click={() => shareCode({ id, title, code })}
-									aria-busy={isSharing}
-								>
-									{#if isSharing}
-										Generating link...
-									{:else if linkCopied}
-										Link copied to clipboard
-									{:else}
-										<ShareIcon size="14" class="mr-2" />
-										Share
-									{/if}
-								</Button>
-							</Card.Footer>
 						</Card.Root>
 					{/each}
 				{/if}
