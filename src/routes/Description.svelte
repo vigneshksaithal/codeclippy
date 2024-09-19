@@ -5,7 +5,7 @@ export let isHighlight = false
 </script>
 
 <section
-	class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+	class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-xl"
 >
 	<Card.Root>
 		<Card.Header class="text-center">
@@ -20,7 +20,7 @@ export let isHighlight = false
 			<video autoplay loop muted class="w-full">
 				<source src="/demo.mp4" type="video/mp4" />
 			</video>
-			<div class="p-4 rounded">
+			<div class="px- rounded">
 				<h4 class="text-2xl font-semibold mb-4 text-primary">How to use?</h4>
 				<ol class="list-decimal list-inside space-y-4">
 					<li>Copy any code snippet you want to save.</li>
@@ -35,7 +35,7 @@ export let isHighlight = false
 				</ol>
 			</div>
 			{#if !isHighlight}
-				<p class="text-red-400 mt-8 text-center">
+				<p class="text-red-400 text-center">
 					[WARNING] This app is designed to run inside the Highlight.ing app.
 					<br />
 					<a
