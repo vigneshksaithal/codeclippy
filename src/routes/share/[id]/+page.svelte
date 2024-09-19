@@ -9,6 +9,7 @@ import { HighlightAuto } from 'svelte-highlight'
 import atomOneDark from 'svelte-highlight/styles/atom-one-dark'
 import { fade } from 'svelte/transition'
 import type { PageData } from './$types'
+import Footer from './Footer.svelte'
 
 export let data: PageData
 const { title, code, url } = data
@@ -70,16 +71,6 @@ const copyToClipboard = async (code: string) => {
 			</Card.Content>
 		</Card.Root>
 
-		<!-- Footer -->
-		<p class="text-center tracking-wide text-muted-foreground mt-8">
-			Saved on <a
-				href="https://highlight.ing/apps/codeclippy"
-				class="text-primary underline">CodeClippy</a
-			>
-			using
-			<a href="https://highlight.ing" class="text-primary underline"
-				>Highlight</a
-			>
-		</p>
+		<Footer />
 	</div>
 {/if}
