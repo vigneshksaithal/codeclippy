@@ -187,7 +187,7 @@ const shareCode = async (snippet: {
 							id={result.item.id}
 							title={result.item.title}
 							code={result.item.code}
-							isCopied={result.item.isCopied}
+							isCopied={result.item.isCopied || false}
 							onCopy={copyToClipboard}
 							onShare={shareCode}
 							onDelete={(id) => {
@@ -202,7 +202,7 @@ const shareCode = async (snippet: {
 							id={snippet.id}
 							title={snippet.title}
 							code={snippet.code}
-							isCopied={snippet.isCopied}
+							isCopied={snippet.isCopied ?? false}
 							onCopy={copyToClipboard}
 							onShare={shareCode}
 							onDelete={deleteSnippet}
