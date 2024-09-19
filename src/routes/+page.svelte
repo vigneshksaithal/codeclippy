@@ -1,21 +1,14 @@
 <script lang="ts">
 import MetaTags from '$lib/MetaTags.svelte'
-import { Button } from '$lib/components/ui/button'
-import * as Card from '$lib/components/ui/card'
-import * as DropdownMenu from '$lib/components/ui/dropdown-menu'
 import { Input } from '$lib/components/ui/input'
 import { pb } from '$lib/pocketbase'
 import Highlight, { type HighlightContext } from '@highlight-ai/app-runtime'
 import Fuse from 'fuse.js'
-import ChevronDownIcon from 'lucide-svelte/icons/chevron-down'
-import CopyIcon from 'lucide-svelte/icons/copy'
-import ShareIcon from 'lucide-svelte/icons/share'
-import Trash2Icon from 'lucide-svelte/icons/trash-2'
 import { onDestroy, onMount } from 'svelte'
-import { HighlightAuto } from 'svelte-highlight'
 import atomOneDark from 'svelte-highlight/styles/atom-one-dark'
 import { toast } from 'svelte-sonner'
 import { fade } from 'svelte/transition'
+import CodeSnippetCard from './CodeSnippetCard.svelte'
 import Description from './Description.svelte'
 
 let codeSnippets: (CodeSnippet & {
@@ -87,9 +80,12 @@ const showToast = (
 	toast[type](message)
 }
 
-const copyToClipboard = async (text: string, id: number): Promise<void> => {
+const copyToClipboard = async (id: number): Promise<void> => {
+	const snippet = codeSnippets.find((s) => s.id === id)
+	if (!snippet) return
+
 	try {
-		await navigator.clipboard.writeText(text)
+		await navigator.clipboard.writeText(snippet.code)
 		codeSnippets = codeSnippets.map((s) =>
 			s.id === id ? { ...s, isCopied: true } : s,
 		)
@@ -187,120 +183,30 @@ const shareCode = async (snippet: {
 				<!-- Search Results -->
 				{#if query !== ''}
 					{#each searchCode(query) as result}
-						<Card.Root>
-							<Card.Header>
-								<div class="flex justify-between items-center">
-									<Card.Title class="text-primary text-xl">
-										{result.item.title}
-									</Card.Title>
-									<DropdownMenu.Root>
-										<DropdownMenu.Trigger asChild let:builder>
-											<Button variant="ghost" size="icon" builders={[builder]}>
-												<ChevronDownIcon size="24" />
-											</Button>
-										</DropdownMenu.Trigger>
-										<DropdownMenu.Content>
-											<DropdownMenu.Item
-												class="flex justify-between"
-												on:click={() =>
-													shareCode({
-														id: result.item.id,
-														title: result.item.title,
-														code: result.item.code,
-													})}
-											>
-												<span>Share</span>
-												<ShareIcon size="16" />
-											</DropdownMenu.Item>
-											<DropdownMenu.Item
-												class="flex justify-between"
-												on:click={() => {
-													deleteSnippet(result.item.id)
-													query = ''
-												}}
-											>
-												<span>Delete</span>
-												<Trash2Icon size="16" />
-											</DropdownMenu.Item>
-										</DropdownMenu.Content>
-									</DropdownMenu.Root>
-								</div>
-							</Card.Header>
-							<Card.Content>
-								<div class="relative">
-									<Button
-										variant="outline"
-										size="sm"
-										class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
-										on:click={() =>
-											copyToClipboard(result.item.code, result.item.id)}
-									>
-										{#if result.item.isCopied}
-											Copied
-										{:else}
-											<CopyIcon size="14" class="mr-2" />
-											Copy
-										{/if}
-									</Button>
-									<div class="max-h-72 overflow-auto">
-										<HighlightAuto class="text-sm" code={result.item.code} />
-									</div>
-								</div>
-							</Card.Content>
-						</Card.Root>
+						<CodeSnippetCard
+							id={result.item.id}
+							title={result.item.title}
+							code={result.item.code}
+							isCopied={result.item.isCopied}
+							onCopy={copyToClipboard}
+							onShare={shareCode}
+							onDelete={(id) => {
+								deleteSnippet(id)
+								query = ''
+							}}
+						/>
 					{/each}
 				{:else}
-					{#each codeSnippets as { id, title, code, isCopied }}
-						<Card.Root>
-							<Card.Header>
-								<div class="flex justify-between items-center">
-									<Card.Title class="text-primary text-xl">{title}</Card.Title>
-									<DropdownMenu.Root>
-										<DropdownMenu.Trigger asChild let:builder>
-											<Button variant="ghost" size="icon" builders={[builder]}>
-												<ChevronDownIcon size="24" />
-											</Button>
-										</DropdownMenu.Trigger>
-										<DropdownMenu.Content>
-											<DropdownMenu.Item
-												class="flex justify-between"
-												on:click={() => shareCode({ id, title, code })}
-											>
-												<span>Share</span>
-												<ShareIcon size="16" />
-											</DropdownMenu.Item>
-											<DropdownMenu.Item
-												class="flex justify-between"
-												on:click={() => deleteSnippet(id)}
-											>
-												<span>Delete</span>
-												<Trash2Icon size="16" />
-											</DropdownMenu.Item>
-										</DropdownMenu.Content>
-									</DropdownMenu.Root>
-								</div>
-							</Card.Header>
-							<Card.Content>
-								<div class="relative">
-									<Button
-										variant="outline"
-										size="sm"
-										class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
-										on:click={() => copyToClipboard(code, id)}
-									>
-										{#if isCopied}
-											Copied
-										{:else}
-											<CopyIcon size="14" class="mr-2" />
-											Copy
-										{/if}
-									</Button>
-									<div class="max-h-80 overflow-auto">
-										<HighlightAuto class="text-sm" {code} />
-									</div>
-								</div>
-							</Card.Content>
-						</Card.Root>
+					{#each codeSnippets as snippet}
+						<CodeSnippetCard
+							id={snippet.id}
+							title={snippet.title}
+							code={snippet.code}
+							isCopied={snippet.isCopied}
+							onCopy={copyToClipboard}
+							onShare={shareCode}
+							onDelete={deleteSnippet}
+						/>
 					{/each}
 				{/if}
 			</div>
