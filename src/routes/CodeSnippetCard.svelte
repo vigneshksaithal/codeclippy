@@ -66,7 +66,7 @@ export let onDelete: (id: number) => void
 				{/if}
 			</Button>
 			<div class="max-h-80 overflow-auto">
-				<HighlightAuto class="text-sm" {code} />
+				<HighlightAuto class="text-sm text-wrap" {code} />
 			</div>
 		</div>
 	</Card.Content>

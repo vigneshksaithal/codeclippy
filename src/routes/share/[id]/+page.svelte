@@ -47,7 +47,7 @@ const copyToClipboard = async (code: string) => {
 	<div class="max-w-3xl mx-auto p-4 md:p-8 w-full" in:fade={{ duration: 150 }}>
 		<Card.Root>
 			<Card.Header>
-				<Card.Title class="text-primary tracking-normal">{title}</Card.Title>
+				<Card.Title tag="h2" class="text-primary">{title}</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<div class="relative">
@@ -64,20 +64,20 @@ const copyToClipboard = async (code: string) => {
 						{copyButtonText}
 					</Button>
 					<div class="max-h-screen overflow-auto">
-						<HighlightAuto class="text-sm" {code} />
+						<HighlightAuto class="text-sm text-wrap" {code} />
 					</div>
 				</div>
 			</Card.Content>
 		</Card.Root>
 
 		<!-- Footer -->
-		<p class="text-center tracking-wide text-muted-foreground mt-4">
+		<p class="text-center tracking-wide text-muted-foreground mt-8">
 			Saved on <a
 				href="https://highlight.ing/apps/codeclippy"
-				class="text-primary hover:underline">CodeClippy</a
+				class="text-primary underline">CodeClippy</a
 			>
 			using
-			<a href="https://highlight.ing" class="text-primary hover:underline"
+			<a href="https://highlight.ing" class="text-primary underline"
 				>Highlight</a
 			>
 		</p>
