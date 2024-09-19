@@ -44,10 +44,7 @@ const copyToClipboard = async (code: string) => {
 </svelte:head>
 
 {#if isPageLoaded}
-	<div
-		class="max-w-2xl mx-auto p-4 md:p-8 w-full"
-		in:fade={{ delay: 100, duration: 100 }}
-	>
+	<div class="max-w-3xl mx-auto p-4 md:p-8 w-full" in:fade={{ duration: 150 }}>
 		<Card.Root>
 			<Card.Header>
 				<Card.Title class="text-primary tracking-normal">{title}</Card.Title>
@@ -66,25 +63,11 @@ const copyToClipboard = async (code: string) => {
 						{/if}
 						{copyButtonText}
 					</Button>
-					<div class="max-h-72 overflow-auto">
+					<div class="max-h-screen overflow-auto">
 						<HighlightAuto class="text-sm" {code} />
 					</div>
 				</div>
 			</Card.Content>
-			<Card.Footer class="flex gap-2 justify-end">
-				<Button
-					variant="outline"
-					class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
-					on:click={() => copyToClipboard(code)}
-				>
-					{#if isCopied}
-						<CheckIcon class="mr-2 w-4 h-4" />
-					{:else}
-						<CopyIcon class="mr-2 w-4 h-4" />
-					{/if}
-					{copyButtonText}
-				</Button>
-			</Card.Footer>
 		</Card.Root>
 
 		<!-- Footer -->
