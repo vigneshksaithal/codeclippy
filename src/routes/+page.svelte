@@ -201,6 +201,7 @@ const shareCode = async (snippet: {
 										</DropdownMenu.Trigger>
 										<DropdownMenu.Content>
 											<DropdownMenu.Item
+												class="flex justify-between"
 												on:click={() =>
 													shareCode({
 														id: result.item.id,
@@ -208,17 +209,18 @@ const shareCode = async (snippet: {
 														code: result.item.code,
 													})}
 											>
-												<ShareIcon class="mr-2 h-4 w-4" />
 												<span>Share</span>
+												<ShareIcon size="16" />
 											</DropdownMenu.Item>
 											<DropdownMenu.Item
+												class="flex justify-between"
 												on:click={() => {
 													deleteSnippet(result.item.id)
 													query = ''
 												}}
 											>
-												<Trash2Icon class="mr-2 h-4 w-4" />
 												<span>Delete</span>
+												<Trash2Icon size="16" />
 											</DropdownMenu.Item>
 										</DropdownMenu.Content>
 									</DropdownMenu.Root>
@@ -248,7 +250,7 @@ const shareCode = async (snippet: {
 						</Card.Root>
 					{/each}
 				{:else}
-					{#each codeSnippets as { id, title, code, isSharing, isCopied, linkCopied }}
+					{#each codeSnippets as { id, title, code, isCopied }}
 						<Card.Root>
 							<Card.Header>
 								<div class="flex justify-between items-center">
@@ -261,14 +263,18 @@ const shareCode = async (snippet: {
 										</DropdownMenu.Trigger>
 										<DropdownMenu.Content>
 											<DropdownMenu.Item
+												class="flex justify-between"
 												on:click={() => shareCode({ id, title, code })}
 											>
-												<ShareIcon class="mr-2 h-4 w-4" />
 												<span>Share</span>
+												<ShareIcon size="16" />
 											</DropdownMenu.Item>
-											<DropdownMenu.Item on:click={() => deleteSnippet(id)}>
-												<Trash2Icon class="mr-2 h-4 w-4" />
+											<DropdownMenu.Item
+												class="flex justify-between"
+												on:click={() => deleteSnippet(id)}
+											>
 												<span>Delete</span>
+												<Trash2Icon size="16" />
 											</DropdownMenu.Item>
 										</DropdownMenu.Content>
 									</DropdownMenu.Root>
