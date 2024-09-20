@@ -35,7 +35,7 @@ const copyToClipboard = async (code: string) => {
 		<div class="relative">
 			<Button
 				variant="outline"
-				class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
+				class="bg-muted absolute top-4 right-4 z-10 plausible-event-name=Copy+Code"
 				on:click={() => copyToClipboard(code)}
 			>
 				{#if isCopied}

@@ -55,7 +55,7 @@ export let onDelete: (id: number) => void
 			<Button
 				variant="outline"
 				size="sm"
-				class="absolute top-4 right-6 z-10 plausible-event-name=Copy+Code"
+				class="bg-muted absolute top-4 right-4 z-10 plausible-event-name=Copy+Code"
 				on:click={() => onCopy(id)}
 			>
 				{#if isCopied}
