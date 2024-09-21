@@ -23,10 +23,13 @@ export let isHighlight = false
 			<div class="px- rounded">
 				<h4 class="text-2xl font-semibold mb-4 text-primary">How to use?</h4>
 				<ol class="list-decimal list-inside space-y-4">
-					<li>Copy any code snippet you want to save.</li>
 					<li>
-						Open the Highlight app, select the CodeClippy icon, and set a title
-						for your snippet.
+						Copy any code snippet you want to save. Like on a website,
+						documentation page, etc.
+					</li>
+					<li>
+						Then trigger the Highlight app, select the CodeClippy icon, and set
+						a title for your snippet.
 					</li>
 					<li>
 						It will save automatically, allowing you to share via the share
