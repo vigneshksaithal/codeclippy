@@ -179,7 +179,7 @@ const shareCode = async (snippet: {
 			/>
 		</div>
 
-		<div class="mb-8" transition:fade={{ delay: 100, duration: 200 }}>
+		<div class="mb-8" transition:fade={{ duration: 250 }}>
 			<div class="grid grid-cols-1 gap-6">
 				<!-- Search Results -->
 				{#if query !== ''}

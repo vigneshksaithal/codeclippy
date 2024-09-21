@@ -24,7 +24,7 @@ onMount(() => {
 </svelte:head>
 
 {#if isPageLoaded}
-	<div class="max-w-3xl mx-auto p-4 md:p-8 w-full" in:fade={{ duration: 150 }}>
+	<div class="max-w-3xl mx-auto p-4 md:p-8 w-full" in:fade={{ duration: 250 }}>
 		<CodeCard {title} {code} />
 		<Footer />
 	</div>
