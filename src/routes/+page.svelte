@@ -176,38 +176,36 @@ const shareCode = async (snippet: {
 			/>
 		</div>
 
-		<div class="mb-8" transition:fade={{ duration: 250 }}>
-			<div class="grid grid-cols-1 gap-6">
-				<!-- Search Results -->
-				{#if query !== ''}
-					{#each searchCode(query) as result}
-						<CodeSnippetCard
-							id={result.item.id}
-							title={result.item.title}
-							code={result.item.code}
-							isCopied={result.item.copied || false}
-							onCopy={copyToClipboard}
-							onShare={shareCode}
-							onDelete={(id) => {
-								deleteSnippet(id)
-								query = ''
-							}}
-						/>
-					{/each}
-				{:else}
-					{#each codeSnippets as snippet}
-						<CodeSnippetCard
-							id={snippet.id}
-							title={snippet.title}
-							code={snippet.code}
-							isCopied={snippet.copied ?? false}
-							onCopy={copyToClipboard}
-							onShare={shareCode}
-							onDelete={deleteSnippet}
-						/>
-					{/each}
-				{/if}
-			</div>
+		<div class="grid grid-cols-1 gap-6" transition:fade={{ duration: 250 }}>
+			<!-- Search Results -->
+			{#if query !== ''}
+				{#each searchCode(query) as result}
+					<CodeSnippetCard
+						id={result.item.id}
+						title={result.item.title}
+						code={result.item.code}
+						isCopied={result.item.copied || false}
+						onCopy={copyToClipboard}
+						onShare={shareCode}
+						onDelete={(id) => {
+							deleteSnippet(id)
+							query = ''
+						}}
+					/>
+				{/each}
+			{:else}
+				{#each codeSnippets as snippet}
+					<CodeSnippetCard
+						id={snippet.id}
+						title={snippet.title}
+						code={snippet.code}
+						isCopied={snippet.copied ?? false}
+						onCopy={copyToClipboard}
+						onShare={shareCode}
+						onDelete={deleteSnippet}
+					/>
+				{/each}
+			{/if}
 		</div>
 	{:else}
 		<Description {isHighlight} />
