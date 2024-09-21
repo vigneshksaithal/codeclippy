@@ -12,18 +12,15 @@ import CodeSnippetCard from './CodeSnippetCard.svelte'
 import Description from './Description.svelte'
 
 let codeSnippets: (CodeSnippet & {
-	isSharing?: boolean
-	isCopied?: boolean
+	sharing?: boolean
+	copied?: boolean
 	linkCopied?: boolean
 })[] = []
 let query = ''
 let isHighlight = false
-let isReady = false
 let destroyHighlightListener: () => void
 
 onMount(async () => {
-	isReady = true
-
 	if (typeof Highlight !== 'undefined' && Highlight.isRunningInHighlight) {
 		isHighlight = Highlight.isRunningInHighlight()
 
@@ -87,11 +84,11 @@ const copyToClipboard = async (id: number): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(snippet.code)
 		codeSnippets = codeSnippets.map((s) =>
-			s.id === id ? { ...s, isCopied: true } : s,
+			s.id === id ? { ...s, copied: true } : s,
 		)
 		setTimeout(() => {
 			codeSnippets = codeSnippets.map((s) =>
-				s.id === id ? { ...s, isCopied: false } : s,
+				s.id === id ? { ...s, copied: false } : s,
 			)
 		}, 3000)
 	} catch (error) {
@@ -129,7 +126,7 @@ const shareCode = async (snippet: {
 	code: string
 }): Promise<void> => {
 	codeSnippets = codeSnippets.map((s) =>
-		s.id === snippet.id ? { ...s, isSharing: true } : s,
+		s.id === snippet.id ? { ...s, sharing: true } : s,
 	)
 	try {
 		const { id } = await pb.collection('codes').create({
@@ -139,7 +136,7 @@ const shareCode = async (snippet: {
 		const shareUrl = `${window.location.origin}/share/${id}`
 		await navigator.clipboard.writeText(shareUrl)
 		codeSnippets = codeSnippets.map((s) =>
-			s.id === snippet.id ? { ...s, isSharing: false, linkCopied: true } : s,
+			s.id === snippet.id ? { ...s, sharing: false, linkCopied: true } : s,
 		)
 		showToast('Share link generated and copied to clipboard!', 'success')
 		setTimeout(() => {
@@ -151,7 +148,7 @@ const shareCode = async (snippet: {
 		console.error('Error sharing code:', error)
 		showToast('Failed to share code. Please try again.', 'error')
 		codeSnippets = codeSnippets.map((s) =>
-			s.id === snippet.id ? { ...s, isSharing: false } : s,
+			s.id === snippet.id ? { ...s, sharing: false } : s,
 		)
 	}
 }
@@ -165,7 +162,7 @@ const shareCode = async (snippet: {
 </svelte:head>
 
 <section class="max-w-3xl mx-auto p-8">
-	{#if isHighlight && codeSnippets.length > 0 && isReady}
+	{#if isHighlight && codeSnippets.length > 0}
 		<!-- Title Text -->
 		<div class="flex gap-12 justify-between items-center mb-8">
 			<div class="flex gap-2 justify-start items-center">
@@ -188,7 +185,7 @@ const shareCode = async (snippet: {
 							id={result.item.id}
 							title={result.item.title}
 							code={result.item.code}
-							isCopied={result.item.isCopied || false}
+							isCopied={result.item.copied || false}
 							onCopy={copyToClipboard}
 							onShare={shareCode}
 							onDelete={(id) => {
@@ -203,7 +200,7 @@ const shareCode = async (snippet: {
 							id={snippet.id}
 							title={snippet.title}
 							code={snippet.code}
-							isCopied={snippet.isCopied ?? false}
+							isCopied={snippet.copied ?? false}
 							onCopy={copyToClipboard}
 							onShare={shareCode}
 							onDelete={deleteSnippet}
