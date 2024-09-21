@@ -37,7 +37,7 @@ export let onDelete: (id: number) => void
 						on:click={() => onShare({ id, title, code })}
 					>
 						<span>Share</span>
-						<ShareIcon size="16" />
+						<ShareIcon size="18" />
 					</DropdownMenu.Item>
 					<DropdownMenu.Item
 						class="flex justify-between"
@@ -55,15 +55,15 @@ export let onDelete: (id: number) => void
 			<Button
 				variant="outline"
 				size="sm"
-				class="bg-muted absolute top-4 right-4 z-10 plausible-event-name=Copy+Code"
+				class="bg-muted absolute top-4 right-4 z-10 plausible-event-name=Copy+Code flex gap-3"
 				on:click={() => onCopy(id)}
 			>
 				{#if isCopied}
 					Copied
 				{:else}
-					<CopyIcon size="14" class="mr-2" />
 					Copy
 				{/if}
+				<CopyIcon size="14" />
 			</Button>
 			<div class="max-h-80 overflow-auto">
 				<HighlightAuto class="text-sm text-wrap" {code} />
