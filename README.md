@@ -14,7 +14,7 @@ CodeClippy is a Highlight.ing app that helps you capture and share code snippets
 1. Copy the code you want to save.
 2. Hover over Highlight app icon.
 3. Use suggested text or type your own text.
-4. The code snipped will be saved and you can view it inside Highligt app.
+4. The code snipped will be saved and you can view it inside Highlight app.
 
 ## Features
 
