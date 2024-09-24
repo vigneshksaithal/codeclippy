@@ -13,7 +13,14 @@ export let isHighlight = false
 				>CodeClippy_</Card.Title
 			>
 			<Card.Description class="text-base text-slate-300">
-				Capture and share code snippets effortlessly with Highlight.ing
+				Easily capture and share code snippets with Highlight.ing.
+				<br />
+				<b
+					>Code Snippets are saved locally and <b>NEVER</b> sent to the server unless
+					shared.</b
+				>
+				<br />
+				Shared snippets are securely stored in the cloud.
 			</Card.Description>
 		</Card.Header>
 		<Card.Content class="space-y-4">
