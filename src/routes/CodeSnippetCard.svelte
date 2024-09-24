@@ -33,14 +33,14 @@ export let onDelete: (id: number) => void
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					<DropdownMenu.Item
-						class="flex justify-between"
+						class="plausible-event-name=Share+Code flex justify-between"
 						on:click={() => onShare({ id, title, code })}
 					>
 						<span>Share</span>
 						<ShareIcon size="18" />
 					</DropdownMenu.Item>
 					<DropdownMenu.Item
-						class="flex justify-between"
+						class="plausible-event-name=Delete+Code flex justify-between"
 						on:click={() => onDelete(id)}
 					>
 						<span>Delete</span>
@@ -55,7 +55,7 @@ export let onDelete: (id: number) => void
 			<Button
 				variant="outline"
 				size="sm"
-				class="bg-muted absolute top-4 right-4 z-10 plausible-event-name=Copy+Code flex gap-3"
+				class="plausible-event-name=Copy+Code bg-muted absolute top-4 right-4 z-10 flex gap-3"
 				on:click={() => onCopy(id)}
 			>
 				{#if isCopied}
