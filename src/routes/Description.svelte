@@ -12,15 +12,13 @@ export let isHighlight = false
 			<Card.Title class="text-4xl font-bold text-primary mb-2"
 				>CodeClippy_</Card.Title
 			>
-			<Card.Description class="text-base text-slate-300">
+			<Card.Description class="text-base text-slate-300" >
 				Easily capture and share code snippets with Highlight.ing.
-				<br />
-				<b
-					>Code Snippets are saved locally and <b>NEVER</b> sent to the server unless
-					shared.</b
-				>
-				<br />
-				Shared snippets are securely stored in the cloud.
+				{#if !isHighlight}
+				<p class="text-red-400 text-center">
+					[WARNING] This app is designed to run inside the Highlight.ing app.
+					</p>
+				{/if}
 			</Card.Description>
 		</Card.Header>
 		<Card.Content class="space-y-4">
@@ -44,19 +42,6 @@ export let isHighlight = false
 					</li>
 				</ol>
 			</div>
-			{#if !isHighlight}
-				<p class="text-red-400 text-center">
-					[WARNING] This app is designed to run inside the Highlight.ing app.
-					<br />
-					<a
-						href="https://highlight.ing"
-						class="text-primary underline"
-						target="_blank"
-					>
-						Learn more about Highlight
-					</a>
-				</p>
-			{/if}
 		</Card.Content>
 	</Card.Root>
 </section>
