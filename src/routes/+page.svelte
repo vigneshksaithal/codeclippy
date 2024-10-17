@@ -21,46 +21,77 @@ let isHighlight = false
 let destroyHighlightListener: () => void
 
 onMount(async () => {
-	if (typeof Highlight !== 'undefined' && Highlight.isRunningInHighlight) {
-		isHighlight = Highlight.isRunningInHighlight()
+	console.log('onMount called')
+	try {
+		if (typeof Highlight !== 'undefined') {
+			console.log('Highlight is defined')
+			isHighlight = await Highlight.isRunningInHighlight()
+			console.log('Is running in Highlight:', isHighlight)
 
-		if (isHighlight) {
-			codeSnippets = await getCodeSnippets()
+			if (isHighlight) {
+				console.log('Requesting clipboard permission')
+				await Highlight.permissions.requestClipboardReadPermission()
+				
+				console.log('Getting code snippets')
+				codeSnippets = await getCodeSnippets()
 
-			console.log('Setting up Highlight listener')
-			destroyHighlightListener = Highlight.app.addListener(
-				'onContext',
-				async (context: HighlightContext) => {
-					console.log('onContext event received', context)
-					if (!context.suggestion) return
+				console.log('Setting up Highlight listener')
+				destroyHighlightListener = Highlight.app.addListener(
+					'onContext',
+					async (context: HighlightContext) => {
+						console.log('onContext event received', context)
+						
+						// Log the entire context object
+						console.log('Full context object:', JSON.stringify(context, null, 2))
 
-					const newSnippet: CodeSnippet = {
-						id: generateId(),
-						title: context.suggestion,
-						created_at: new Date().toISOString(),
-						updated_at: new Date().toISOString(),
-						description: '',
-						code: '',
-					}
-
-					const attachments = context.attachments
-					if (attachments) {
-						for (const attachment of attachments) {
-							if (attachment.type === 'clipboard') {
-								newSnippet.code = attachment.value
-							}
+						let suggestion = ''
+						if (context.suggestion) {
+							suggestion = context.suggestion
+						} else if (context.attachments) {
+							suggestion = context.attachments.find(attachment => attachment.type === 'clipboard')?.value || 'Untitled Snippet'
+						} else {
+							suggestion = 'Untitled Snippet'
 						}
-					}
+						if (context.suggestion) {
+							suggestion = context.suggestion
+						} else {
+							console.log('No suggestion or text in context')
+							suggestion = 'Untitled Snippet'
+						}
 
-					saveCode(newSnippet)
-				},
-			)
-			console.log('Highlight listener set up successfully')
+						let clipboardContent = ''
+						try {
+							console.log('Getting clipboard contents')
+							const clipboardData = await Highlight.user.getClipboardContents()
+							console.log('Clipboard data:', clipboardData)
+							if (clipboardData && clipboardData.type === 'text') {
+								clipboardContent = clipboardData.value
+							}
+						} catch (error) {
+							console.error('Failed to get clipboard contents:', error)
+						}
+
+						const newSnippet: CodeSnippet = {
+							id: generateId(),
+							title: suggestion,
+							created_at: new Date().toISOString(),
+							updated_at: new Date().toISOString(),
+							description: '',
+							code: clipboardContent,
+						}
+
+						console.log('Saving new snippet:', newSnippet)
+						await saveCode(newSnippet)
+						showToast('New code snippet added!', 'success')
+					}
+				)
+				console.log('Highlight listener set up successfully')
+			}
+		} else {
+			console.warn('Highlight is not defined')
 		}
-	} else {
-		console.warn(
-			'This app is not running inside Highlight. Some features may be limited.',
-		)
+	} catch (error) {
+		console.error('Error in onMount:', error)
 	}
 })
 
@@ -104,13 +135,18 @@ const deleteSnippet = (id: number): void => {
 	showToast('Code snippet deleted successfully!')
 }
 
-const saveCode = (snippet: CodeSnippet): void => {
+const saveCode = async (snippet: CodeSnippet): Promise<void> => {
+	console.log('Saving code snippet:', snippet)
 	codeSnippets = [snippet, ...codeSnippets]
-	Highlight.appStorage.set('codeSnippets', codeSnippets)
+	await Highlight.appStorage.set('codeSnippets', codeSnippets)
+	console.log('Code snippet saved successfully')
 }
 
 const getCodeSnippets = async (): Promise<CodeSnippet[]> => {
-	return (await Highlight.appStorage.get('codeSnippets')) ?? []
+	console.log('Getting code snippets from storage')
+	const snippets = await Highlight.appStorage.get('codeSnippets')
+	console.log('Retrieved snippets:', snippets)
+	return snippets ?? []
 }
 
 const searchCode = (query: string) => {
