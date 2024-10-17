@@ -13,9 +13,9 @@ export const load = (async ({ params }) => {
 }) satisfies PageServerLoad
 
 const getCodeFromDB = async (id: string) => {
-	const url = `${PUBLIC_POCKETBASE_URL}/api/collections/codes/records/${id}?fields=title,code`
+	const URL = `${PUBLIC_POCKETBASE_URL}/api/collections/codes/records/${id}?fields=title,code`
 
-	const response = await fetch(url)
+	const response = await fetch(URL)
 	if (!response.ok) {
 		throw new Error('Failed to fetch code data')
 	}
