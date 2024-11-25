@@ -32,7 +32,7 @@
 		"fuse.js": "^7.0.0",
 		"lucide-svelte": "^0.456.0",
 		"mode-watcher": "^0.5.0",
-		"pocketbase": "^0.21.5",
+		"pocketbase": "^0.22.0",
 		"svelte-sonner": "^0.3.28",
 		"tailwind-merge": "^2.5.4",
 		"tailwind-variants": "^0.3.0"
