@@ -30,7 +30,7 @@
 		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",
 		"fuse.js": "^7.0.0",
-		"lucide-svelte": "^0.468.0",
+		"lucide-svelte": "^0.469.0",
 		"mode-watcher": "^0.5.0",
 		"pocketbase": "^0.23.0",
 		"svelte-sonner": "^0.3.28",
