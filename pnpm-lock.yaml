@@ -64,8 +64,8 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1(svelte@5.14.0)(typescript@5.7.2)
       svelte-highlight:
-        specifier: ^7.8.0
-        version: 7.8.0
+        specifier: ^7.8.2
+        version: 7.8.2
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -1381,8 +1381,8 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte-highlight@7.8.0:
-    resolution: {integrity: sha512-T7iwOq9ihrKze+Ec79OeP7xRbRRsqz4+ueY14MXpZGu6e19Ik8rOaAFYfm8ANf2+RUG/qZL6wTzEmX4P/2eVkQ==}
+  svelte-highlight@7.8.2:
+    resolution: {integrity: sha512-fJZOQtI71CIAOzv43h/cHVDABB3YfWFERGxZx4RisBVHjEuJXfnrrEOhPS0iE2uZUFyQKDWZyzPlcYyBAkH2iA==}
 
   svelte-sonner@0.3.28:
     resolution: {integrity: sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==}
@@ -2667,9 +2667,9 @@ snapshots:
     transitivePeerDependencies:
       - picomatch
 
-  svelte-highlight@7.8.0:
+  svelte-highlight@7.8.2:
     dependencies:
-      highlight.js: 11.11.0
+      highlight.js: 11.11.1
 
   svelte-sonner@0.3.28(svelte@5.14.0):
     dependencies:
