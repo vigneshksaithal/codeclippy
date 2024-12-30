@@ -27,7 +27,7 @@
 	"type": "module",
 	"dependencies": {
 		"@highlight-ai/app-runtime": "^0.2.2",
-		"bits-ui": "^0.21.16",
+		"bits-ui": "^0.22.0",
 		"clsx": "^2.1.1",
 		"fuse.js": "^7.0.0",
 		"lucide-svelte": "^0.469.0",
