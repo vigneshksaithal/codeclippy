@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@highlight-ai/app-runtime':
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.2.4
+        version: 0.2.4
       bits-ui:
         specifier: ^0.22.0
         version: 0.22.0(svelte@5.14.0)
@@ -632,8 +632,8 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@highlight-ai/app-runtime@0.2.2':
-    resolution: {integrity: sha512-iOfFBkfZHISLDW2mKQPWlTUzyeua1BZClWmYPfqklWBFW0aHL5XbHcUAjqWUBIpEpxUSp1bQeTaWiLIW5FHuQQ==}
+  '@highlight-ai/app-runtime@0.2.4':
+    resolution: {integrity: sha512-8AfVSz2j7Y1NoWGsMosub4++2MrhB1IwEihMM0gmQPb2T4tYvxZLjRPXdwlnl37rZucY0tZ+QepZr8rssyc4HQ==}
 
   '@internationalized/date@3.6.0':
     resolution: {integrity: sha512-+z6ti+CcJnRlLHok/emGEsWQhe7kfSmEW+/6qCzvKY67YPh7YOBfvc7+/+NXq+zJlbArg30tYpqLjNgcAYv2YQ==}
@@ -2031,7 +2031,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@highlight-ai/app-runtime@0.2.2':
+  '@highlight-ai/app-runtime@0.2.4':
     dependencies:
       openapi3-ts: 4.4.0
       zod: 3.24.0
