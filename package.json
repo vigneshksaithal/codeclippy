@@ -35,6 +35,6 @@
 		"pocketbase": "^0.25.0",
 		"svelte-sonner": "^0.3.28",
 		"tailwind-merge": "^2.6.0",
-		"tailwind-variants": "^0.3.0"
+		"tailwind-variants": "^0.3.1"
 	}
 }
