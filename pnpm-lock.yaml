@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@highlight-ai/app-runtime':
-        specifier: ^0.2.10
-        version: 0.2.10
+        specifier: ^0.3.3
+        version: 0.3.3
       bits-ui:
         specifier: ^0.22.0
         version: 0.22.0(svelte@5.19.3)
@@ -44,13 +44,13 @@ importers:
         version: 1.9.4
       '@sveltejs/adapter-cloudflare':
         specifier: ^4.9.0
-        version: 4.9.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(wrangler@3.65.0(@cloudflare/workers-types@4.20241205.0))
+        version: 4.9.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(wrangler@3.65.0(@cloudflare/workers-types@4.20241205.0))
       '@sveltejs/kit':
         specifier: ^2.16.1
-        version: 2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+        version: 2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
-        version: 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+        version: 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -77,7 +77,7 @@ importers:
         version: 5.7.3
       vite:
         specifier: ^6.0.9
-        version: 6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)
+        version: 6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)
 
 packages:
 
@@ -632,8 +632,8 @@ packages:
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@highlight-ai/app-runtime@0.2.10':
-    resolution: {integrity: sha512-77ZNA59H3HvyTcQKyqpZGt8qS/7Ika8PL0VeON46Rcfz2eNbStC5jIfJozUgo7EXQ+MlmiMVF1nQme/iLjnsoQ==}
+  '@highlight-ai/app-runtime@0.3.3':
+    resolution: {integrity: sha512-2QhVpRbXFeY2Fn1VuOU47d2mmDfsjm6HoQGufLd/br5Jbq9yV8pwIgni7aV8EaUGAnwYBGSKILQGCMjbAth2AQ==}
 
   '@internationalized/date@3.6.0':
     resolution: {integrity: sha512-+z6ti+CcJnRlLHok/emGEsWQhe7kfSmEW+/6qCzvKY67YPh7YOBfvc7+/+NXq+zJlbArg30tYpqLjNgcAYv2YQ==}
@@ -687,58 +687,58 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@oven/bun-darwin-aarch64@1.1.45':
-    resolution: {integrity: sha512-HH+xHRSF8+B0/T4b+CGOI/DWwN5pDbMhKZ3tJYWHCXCCGSc2DoU5dbVPArKc1U629a5uRtuXsBgm6kmgO7ZRUQ==}
+  '@oven/bun-darwin-aarch64@1.2.2':
+    resolution: {integrity: sha512-hCDvi6GGJvsKpfGcU9xdrIhshDtzkYcGiB5wnj0jq/QM3U85qmIe8QUs7tyse9T77aZNjFIXO0GirL+oZ7C+IQ==}
     cpu: [arm64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64-baseline@1.1.45':
-    resolution: {integrity: sha512-XWy/qHZUe/UJtcaETiNz5vvS5m8utDA7nzXJJVu3Ji9MGtRUCCB1H8LGxjrB1syTRuZ+YcydotBNF7IY1O6kbw==}
+  '@oven/bun-darwin-x64-baseline@1.2.2':
+    resolution: {integrity: sha512-Q4gC6fB/6BwGc6QltAAlhugCdRRIraxbNYuA0cyuwUlFmMzQIqgO+iSCIaS2PLEwVEwVx8WF++YpU+dVGyNAvg==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-darwin-x64@1.1.45':
-    resolution: {integrity: sha512-3UAmR4/jKw80V1p3dtVk56hClIlK9pYR8IZXIyhUXfv6j343MSDuBIlqVM8iXUh0I00u27sDbpYPJvx8Aul39Q==}
+  '@oven/bun-darwin-x64@1.2.2':
+    resolution: {integrity: sha512-W1MkLpfLMH4+aRoLNksLiODySVUlnKF5dTEmS2VlHxl4Mle+V/40/WSalpZVRPcztJMquwQy2VXox62WUmERXQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@oven/bun-linux-aarch64-musl@1.1.45':
-    resolution: {integrity: sha512-J6OcF6G1lz3tDY+z055bIRF4Ajum7vnnf0Ru2I01GrPukZn5DswXPgNTZwG6aGT9hcRZs3VryTthj8itLWw8ng==}
+  '@oven/bun-linux-aarch64-musl@1.2.2':
+    resolution: {integrity: sha512-73srKJaPf3fKUuST4Xd+CO52qCKVMtXUICkTddZ+6itnNNrBDBw4AoayrlNImg7swL8wIZonGGYZHpsvyjmlcg==}
     cpu: [aarch64]
     os: [linux]
 
-  '@oven/bun-linux-aarch64@1.1.45':
-    resolution: {integrity: sha512-8UNG7RZ0tLTi+yS+GJJZB8V6gIB6iBmVTthoERWO7mI1B7RQgxImhzN7lOaKmy4D++D6cEHr7WwlUXUbXY7+9w==}
+  '@oven/bun-linux-aarch64@1.2.2':
+    resolution: {integrity: sha512-VW83fgwFAJyu76xMF2t6W1+VxcLaKJUMH+/k61PdwAulpR6M+aqf8vPQDpIx2vrs4BqR8DQ4eEspyb2/DpcuyQ==}
     cpu: [arm64]
     os: [linux]
 
-  '@oven/bun-linux-x64-baseline@1.1.45':
-    resolution: {integrity: sha512-6NlMrpAlga/0471THtCjyWA1bOTnJESnRR8U1rSNNPQsqPh1xsvDfXiZQin0ofAK44jISUsM7pcEEVN/Mb8Vcw==}
+  '@oven/bun-linux-x64-baseline@1.2.2':
+    resolution: {integrity: sha512-YvIilLbII9+sjwnZVumwItoUKSUHJHo9xYw5hcf6aeqDztK1ebGzNIJpE0RgjIT+GYqy504Yz5cK77CGpyVyJw==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl-baseline@1.1.45':
-    resolution: {integrity: sha512-nBvmXOZhZovMRX/f+0jS5sirffT3Zi+WIWBshsBPnlFwKt/YCevNtzRGVpeAOtNzvPxk6WmsrE5Y4nuP4DGhmg==}
+  '@oven/bun-linux-x64-musl-baseline@1.2.2':
+    resolution: {integrity: sha512-K2o2vSHSnGn+ayXUuFJ+7O5L5Mc+uOIydMc5WI9bMhvmEtRqlohrwQR56HPzeFZVPWvmHdxb34VIceEKXmig6Q==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64-musl@1.1.45':
-    resolution: {integrity: sha512-DOAxMO2X6AhlH2IOURomgIxbA0YSBFdUo2wOTBCj5wJIgtxmK6f7qb7nK13U4B/G26DcTc5/XSOZmE1xzbi+Pw==}
+  '@oven/bun-linux-x64-musl@1.2.2':
+    resolution: {integrity: sha512-6uyUXVNH5jUsvhyzD0uiQNe8VPujuGTsHHDTW1LvRR6Lgr6AVaYjdk45ypbDSauRQsABxDKFQdfQqemkM97sYw==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-linux-x64@1.1.45':
-    resolution: {integrity: sha512-mbLIJHpKFz7PAj3aW/r+yRm+SMIUzrD+MqjxhMm7hA8pXqmrNA+SWTPEFY0viShqGxTn/PRhTiEcqecJ8e/l4Q==}
+  '@oven/bun-linux-x64@1.2.2':
+    resolution: {integrity: sha512-qoEkSdWGvTcX2/Iv3nUcwIcOk72L9Pg6X4ONUXV7luuOHsXktoQK5vuQeCC5FTxCEPjfoKy1GFAFomoU4qZDGQ==}
     cpu: [x64]
     os: [linux]
 
-  '@oven/bun-windows-x64-baseline@1.1.45':
-    resolution: {integrity: sha512-nP7fZ86ghfHRPJcnVkcEC91/uSB3P+9b31Kzh1BLAPj4WCADyyOZ2c2btoTMmo/cGWW/uvzGtf1SMYGtPy6XMw==}
+  '@oven/bun-windows-x64-baseline@1.2.2':
+    resolution: {integrity: sha512-bYopMWSCjjjCKjANv7xxAXQoabVUxLZxTw0iC1bGYD9VZGo48nGaJXPn7DsPfeCXGyl+CY3Cy4QIEn+3gNRS2A==}
     cpu: [x64]
     os: [win32]
 
-  '@oven/bun-windows-x64@1.1.45':
-    resolution: {integrity: sha512-0JKUC6zyNTI+6GJ8cMQxiOBqt4OhFnRLS+WJjkWJIHVkwn2/jxpRSPL8+EmZpSppmMCUmF9Jt1tSVGvbCTwk0g==}
+  '@oven/bun-windows-x64@1.2.2':
+    resolution: {integrity: sha512-ZjxyIcS7kQFoGxyNBMZ9mqCxCkg7ZVG9P+/GTzMpUceFF/q88lUwsFsC7YwAe0ZubqcQLRSfdyjbKbC/HuqnFw==}
     cpu: [x64]
     os: [win32]
 
@@ -886,8 +886,8 @@ packages:
   '@types/node-forge@1.3.11':
     resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
 
-  '@types/node@22.10.10':
-    resolution: {integrity: sha512-X47y/mPNzxviAGY5TcYPtYL8JsY3kAq2n8fMmKoRCxq/c4v4pyGNCzM2R6+M5/umG4ZfHuT+sgqDYqWc9rJ6ww==}
+  '@types/node@22.13.0':
+    resolution: {integrity: sha512-ClIbNe36lawluuvq3+YYhnIN2CELi+6q8NpnM7PYp4hBn/TatfboPgVSm2rwKRfnV2M+Ty9GWDFI64KEe+kysA==}
 
   acorn-typescript@1.4.13:
     resolution: {integrity: sha512-xsc9Xv0xlVfwp2o7sQ+GCQ1PgbkdcpWdTzrwXxO3xDMTAywVS3oXVOcOHuRjAPkS4P9b+yc/qNF15460v+jp4Q==}
@@ -974,8 +974,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
-  bun@1.1.45:
-    resolution: {integrity: sha512-w1B/bL2OllGYEsgk0F2F16cyehZnspzXcC8/qM5dVE21zUaTwyv+4Otw19Jb+jDzGziZCmc2qtxF/MD4us603A==}
+  bun@1.2.2:
+    resolution: {integrity: sha512-RUc8uVVTw8WoASUzXaEQJR1s7mnwoHm3P871qBUIqSaoOpuwcU+bSVX151/xoqDwnyv38SjOX7yQ3oO0IeT73g==}
     cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
@@ -2069,13 +2069,13 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@highlight-ai/app-runtime@0.2.10':
+  '@highlight-ai/app-runtime@0.3.3':
     dependencies:
       openapi3-ts: 4.4.0
       zod: 3.24.1
       zod-to-json-schema: 3.24.1(zod@3.24.1)
     optionalDependencies:
-      bun: 1.1.45
+      bun: 1.2.2
 
   '@internationalized/date@3.6.0':
     dependencies:
@@ -2141,37 +2141,37 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@oven/bun-darwin-aarch64@1.1.45':
+  '@oven/bun-darwin-aarch64@1.2.2':
     optional: true
 
-  '@oven/bun-darwin-x64-baseline@1.1.45':
+  '@oven/bun-darwin-x64-baseline@1.2.2':
     optional: true
 
-  '@oven/bun-darwin-x64@1.1.45':
+  '@oven/bun-darwin-x64@1.2.2':
     optional: true
 
-  '@oven/bun-linux-aarch64-musl@1.1.45':
+  '@oven/bun-linux-aarch64-musl@1.2.2':
     optional: true
 
-  '@oven/bun-linux-aarch64@1.1.45':
+  '@oven/bun-linux-aarch64@1.2.2':
     optional: true
 
-  '@oven/bun-linux-x64-baseline@1.1.45':
+  '@oven/bun-linux-x64-baseline@1.2.2':
     optional: true
 
-  '@oven/bun-linux-x64-musl-baseline@1.1.45':
+  '@oven/bun-linux-x64-musl-baseline@1.2.2':
     optional: true
 
-  '@oven/bun-linux-x64-musl@1.1.45':
+  '@oven/bun-linux-x64-musl@1.2.2':
     optional: true
 
-  '@oven/bun-linux-x64@1.1.45':
+  '@oven/bun-linux-x64@1.2.2':
     optional: true
 
-  '@oven/bun-windows-x64-baseline@1.1.45':
+  '@oven/bun-windows-x64-baseline@1.2.2':
     optional: true
 
-  '@oven/bun-windows-x64@1.1.45':
+  '@oven/bun-windows-x64@1.2.2':
     optional: true
 
   '@pkgjs/parseargs@0.11.0':
@@ -2236,17 +2236,17 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.31.0':
     optional: true
 
-  '@sveltejs/adapter-cloudflare@4.9.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(wrangler@3.65.0(@cloudflare/workers-types@4.20241205.0))':
+  '@sveltejs/adapter-cloudflare@4.9.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(wrangler@3.65.0(@cloudflare/workers-types@4.20241205.0))':
     dependencies:
       '@cloudflare/workers-types': 4.20241205.0
-      '@sveltejs/kit': 2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+      '@sveltejs/kit': 2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       esbuild: 0.24.0
       worktop: 0.8.0-next.18
       wrangler: 3.65.0(@cloudflare/workers-types@4.20241205.0)
 
-  '@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))':
+  '@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       devalue: 5.1.1
@@ -2259,27 +2259,27 @@ snapshots:
       set-cookie-parser: 2.7.1
       sirv: 3.0.0
       svelte: 5.19.3
-      vite: 6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)
+      vite: 6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       debug: 4.4.0
       svelte: 5.19.3
-      vite: 6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)
+      vite: 6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)))(svelte@5.19.3)(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.15
       svelte: 5.19.3
-      vite: 6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)
-      vitefu: 1.0.4(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0))
+      vite: 6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)
+      vitefu: 1.0.4(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -2293,9 +2293,9 @@ snapshots:
 
   '@types/node-forge@1.3.11':
     dependencies:
-      '@types/node': 22.10.10
+      '@types/node': 22.13.0
 
-  '@types/node@22.10.10':
+  '@types/node@22.13.0':
     dependencies:
       undici-types: 6.20.0
 
@@ -2374,19 +2374,19 @@ snapshots:
       node-releases: 2.0.19
       update-browserslist-db: 1.1.1(browserslist@4.24.2)
 
-  bun@1.1.45:
+  bun@1.2.2:
     optionalDependencies:
-      '@oven/bun-darwin-aarch64': 1.1.45
-      '@oven/bun-darwin-x64': 1.1.45
-      '@oven/bun-darwin-x64-baseline': 1.1.45
-      '@oven/bun-linux-aarch64': 1.1.45
-      '@oven/bun-linux-aarch64-musl': 1.1.45
-      '@oven/bun-linux-x64': 1.1.45
-      '@oven/bun-linux-x64-baseline': 1.1.45
-      '@oven/bun-linux-x64-musl': 1.1.45
-      '@oven/bun-linux-x64-musl-baseline': 1.1.45
-      '@oven/bun-windows-x64': 1.1.45
-      '@oven/bun-windows-x64-baseline': 1.1.45
+      '@oven/bun-darwin-aarch64': 1.2.2
+      '@oven/bun-darwin-x64': 1.2.2
+      '@oven/bun-darwin-x64-baseline': 1.2.2
+      '@oven/bun-linux-aarch64': 1.2.2
+      '@oven/bun-linux-aarch64-musl': 1.2.2
+      '@oven/bun-linux-x64': 1.2.2
+      '@oven/bun-linux-x64-baseline': 1.2.2
+      '@oven/bun-linux-x64-musl': 1.2.2
+      '@oven/bun-linux-x64-musl-baseline': 1.2.2
+      '@oven/bun-windows-x64': 1.2.2
+      '@oven/bun-windows-x64-baseline': 1.2.2
     optional: true
 
   camelcase-css@2.0.1: {}
@@ -3099,20 +3099,20 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0):
+  vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.1
       rollup: 4.31.0
     optionalDependencies:
-      '@types/node': 22.10.10
+      '@types/node': 22.13.0
       fsevents: 2.3.3
       jiti: 1.21.6
       yaml: 2.7.0
 
-  vitefu@1.0.4(vite@6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)):
+  vitefu@1.0.4(vite@6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)):
     optionalDependencies:
-      vite: 6.0.9(@types/node@22.10.10)(jiti@1.21.6)(yaml@2.7.0)
+      vite: 6.0.9(@types/node@22.13.0)(jiti@1.21.6)(yaml@2.7.0)
 
   which@2.0.2:
     dependencies:
